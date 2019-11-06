@@ -1,6 +1,6 @@
 <?php
 
-namespace gemadigital\framework\App\Helpers;
+namespace GemaDigital\Framework\App\Helpers;
 
 class UnityHelper
 {

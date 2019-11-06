@@ -1,6 +1,6 @@
 <?php
 
-namespace gemadigital\framework\App\Http\Controllers\API;
+namespace GemaDigital\Framework\App\Http\Controllers\API;
 
 use Illuminate\Routing\Controller;
 

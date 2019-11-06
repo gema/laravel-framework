@@ -1,6 +1,6 @@
 <?php
 
-namespace gemadigital\framework\App\Http\Controllers\Admin\Operations;
+namespace GemaDigital\Framework\App\Http\Controllers\Admin\Operations;
 
 trait ListOperation
 {

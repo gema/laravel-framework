@@ -1,6 +1,6 @@
 <?php
 
-namespace gemadigital\framework\App\Http\Controllers\Auth;
+namespace GemaDigital\Framework\App\Http\Controllers\Auth;
 
 use App\Models\SocialAccount;
 use App\User;

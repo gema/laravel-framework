@@ -1,8 +1,8 @@
 <?php
 
-namespace gemadigital\framework\App\Http\Controllers\Admin;
+namespace GemaDigital\Framework\App\Http\Controllers\Admin;
 
-use gemadigital\framework\App\Helpers\HandleDropzoneUploadHelper;
+use GemaDigital\Framework\App\Helpers\HandleDropzoneUploadHelper;
 use Illuminate\Http\Request;
 
 class CrudController extends \Backpack\CRUD\app\Http\Controllers\CrudController

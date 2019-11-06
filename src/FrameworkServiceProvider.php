@@ -7,10 +7,10 @@ use Illuminate\Support\ServiceProvider;
 class FrameworkServiceProvider extends ServiceProvider
 {
     protected $commands = [
-        \gemadigital\framework\App\Console\Commands\install::class,
-        \gemadigital\framework\App\Console\Commands\package::class,
-        \gemadigital\framework\App\Console\Commands\publish::class,
-        \gemadigital\framework\App\Console\Commands\run::class,
+        \GemaDigital\Framework\App\Console\Commands\install::class,
+        \GemaDigital\Framework\App\Console\Commands\package::class,
+        \GemaDigital\Framework\App\Console\Commands\publish::class,
+        \GemaDigital\Framework\App\Console\Commands\run::class,
     ];
 
     /**

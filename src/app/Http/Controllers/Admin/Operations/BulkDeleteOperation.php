@@ -1,8 +1,8 @@
 <?php
 
-namespace gemadigital\framework\App\Http\Controllers\Admin\Operations;
+namespace GemaDigital\Framework\App\Http\Controllers\Admin\Operations;
 
-use gemadigital\framework\App\Http\Controllers\Admin\CrudController;
+use GemaDigital\Framework\App\Http\Controllers\Admin\CrudController;
 
 trait BulkDeleteOperation
 {

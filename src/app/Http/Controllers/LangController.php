@@ -1,6 +1,6 @@
 <?php
 
-namespace gemadigital\framework\App\Http\Controllers;
+namespace GemaDigital\Framework\App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Session;

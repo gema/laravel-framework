@@ -1,6 +1,6 @@
 <?php
 
-namespace gemadigital\framework\App\Console\Commands;
+namespace GemaDigital\Framework\App\Console\Commands;
 
 use Carbon\Carbon;
 use Illuminate\Console\Command;

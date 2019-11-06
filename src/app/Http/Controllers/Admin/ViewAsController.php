@@ -1,6 +1,6 @@
 <?php
 
-namespace gemadigital\framework\App\Http\Controllers\Admin;
+namespace GemaDigital\Framework\App\Http\Controllers\Admin;
 
 use Illuminate\Routing\Controller;
 use Session;

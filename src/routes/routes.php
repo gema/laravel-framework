@@ -3,7 +3,7 @@
 // Framework
 Route::group(
     [
-        'namespace' => 'gemadigital\framework\app\Http\Controllers',
+        'namespace' => 'GemaDigital\Framework\app\Http\Controllers',
         'middleware' => 'web',
     ],
     function () {

@@ -133,7 +133,7 @@ if (!function_exists('json_response')) {
         ];
 
         if (Config::get('app.debug', false)) {
-            $start_time = \gemadigital\framework\App\Http\Controllers\API\APIController::$start_time;
+            $start_time = \GemaDigital\Framework\App\Http\Controllers\API\APIController::$start_time;
 
             $response = array_merge($response, ['debug' => [
                 'time' => $start_time ? (microtime(true) - $start_time) * 1000 : 0,
