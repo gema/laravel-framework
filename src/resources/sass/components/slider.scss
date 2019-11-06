@@ -1,0 +1,99 @@
+$white-color: #FFF;
+$title-font: #444;
+$color-initial: #888;
+
+.slider {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+
+    .flex-slider {
+        flex: 1;
+        position: relative;
+        overflow: hidden;
+
+        ul {
+            white-space: nowrap;
+            margin-bottom: 0;
+            transition: transform .3s;
+            font-size: 0;
+
+            li.slide {
+                display: inline-flex;
+                align-items: center;
+                width: 100%;
+                white-space: normal;
+                height: 50vh;
+                background-size: cover;
+                background-repeat: no-repeat;
+
+                .content {
+                    .excerpt {
+                        display: flex;
+                        justify-content: center;
+                        position: absolute;
+                        top: 0;
+                        flex-direction: column;
+                        height: 100%;
+                        padding: 2rem;
+                        color: $white-color;
+
+                        h2 {
+                            text-transform: uppercase;
+                            font-family: $title-font;
+                        }
+
+                        .knowmore {
+                            color: $white-color;
+                            background-color: $color-initial;
+                            margin-top: 1rem;
+                            padding: .8rem 2rem;
+                            border-radius: 50px;
+                            text-align: center;
+                            width: 40%;
+                            text-transform: uppercase;
+                            transition: color .2s, background-color .2s;
+
+                            &:hover {
+                                color: $color-initial;
+                                background-color: $white-color;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .dots {
+            position: absolute;
+            bottom: 2rem;
+            display: flex;
+            justify-content: center;
+            flex-direction: row;
+            height: 20px;
+            width: 100%;
+            z-index: 1;
+
+            li {
+                background-color: transparent;
+                width: 10px;
+                height: 10px;
+                border-radius: 5px;
+                border: 2px solid $white-color;
+                transition: background .3s;
+                margin: 0 5px;
+                cursor: pointer;
+
+                &:last-child {
+                    margin-right: 0;
+                }
+
+                &.active {
+                    background-color: $white-color;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,43 @@
+<?php
+
+namespace gemadigital\framework\App\Http\Controllers\Traits;
+
+use Backpack\PageManager\app\Models\Page;
+use Cache;
+use Session;
+
+trait PageTrait
+{
+    public function index($slug = 'home', $sub = null)
+    {
+        $locale = Session::get('locale', \Config::get('app.locale'));
+
+        $this->data = Cache::rememberForever("page_{$slug}_{$locale}", function () use ($slug) {
+            $page = Page::findBySlug($slug);
+
+            if (!$page) {
+                abort(404);
+            }
+
+            return [
+                'title' => $page->title,
+                'page' => $page->withFakes(),
+            ];
+        });
+
+        // Common data to all pages
+        $this->data = array_merge($this->data, $this->common());
+
+        // Sub page
+        if ($sub) {
+            $this->data['page']->template .= '_view';
+        }
+
+        // Page specific data
+        if (method_exists($this, $this->data['page']->template)) {
+            $this->data = array_merge($this->data, call_user_func(array($this, $this->data['page']->template), $sub));
+        }
+
+        return view('pages.' . $this->data['page']->template, $this->data);
+    }
+}
