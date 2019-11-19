@@ -51,22 +51,17 @@
             "GemaDigital\\Framework\\Tests\\": "tests"
         },
         "files": [
-            "src/app/Helpers/CommonHelper.php"
+            "src\\app\\Helpers\\CommonHelper.php"
         ]
     },
     "extra": {
         "laravel": {
             "providers": [
-                "GemaDigital\\Framework\\frameworkServiceProvider"
+                "GemaDigital\\Framework\\FrameworkServiceProvider"
             ],
             "aliases": {
                 "Framework": "GemaDigital\\Framework\\Facades\\Framework"
             }
         }
-    },
-    "scripts": {
-        "post-install-cmd": [
-            "GemaDigital\\Framework\\src\\App\\Helpers\\ComposerScripts::postInstall"
-        ]
     }
 }

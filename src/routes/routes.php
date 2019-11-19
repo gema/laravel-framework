@@ -28,7 +28,7 @@ Route::group(
         Route::group(
             [
                 'prefix' => config('backpack.base.route_prefix'),
-                'middleware' => 'admin',
+                'middleware' => ['admin', 'web'],
                 'namespace' => 'Admin',
             ],
             function () {
