@@ -4,7 +4,7 @@ $locales = config('backpack.crud.locales');
 @endphp
 
 @foreach($locales as $local => $label)
-<a href="{{ route('lang', ['locale' => $local]) }}">
-    <div class="lang{{ $local == $lang ? " active" : "" }}">{{ strtoupper(__("$local")) }}</div>
+<a href="{{ route('lang', ['locale' => $local]) }}" class="lang{{ $local == $lang ? " active" : "" }}">
+    <span>{{ strtoupper(__("$local")) }}</span>
 </a>
 @endforeach

@@ -76,6 +76,17 @@ Route::group(
             ->where('locale', '[a-z]{2}(-[A-Z]{2})?')->name('lang');
     });
 
+// Webhooks
+Route::group(
+    [
+        'namespace' => 'GemaDigital\Framework\app\Http\Controllers',
+    ],
+    function () {
+
+        // Bitbucket
+        Route::any('bitbucket/webhook', 'BitbucketController@webhook');
+    });
+
 // Admin Overrides
 Route::group(
     [
