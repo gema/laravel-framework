@@ -79,4 +79,8 @@ class UserCrudController extends \Backpack\PermissionManager\app\Http\Controller
 
         $this->setupFields();
     }
+
+    // Overrides to deal with cache
+    public function sync($operation)
+    {}
 }
