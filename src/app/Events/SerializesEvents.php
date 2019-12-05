@@ -6,7 +6,11 @@ trait SerializesEvents
 {
     public function toArray()
     {
-        return array_merge((array) $this, ['event' => $this->broadcastAs()]);
+        return [
+            'data' => (array) $this,
+            'event' => $this->broadcastAs(),
+            'socket' => null,
+        ];
     }
 
     public function toJson()
