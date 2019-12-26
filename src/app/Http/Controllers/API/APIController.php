@@ -6,8 +6,6 @@ use Illuminate\Routing\Controller;
 
 class APIController extends Controller
 {
-    public static $start_time = null;
-
     // CURL Helper
     public function curl_request($url, $post = null)
     {

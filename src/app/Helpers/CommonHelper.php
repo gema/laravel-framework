@@ -1,5 +1,12 @@
 <?php
 
+if (!function_exists('debugMode')) {
+    function debugMode()
+    {
+        return Config::get('app.debug', false);
+    }
+}
+
 if (!function_exists('api')) {
     function api()
     {
@@ -132,11 +139,19 @@ if (!function_exists('json_response')) {
             'errors' => $errors,
         ];
 
-        if (Config::get('app.debug', false)) {
-            $start_time = \GemaDigital\Framework\App\Http\Controllers\API\APIController::$start_time;
+        $time = number_format((microtime(true) - LARAVEL_START), 6) * 1e6;
+        $timeData = $time > 1e6 ? [$time / 1e6, 'seconds'] : (
+            $time > 1e3 ? [$time / 1e3, 'miliseconds'] : (
+                [$time, 'microseconds']
+            )
+        );
 
+        if (debugMode()) {
             $response = array_merge($response, ['debug' => [
-                'time' => $start_time ? (microtime(true) - $start_time) * 1000 : 0,
+                'time' => [
+                    'value' => $timeData[0],
+                    'unit' => $timeData[1],
+                ],
                 'exception' => $exception,
                 'queries' => DB::getQueryLog(),
                 'post' => request()->request->all(),
