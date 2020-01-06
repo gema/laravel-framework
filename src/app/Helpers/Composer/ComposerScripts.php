@@ -16,8 +16,8 @@ class ComposerScripts
     {
         switch (DIRECTORY_SEPARATOR) {
             case '/': // unix
-                exec('ln -s "public/packages" "vendor/backpack/crud/src/public/packages"');
-                exec('ln -s "public/gemadigital" "packages/GemaDigital/Framework/src/public/gemadigital"');
+                exec('ln -s "../vendor/backpack/crud/src/public/packages" "public/packages"');
+                exec('ln -s "../packages/GemaDigital/Framework/src/public/gemadigital" "public/gemadigital"');
                 break;
             case '\\': // windows
                 exec('mklink /J "public\packages" "vendor\backpack\crud\src\public\packages"');
