@@ -199,3 +199,12 @@ if (!function_exists('__fallback')) {
         return $fallback;
     }
 }
+
+if (!function_exists('backpack_user_from_auth')) {
+    function backpack_user_from_auth()
+    {
+        $user = new \App\Models\BackpackUser();
+        $user->id = Auth::user()->id ?? null;
+        return $user;
+    }
+}
