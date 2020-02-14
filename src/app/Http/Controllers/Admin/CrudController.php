@@ -39,6 +39,11 @@ class CrudController extends \Backpack\CRUD\app\Http\Controllers\CrudController
         return $matches && sizeof($matches) > 1 ? intval($matches[1]) : null;
     }
 
+    public function getEntry()
+    {
+        return $this->crud->model::where('id', $this->getEntryID())->first() ?: null;
+    }
+
     // Overrides to deal with cache
     public function sync($operation)
     {}
