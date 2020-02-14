@@ -21,7 +21,7 @@ class APICrudController extends Controller
     public function getSearchParam()
     {
         $request = request();
-        return $request ? ($request->has('q') || $request->has('term') ? $request->input('q') . $request->input('term') : false) : false;
+        return $request->input('q') ?: $request->input('term') ?: false;
     }
 
     public function entitySearch($entity, $searchFields = null, $where = null, $whereIn = null)
