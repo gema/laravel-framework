@@ -24,13 +24,19 @@ class APICrudController extends Controller
         return $request->input('q') ?: $request->input('term') ?: false;
     }
 
-    public function entitySearch($entity, $searchFields = null, $where = null, $whereIn = null)
+    public function entitySearch($entity, $searchFields = null, $where = null, $whereIn = null, $with = null)
     {
         $search_term = $this->getSearchParam();
         $results = $entity::select();
 
+        if ($with) {
+            foreach ($with as $entry) {
+                $results = $results->with($entry);
+            }
+        }
+
         if ($search_term && count($searchFields)) {
-            $results = $entity::where(function ($query) use ($search_term, $searchFields) {
+            $results = $results->where(function ($query) use ($search_term, $searchFields) {
                 $query->where(array_shift($searchFields), 'LIKE', "%$search_term%");
 
                 foreach ($searchFields as $field) {
