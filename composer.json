@@ -12,7 +12,7 @@
     "homepage": "https://github.com/gemadigital/framework",
     "keywords": ["Laravel", "framework"],
     "require": {
-        "php": "^7.2",
+        "php": "^7.3",
         "illuminate/support": "~6",
         "backpack/backupmanager": "^2.0",
         "backpack/crud": "4.0.*",
@@ -26,7 +26,7 @@
         "fideloper/proxy": "^4.0",
         "laravel/framework": "^6.4",
         "laravel/socialite": "^4.2",
-        "laravel/tinker": "^1.0",
+        "laravel/tinker": "^2.0",
         "spatie/laravel-cookie-consent": "^2.10",
         "spatie/laravel-translatable": "^4.2"
     },
