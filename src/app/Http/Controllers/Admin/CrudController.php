@@ -15,6 +15,24 @@ class CrudController extends \Backpack\CRUD\app\Http\Controllers\CrudController
     const REORDERED = 'reorder';
     const UPDATED = 'update';
 
+    // Hack to access setup without touching the setup()
+    public function setupDefaults()
+    {
+        parent::setupDefaults();
+
+        // Check authorization for cRUD
+        $this->crud->id = $this->crud->getCurrentEntryId();
+
+        if ($this->crud->id && !$this->authorize($this->crud->id)) {
+            abort(401);
+        }
+    }
+
+    public function authorize($id)
+    {
+        return true;
+    }
+
     public function wantsJSON()
     {
         return $this->request && strpos($this->request->headers->get('accept'), 'application/json') === 0;
