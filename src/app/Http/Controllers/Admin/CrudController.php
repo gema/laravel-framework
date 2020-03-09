@@ -16,9 +16,9 @@ class CrudController extends \Backpack\CRUD\app\Http\Controllers\CrudController
     const UPDATED = 'update';
 
     // Hack to access setup without touching the setup()
-    public function setupDefaults()
+    public function setupConfigurationForCurrentOperation()
     {
-        parent::setupDefaults();
+        parent::setupConfigurationForCurrentOperation();
 
         // Check authorization for cRUD
         $this->crud->id = $this->crud->getCurrentEntryId();
