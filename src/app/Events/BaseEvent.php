@@ -2,6 +2,7 @@
 
 namespace GemaDigital\Framework\App\Events;
 
+use Auth;
 use GemaDigital\Framework\App\Events\SerializesEvents;
 use GemaDigital\Framework\App\Events\ShouldBroadcast;
 use Illuminate\Broadcasting\InteractsWithSockets;
@@ -15,5 +16,10 @@ abstract class BaseEvent implements ShouldBroadcast
     public function broadcastAs()
     {
         return (new \ReflectionClass($this))->getShortName();
+    }
+
+    public function getUserData()
+    {
+        return (object) Auth::user()->only(['id', 'name', 'email']);
     }
 }
