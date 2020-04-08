@@ -1,6 +1,6 @@
-# GemaDigital Laravel 6 Framework
+# GemaDigital Laravel Framework
 
-GemaDigital Laravel 6 Framework
+GemaDigital Laravel Framework
 
 ## Comands
 
@@ -19,7 +19,7 @@ Packages a ready for production zip
 $ php artisan package
 ```
 
-Published the framework assets
+Publishes the framework assets
 ``` bash
 $ php artisan publish
 ```
