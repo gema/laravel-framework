@@ -190,7 +190,7 @@ if (!function_exists('sized_image')) {
 }
 
 if (!function_exists('__fallback')) {
-    function __fallback(string $key,  ? string $fallback = null,  ? string $locale = null,  ? array $replace = [])
+    function __fallback(string $key, ?string $fallback = null, ?string $locale = null, ?array $replace = [])
     {
         if (\Illuminate\Support\Facades\Lang::has($key, $locale)) {
             return trans($key, $replace, $locale);
@@ -206,5 +206,12 @@ if (!function_exists('backpack_user_from_auth')) {
         $user = new \App\Models\BackpackUser();
         $user->id = Auth::user()->id ?? null;
         return $user;
+    }
+}
+
+if (!function_exists('get_class_name')) {
+    function get_class_name($object)
+    {
+        return (new \ReflectionClass($object))->getShortName();
     }
 }
