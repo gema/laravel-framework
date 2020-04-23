@@ -6,6 +6,7 @@ use Auth;
 use Carbon\Carbon;
 use GemaDigital\Framework\App\Events\SerializesEvents;
 use GemaDigital\Framework\App\Events\ShouldBroadcast;
+use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
@@ -35,6 +36,11 @@ abstract class BaseEvent implements ShouldBroadcast
         return (new \ReflectionClass($this))->getShortName();
     }
 
+    public function broadcastOn()
+    {
+        return new Channel($this->channel);
+    }
+
     public function getChannel()
     {
         return $this->channel;
@@ -43,5 +49,14 @@ abstract class BaseEvent implements ShouldBroadcast
     public function getUserData()
     {
         return (object) Auth::user()->only(['id', 'name', 'email']) ?? null;
+    }
+
+    public function __toString()
+    {
+        return json_encode([
+            get_class_name($this),
+            $this->broadcastOn()->name,
+            $this,
+        ]);
     }
 }
