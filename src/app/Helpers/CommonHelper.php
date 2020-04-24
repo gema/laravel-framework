@@ -139,14 +139,14 @@ if (!function_exists('json_response')) {
             'errors' => $errors,
         ];
 
-        $time = number_format((microtime(true) - LARAVEL_START), 6) * 1e6;
-        $timeData = $time > 1e6 ? [$time / 1e6, 'seconds'] : (
-            $time > 1e3 ? [$time / 1e3, 'miliseconds'] : (
-                [$time, 'microseconds']
-            )
-        );
-
         if (debugMode()) {
+            $time = number_format((microtime(true) - LARAVEL_START), 6) * 1e6;
+            $timeData = $time > 1e6 ? [$time / 1e6, 'seconds'] : (
+                $time > 1e3 ? [$time / 1e3, 'miliseconds'] : (
+                    [$time, 'microseconds']
+                )
+            );
+
             $response = array_merge($response, ['debug' => [
                 'time' => [
                     'value' => $timeData[0],
@@ -159,6 +159,24 @@ if (!function_exists('json_response')) {
         }
 
         $response = json_encode($response);
+        return response($response, $status)
+            ->header('Content-Type', 'text/json')
+            ->header('Content-Length', strlen($response));
+    }
+}
+
+if (!function_exists('json_response_raw')) {
+    function json_response_raw($raw = null, $code = 0, $status = 200, $errors = null, $exception = null)
+    {
+        $response = [
+            'code' => $code,
+            'data' => 'RAW',
+            'errors' => $errors,
+        ];
+
+        $response = json_encode($response);
+        $response = str_replace('"RAW"', $raw, $response);
+
         return response($response, $status)
             ->header('Content-Type', 'text/json')
             ->header('Content-Length', strlen($response));
