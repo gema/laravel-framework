@@ -5,7 +5,7 @@ namespace GemaDigital\Framework\App\Models;
 class Model extends \Illuminate\Database\Eloquent\Model
 {
     // Scopes
-    public static function find(string $id)
+    public static function findById(string $id)
     {
         return static::where('id', $id)->firstOrFail();
     }
