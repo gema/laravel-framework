@@ -17,9 +17,9 @@ class ComposerScripts
         switch (DIRECTORY_SEPARATOR) {
             case '/': // unix
                 exec('unlink "public\packages"');
-                exec('ln -s "vendor/backpack/crud/src/public/packages" "public/packages"');
+                exec('ln -s "../vendor/backpack/crud/src/public/packages" "public/packages"');
                 exec('unlink "public\gemadigital"');
-                exec('ln -s "packages/GemaDigital/Framework/src/public/gemadigital" "public/gemadigital"');
+                exec('ln -s "../vendor/gemadigital/framework/src/public/gemadigital" "public/gemadigital"');
 
                 // ElFinder Assets
                 exec('mkdir -p foo "vendor/backpack/crud/src/public/packages/barryvdh/elfinder"');
@@ -32,7 +32,7 @@ class ComposerScripts
                 exec('if exist "public\packages" rmdir "public\packages" /s /q');
                 exec('mklink /J "public\packages" "vendor\backpack\crud\src\public\packages"');
                 exec('if exist "public\gemadigital" rmdir "public\gemadigital" /s /q');
-                exec('mklink /J "public\gemadigital" "packages\GemaDigital\Framework\src\public\gemadigital"');
+                exec('mklink /J "public\gemadigital" "vendor\gemadigital\framework\src\public\gemadigital"');
 
                 // ElFinder Assets
                 exec('if not exist "vendor/backpack/crud/src/public/packages/barryvdh/elfinder" mkdir "vendor/backpack/crud/src/public/packages/barryvdh/elfinder"');
