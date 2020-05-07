@@ -4,25 +4,25 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "eb00c5a31eecba03fe00a403656699ca",
+    "content-hash": "4639c3f1ffd2d6128d9a738590b410e6",
     "packages": [
         {
             "name": "backpack/backupmanager",
-            "version": "2.0.5",
+            "version": "3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Laravel-Backpack/BackupManager.git",
-                "reference": "2c81380deea6163e2c982a388074ba9b7a4b258d"
+                "reference": "47d84cbb6b37478de25e9ccba001f773901e2ee0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Laravel-Backpack/BackupManager/zipball/2c81380deea6163e2c982a388074ba9b7a4b258d",
-                "reference": "2c81380deea6163e2c982a388074ba9b7a4b258d",
+                "url": "https://api.github.com/repos/Laravel-Backpack/BackupManager/zipball/47d84cbb6b37478de25e9ccba001f773901e2ee0",
+                "reference": "47d84cbb6b37478de25e9ccba001f773901e2ee0",
                 "shasum": ""
             },
             "require": {
-                "backpack/crud": "^4.0.0",
-                "spatie/laravel-backup": "^6.0"
+                "backpack/crud": "^4.1.0",
+                "spatie/laravel-backup": "^6.1"
             },
             "require-dev": {
                 "phpunit/phpunit": "^9.0||^7.0",
@@ -67,40 +67,36 @@
                 "tabacitu",
                 "updivision"
             ],
-            "time": "2020-04-20T06:18:36+00:00"
+            "time": "2020-05-06T17:05:04+00:00"
         },
         {
             "name": "backpack/crud",
-            "version": "4.0.60",
+            "version": "4.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Laravel-Backpack/CRUD.git",
-                "reference": "3c6116bce3c90ef9850d3d07de5c7b8f41a7b6cd"
+                "reference": "d0612499fa22d91f7302594313c60880c41c1180"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Laravel-Backpack/CRUD/zipball/3c6116bce3c90ef9850d3d07de5c7b8f41a7b6cd",
-                "reference": "3c6116bce3c90ef9850d3d07de5c7b8f41a7b6cd",
+                "url": "https://api.github.com/repos/Laravel-Backpack/CRUD/zipball/d0612499fa22d91f7302594313c60880c41c1180",
+                "reference": "d0612499fa22d91f7302594313c60880c41c1180",
                 "shasum": ""
             },
             "require": {
                 "creativeorange/gravatar": "~1.0",
                 "doctrine/dbal": "^2.5",
                 "guzzlehttp/guzzle": "^6.3",
-                "intervention/image": "^2.3",
-                "laravel/framework": "^7.0|^6.0|5.8.*",
-                "laravel/helpers": "^1.1",
-                "nesbot/carbon": "^2.14",
+                "laravel/framework": "^7.0|^6.0",
                 "ocramius/package-versions": "^1.4",
-                "prologue/alerts": "^0.4.1",
-                "venturecraft/revisionable": "1.*"
+                "prologue/alerts": "^0.4.1"
             },
             "require-dev": {
-                "orchestra/database": "^5.0@dev|3.8.x-dev",
-                "orchestra/testbench": "^5.0|^3.0",
+                "orchestra/database": "^5.0|^4.0|^3.0",
+                "orchestra/testbench": "^5.0|^4.0|^3.0",
                 "phpunit/phpunit": "~8.0|~7.0",
                 "scrutinizer/ocular": "~1.7|~1.1",
-                "spatie/laravel-translatable": "^4.0|^3.1.3"
+                "spatie/laravel-translatable": "^4.0"
             },
             "type": "library",
             "extra": {
@@ -112,7 +108,8 @@
                         "Backpack\\CRUD\\BackpackServiceProvider"
                     ],
                     "aliases": {
-                        "CRUD": "Backpack\\CRUD\\app\\Library\\CrudPanel\\CrudPanelFacade"
+                        "CRUD": "Backpack\\CRUD\\app\\Library\\CrudPanel\\CrudPanelFacade",
+                        "Widget": "Backpack\\CRUD\\app\\Library\\Widget"
                     }
                 }
             },
@@ -154,24 +151,80 @@
                 "read",
                 "update"
             ],
-            "time": "2020-04-21T07:54:06+00:00"
+            "time": "2020-05-06T16:10:35+00:00"
         },
         {
-            "name": "backpack/langfilemanager",
-            "version": "2.0.2",
+            "name": "backpack/filemanager",
+            "version": "1.1.4",
             "source": {
                 "type": "git",
-                "url": "https://github.com/Laravel-Backpack/LangFileManager.git",
-                "reference": "9d3ae7505557cd6a8a374e281ecb7711395198f2"
+                "url": "https://github.com/Laravel-Backpack/FileManager.git",
+                "reference": "f3fbea46ee3bcb0dcd753d2de8362f955008e0f7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Laravel-Backpack/LangFileManager/zipball/9d3ae7505557cd6a8a374e281ecb7711395198f2",
-                "reference": "9d3ae7505557cd6a8a374e281ecb7711395198f2",
+                "url": "https://api.github.com/repos/Laravel-Backpack/FileManager/zipball/f3fbea46ee3bcb0dcd753d2de8362f955008e0f7",
+                "reference": "f3fbea46ee3bcb0dcd753d2de8362f955008e0f7",
                 "shasum": ""
             },
             "require": {
-                "backpack/crud": "^4.0.0"
+                "backpack/crud": "^4.1.0|4.1.x-dev",
+                "barryvdh/laravel-elfinder": "^0.4.5"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.1",
+                "orchestra/testbench": "~3|~4",
+                "phpunit/phpunit": "^8.0",
+                "sempro/phpunit-pretty-print": "^1.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Backpack\\FileManager\\FileManagerServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Backpack\\FileManager\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Cristian Tabacitu",
+                    "email": "hello@tabacitu.ro",
+                    "homepage": "https://backpackforlaravel.com"
+                }
+            ],
+            "description": "Backpack admin interface for files and folder, using elFinder",
+            "homepage": "https://github.com/laravel-backpack/filemanager",
+            "keywords": [
+                "filemanager",
+                "laravel"
+            ],
+            "time": "2020-04-27T14:03:20+00:00"
+        },
+        {
+            "name": "backpack/langfilemanager",
+            "version": "3.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Laravel-Backpack/LangFileManager.git",
+                "reference": "fd1b1732db0cbfe22990a0d0af03c6a2d1beda19"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Laravel-Backpack/LangFileManager/zipball/fd1b1732db0cbfe22990a0d0af03c6a2d1beda19",
+                "reference": "fd1b1732db0cbfe22990a0d0af03c6a2d1beda19",
+                "shasum": ""
+            },
+            "require": {
+                "backpack/crud": "^4.1.0"
             },
             "require-dev": {
                 "phpunit/phpunit": "4.*",
@@ -228,24 +281,24 @@
                 "translationmanager",
                 "updivision"
             ],
-            "time": "2020-01-15T16:27:58+00:00"
+            "time": "2020-05-06T17:01:40+00:00"
         },
         {
             "name": "backpack/logmanager",
-            "version": "3.0.5",
+            "version": "4.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Laravel-Backpack/LogManager.git",
-                "reference": "a4db303ebfa00c006586e513ed5c417c97921fbe"
+                "reference": "056ecdb6aefbff0511eba44120eaa7f51e3a277c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Laravel-Backpack/LogManager/zipball/a4db303ebfa00c006586e513ed5c417c97921fbe",
-                "reference": "a4db303ebfa00c006586e513ed5c417c97921fbe",
+                "url": "https://api.github.com/repos/Laravel-Backpack/LogManager/zipball/056ecdb6aefbff0511eba44120eaa7f51e3a277c",
+                "reference": "056ecdb6aefbff0511eba44120eaa7f51e3a277c",
                 "shasum": ""
             },
             "require": {
-                "backpack/crud": "^4.0.0"
+                "backpack/crud": "^4.1.0"
             },
             "require-dev": {
                 "phpunit/phpunit": "^9.0||^7.0",
@@ -288,30 +341,30 @@
                 "log manager",
                 "logs"
             ],
-            "time": "2020-04-20T05:44:01+00:00"
+            "time": "2020-05-06T16:52:13+00:00"
         },
         {
             "name": "backpack/pagemanager",
-            "version": "2.0.7",
+            "version": "3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Laravel-Backpack/PageManager.git",
-                "reference": "786d070a89569031335ad62fdf8a1ce23619e66d"
+                "reference": "28519f6498036ed04fbd007138fb7fe2b1405602"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Laravel-Backpack/PageManager/zipball/786d070a89569031335ad62fdf8a1ce23619e66d",
-                "reference": "786d070a89569031335ad62fdf8a1ce23619e66d",
+                "url": "https://api.github.com/repos/Laravel-Backpack/PageManager/zipball/28519f6498036ed04fbd007138fb7fe2b1405602",
+                "reference": "28519f6498036ed04fbd007138fb7fe2b1405602",
                 "shasum": ""
             },
             "require": {
-                "backpack/crud": "^4.0.0",
+                "backpack/crud": "^4.1.0",
                 "cviebrock/eloquent-sluggable": "^7.0||^6.0||4.8"
             },
             "require-dev": {
                 "phpunit/phpunit": "^9.0||^7.0",
                 "scrutinizer/ocular": "~1.1",
-                "squizlabs/php_codesniffer": "~2.3"
+                "squizlabs/php_codesniffer": "~2.3 || ~3.0"
             },
             "type": "library",
             "extra": {
@@ -356,24 +409,24 @@
                 "presentation website",
                 "wordpress"
             ],
-            "time": "2020-03-05T07:43:58+00:00"
+            "time": "2020-05-06T17:03:13+00:00"
         },
         {
             "name": "backpack/permissionmanager",
-            "version": "5.0.7",
+            "version": "6.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Laravel-Backpack/PermissionManager.git",
-                "reference": "032051df0ed1b638c5afcc9bccc93c8162261f17"
+                "reference": "120a927e2953044d6bef684ccd2fcec403e72068"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Laravel-Backpack/PermissionManager/zipball/032051df0ed1b638c5afcc9bccc93c8162261f17",
-                "reference": "032051df0ed1b638c5afcc9bccc93c8162261f17",
+                "url": "https://api.github.com/repos/Laravel-Backpack/PermissionManager/zipball/120a927e2953044d6bef684ccd2fcec403e72068",
+                "reference": "120a927e2953044d6bef684ccd2fcec403e72068",
                 "shasum": ""
             },
             "require": {
-                "backpack/crud": "^4.0.0",
+                "backpack/crud": "^4.1.0",
                 "spatie/laravel-permission": "^3.0"
             },
             "require-dev": {
@@ -431,7 +484,7 @@
                 "updivision",
                 "users roles admin"
             ],
-            "time": "2020-03-05T07:55:03+00:00"
+            "time": "2020-05-06T16:57:18+00:00"
         },
         {
             "name": "backpack/settings",
@@ -1779,16 +1832,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v7.9.2",
+            "version": "v7.10.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "757b155658ae6da429065ba8f22242fe599824f7"
+                "reference": "6e927e78aafd578d59c99608e7f0e23a5f7bfc5a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/757b155658ae6da429065ba8f22242fe599824f7",
-                "reference": "757b155658ae6da429065ba8f22242fe599824f7",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/6e927e78aafd578d59c99608e7f0e23a5f7bfc5a",
+                "reference": "6e927e78aafd578d59c99608e7f0e23a5f7bfc5a",
                 "shasum": ""
             },
             "require": {
@@ -1927,60 +1980,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2020-04-28T16:09:20+00:00"
-        },
-        {
-            "name": "laravel/helpers",
-            "version": "v1.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/laravel/helpers.git",
-                "reference": "1f978fc5dad9f7f906b18242c654252615201de4"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/laravel/helpers/zipball/1f978fc5dad9f7f906b18242c654252615201de4",
-                "reference": "1f978fc5dad9f7f906b18242c654252615201de4",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/support": "~5.8.0|^6.0|^7.0",
-                "php": ">=7.1.3"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^7.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0-dev"
-                }
-            },
-            "autoload": {
-                "files": [
-                    "src/helpers.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Taylor Otwell",
-                    "email": "taylor@laravel.com"
-                },
-                {
-                    "name": "Dries Vints",
-                    "email": "dries.vints@gmail.com"
-                }
-            ],
-            "description": "Provides backwards compatibility for helpers in the latest Laravel release.",
-            "keywords": [
-                "helpers",
-                "laravel"
-            ],
-            "time": "2020-03-03T13:52:16+00:00"
+            "time": "2020-05-06T15:36:00+00:00"
         },
         {
             "name": "laravel/socialite",
@@ -2112,16 +2112,16 @@
         },
         {
             "name": "league/commonmark",
-            "version": "1.4.2",
+            "version": "1.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/commonmark.git",
-                "reference": "9e780d972185e4f737a03bade0fd34a9e67bbf31"
+                "reference": "412639f7cfbc0b31ad2455b2fe965095f66ae505"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/commonmark/zipball/9e780d972185e4f737a03bade0fd34a9e67bbf31",
-                "reference": "9e780d972185e4f737a03bade0fd34a9e67bbf31",
+                "url": "https://api.github.com/repos/thephpleague/commonmark/zipball/412639f7cfbc0b31ad2455b2fe965095f66ae505",
+                "reference": "412639f7cfbc0b31ad2455b2fe965095f66ae505",
                 "shasum": ""
             },
             "require": {
@@ -2182,7 +2182,33 @@
                 "md",
                 "parser"
             ],
-            "time": "2020-04-24T13:39:56+00:00"
+            "funding": [
+                {
+                    "url": "https://enjoy.gitstore.app/repositories/thephpleague/commonmark",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://www.colinodell.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://www.paypal.me/colinpodell/10.00",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/colinodell",
+                    "type": "github"
+                },
+                {
+                    "url": "https://www.patreon.com/colinodell",
+                    "type": "patreon"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/league/commonmark",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2020-05-04T22:15:21+00:00"
         },
         {
             "name": "league/flysystem",
@@ -3368,16 +3394,16 @@
         },
         {
             "name": "spatie/db-dumper",
-            "version": "2.16.0",
+            "version": "2.16.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/db-dumper.git",
-                "reference": "7c6d3b7f7191e1549aa5996b8ab371de31eec762"
+                "reference": "56448e8f41d4e8e83babf701d5708b1e597e8ec6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/db-dumper/zipball/7c6d3b7f7191e1549aa5996b8ab371de31eec762",
-                "reference": "7c6d3b7f7191e1549aa5996b8ab371de31eec762",
+                "url": "https://api.github.com/repos/spatie/db-dumper/zipball/56448e8f41d4e8e83babf701d5708b1e597e8ec6",
+                "reference": "56448e8f41d4e8e83babf701d5708b1e597e8ec6",
                 "shasum": ""
             },
             "require": {
@@ -3414,7 +3440,13 @@
                 "mysqldump",
                 "spatie"
             ],
-            "time": "2020-04-16T15:10:19+00:00"
+            "funding": [
+                {
+                    "url": "https://www.patreon.com/spatie",
+                    "type": "patreon"
+                }
+            ],
+            "time": "2020-05-06T14:32:38+00:00"
         },
         {
             "name": "spatie/laravel-backup",
@@ -5412,66 +5444,6 @@
             "time": "2019-10-24T08:53:34+00:00"
         },
         {
-            "name": "venturecraft/revisionable",
-            "version": "1.34.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/VentureCraft/revisionable.git",
-                "reference": "151336f0cd51921a00a1ac249afdbcbedb3bc8b3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/VentureCraft/revisionable/zipball/151336f0cd51921a00a1ac249afdbcbedb3bc8b3",
-                "reference": "151336f0cd51921a00a1ac249afdbcbedb3bc8b3",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/support": "~4.0|~5.0|~5.1|^6.0|^7.0",
-                "laravel/framework": "~5.4|^6.0|^7.0",
-                "php": ">=5.4.0"
-            },
-            "require-dev": {
-                "orchestra/testbench": "~3.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Venturecraft\\Revisionable\\RevisionableServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "classmap": [
-                    "src/migrations"
-                ],
-                "psr-0": {
-                    "Venturecraft\\Revisionable": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Chris Duell",
-                    "email": "me@chrisduell.com"
-                }
-            ],
-            "description": "Keep a revision history for your models without thinking, created as a package for use with Laravel",
-            "homepage": "http://github.com/venturecraft/revisionable",
-            "keywords": [
-                "Audit",
-                "ardent",
-                "history",
-                "laravel",
-                "model",
-                "revision"
-            ],
-            "time": "2020-03-03T22:35:12+00:00"
-        },
-        {
             "name": "vlucas/phpdotenv",
             "version": "v4.1.5",
             "source": {
@@ -5598,20 +5570,20 @@
     "packages-dev": [
         {
             "name": "backpack/generators",
-            "version": "v2.0.7",
+            "version": "3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Laravel-Backpack/Generators.git",
-                "reference": "7011e79406919468f1c0408840741db8b4dd0876"
+                "reference": "d797a81fa13b766404ed18c2c9aef5b6c7148c66"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Laravel-Backpack/Generators/zipball/7011e79406919468f1c0408840741db8b4dd0876",
-                "reference": "7011e79406919468f1c0408840741db8b4dd0876",
+                "url": "https://api.github.com/repos/Laravel-Backpack/Generators/zipball/d797a81fa13b766404ed18c2c9aef5b6c7148c66",
+                "reference": "d797a81fa13b766404ed18c2c9aef5b6c7148c66",
                 "shasum": ""
             },
             "require": {
-                "backpack/crud": "4.0.*"
+                "backpack/crud": "4.1.*"
             },
             "require-dev": {
                 "phpunit/phpunit": "^9.0||^7.0",
@@ -5654,20 +5626,20 @@
                 "request",
                 "view"
             ],
-            "time": "2020-03-05T10:18:48+00:00"
+            "time": "2020-05-06T16:55:09+00:00"
         },
         {
             "name": "barryvdh/laravel-debugbar",
-            "version": "v3.3.2",
+            "version": "v3.3.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/barryvdh/laravel-debugbar.git",
-                "reference": "95c31aab33689cd4572d27038186886f4bfa63ae"
+                "reference": "57f2219f6d9efe41ed1bc880d86701c52f261bf5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/barryvdh/laravel-debugbar/zipball/95c31aab33689cd4572d27038186886f4bfa63ae",
-                "reference": "95c31aab33689cd4572d27038186886f4bfa63ae",
+                "url": "https://api.github.com/repos/barryvdh/laravel-debugbar/zipball/57f2219f6d9efe41ed1bc880d86701c52f261bf5",
+                "reference": "57f2219f6d9efe41ed1bc880d86701c52f261bf5",
                 "shasum": ""
             },
             "require": {
@@ -5722,7 +5694,13 @@
                 "profiler",
                 "webprofiler"
             ],
-            "time": "2020-04-16T20:19:40+00:00"
+            "funding": [
+                {
+                    "url": "https://github.com/barryvdh",
+                    "type": "github"
+                }
+            ],
+            "time": "2020-05-05T10:53:32+00:00"
         },
         {
             "name": "doctrine/instantiator",
@@ -5951,16 +5929,16 @@
         },
         {
             "name": "filp/whoops",
-            "version": "2.7.1",
+            "version": "2.7.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filp/whoops.git",
-                "reference": "fff6f1e4f36be0e0d0b84d66b413d9dcb0c49130"
+                "reference": "17d0d3f266c8f925ebd035cd36f83cf802b47d4a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/filp/whoops/zipball/fff6f1e4f36be0e0d0b84d66b413d9dcb0c49130",
-                "reference": "fff6f1e4f36be0e0d0b84d66b413d9dcb0c49130",
+                "url": "https://api.github.com/repos/filp/whoops/zipball/17d0d3f266c8f925ebd035cd36f83cf802b47d4a",
+                "reference": "17d0d3f266c8f925ebd035cd36f83cf802b47d4a",
                 "shasum": ""
             },
             "require": {
@@ -6008,7 +5986,7 @@
                 "throwable",
                 "whoops"
             ],
-            "time": "2020-01-15T10:00:00+00:00"
+            "time": "2020-05-05T12:28:07+00:00"
         },
         {
             "name": "hamcrest/hamcrest-php",
@@ -6121,16 +6099,16 @@
         },
         {
             "name": "maximebf/debugbar",
-            "version": "v1.16.2",
+            "version": "v1.16.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/maximebf/php-debugbar.git",
-                "reference": "40f375504a4dd8e59f779c3f3cac524777ddcde5"
+                "reference": "1a1605b8e9bacb34cc0c6278206d699772e1d372"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/maximebf/php-debugbar/zipball/40f375504a4dd8e59f779c3f3cac524777ddcde5",
-                "reference": "40f375504a4dd8e59f779c3f3cac524777ddcde5",
+                "url": "https://api.github.com/repos/maximebf/php-debugbar/zipball/1a1605b8e9bacb34cc0c6278206d699772e1d372",
+                "reference": "1a1605b8e9bacb34cc0c6278206d699772e1d372",
                 "shasum": ""
             },
             "require": {
@@ -6178,7 +6156,7 @@
                 "debug",
                 "debugbar"
             ],
-            "time": "2020-04-16T09:05:52+00:00"
+            "time": "2020-05-06T07:06:27+00:00"
         },
         {
             "name": "mockery/mockery",
@@ -6940,16 +6918,16 @@
         },
         {
             "name": "phpunit/php-token-stream",
-            "version": "4.0.0",
+            "version": "4.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-token-stream.git",
-                "reference": "b2560a0c33f7710e4d7f8780964193e8e8f8effe"
+                "reference": "cdc0db5aed8fbfaf475fbd95bfd7bab83c7a779c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-token-stream/zipball/b2560a0c33f7710e4d7f8780964193e8e8f8effe",
-                "reference": "b2560a0c33f7710e4d7f8780964193e8e8f8effe",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-token-stream/zipball/cdc0db5aed8fbfaf475fbd95bfd7bab83c7a779c",
+                "reference": "cdc0db5aed8fbfaf475fbd95bfd7bab83c7a779c",
                 "shasum": ""
             },
             "require": {
@@ -6985,7 +6963,13 @@
             "keywords": [
                 "tokenizer"
             ],
-            "time": "2020-02-07T06:19:00+00:00"
+            "funding": [
+                {
+                    "url": "https://github.com/sebastianbergmann",
+                    "type": "github"
+                }
+            ],
+            "time": "2020-05-06T09:56:31+00:00"
         },
         {
             "name": "phpunit/phpunit",

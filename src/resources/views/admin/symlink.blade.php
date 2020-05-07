@@ -1,4 +1,4 @@
-@extends('backpack::layouts.top_left')
+@extends('backpack::blank')
 
 @section('after_styles')
 <style media="screen">
@@ -84,7 +84,7 @@
                     </div>
 
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-success"><span class="ladda-label"><i class="fa fa-terminal"></i> {{ trans('gemadigital::messages.run') }}</span></button>
+                        <button type="submit" class="btn btn-success"><span class="ladda-label"><i class="la la-terminal"></i> {{ trans('gemadigital::messages.run') }}</span></button>
                     </div>
 
                     <pre style="min-height: 180px;"></pre>

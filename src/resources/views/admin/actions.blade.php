@@ -1,4 +1,4 @@
-@extends('backpack::layouts.top_left')
+@extends('backpack::blank')
 
 @php
   $breadcrumbs = [

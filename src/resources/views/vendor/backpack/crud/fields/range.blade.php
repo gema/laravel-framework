@@ -1,7 +1,7 @@
 {{-- html5 range input --}}
-<div @include('crud::inc.field_wrapper_attributes') >
+@include('crud::fields.inc.wrapper_start')
     <label>{!! $field['label'] !!}</label>
-    @include('crud::inc.field_translatable_icon')
+    @include('crud::fields.inc.translatable_icon')
     <input
         type="range"
         name="{{ $field['name'] }}"
@@ -9,14 +9,14 @@
         max="{{ $field['max'] }}"
         step="{{ $field['step'] }}"
         value="{{ old($field['name']) ? old($field['name']) : (isset($field['value']) ? $field['value'] : (isset($field['default']) ? $field['default'] : '' )) }}"
-        @include('crud::inc.field_attributes')
+        @include('crud::fields.inc.attributes')
         oninput="updateRangeInput(this);"
         >
 
     <input type="text" disabled
         style="margin-top: 8px; max-width: 120px;"
         value="{{ old($field['name']) ? old($field['name']) : (isset($field['value']) ? $field['value'] : (isset($field['default']) ? $field['default'] : '' )) }}"
-        @include('crud::inc.field_attributes')
+        @include('crud::fields.inc.attributes')
         >
 
     {{-- HINT --}}

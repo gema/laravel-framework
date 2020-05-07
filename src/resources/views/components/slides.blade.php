@@ -15,7 +15,7 @@
                         </div>
                         <div class="excerpt">
                             <h2>{{ $slide->title }}</h2>
-                            <p>{{ str_limit($slide->description,300) }}</p>
+                            <p>{{ Str::limit($slide->description,300) }}</p>
                             @if($slide->url)
                             <a class="knowmore" href="{{ $slide->url }}" target="_blank">{{ __('ui.knowmore') }}</a>
                             @endif

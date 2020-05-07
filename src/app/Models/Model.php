@@ -33,7 +33,7 @@ class Model extends \Illuminate\Database\Eloquent\Model
         }
 
         $class = strtolower(class_basename($entity));
-        return "<a href='/admin/$class/{$entity->id}/edit'>" . str_limit($entity->name, 60, '...') . '</a>';
+        return "<a href='/admin/$class/{$entity->id}/edit'>" . Str::limit($entity->name, 60, '...') . '</a>';
     }
 
     // Upload Multiple Files Helper

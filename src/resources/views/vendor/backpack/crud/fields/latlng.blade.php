@@ -2,11 +2,11 @@
     <label>{{ $field['label'] }}</label>
     <div class="input-group">
         <div class="input-group-addon">
-            <i class="fa fa-map-marker"></i>
+            <i class="la la-map-marker"></i>
         </div>
         <input id="search_address" class="form-control" type="text" placeholder="{{ __('gemadigital::messages.location') }}" />
         <div id="geolocate" class="input-group-addon btn btn-primary">
-            <i class="fa fa-compass"></i>
+            <i class="la la-compass"></i>
         </div>
     </div>
 </div>

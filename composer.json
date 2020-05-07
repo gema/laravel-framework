@@ -9,17 +9,18 @@
             "homepage": "https://promatik.pt"
         }
     ],
-    "homepage": "https://github.com/gemadigital/framework",
+    "homepage": "https://github.com/EnigmaVirtual/laravel-framework",
     "keywords": ["Laravel", "framework"],
     "require": {
         "php": "^7.3",
         "illuminate/support": "~7",
-        "backpack/backupmanager": "^2.0",
-        "backpack/crud": "4.0.*",
-        "backpack/langfilemanager": "^2.0",
-        "backpack/logmanager": "^3.0",
-        "backpack/pagemanager": "^2.0",
-        "backpack/permissionmanager": "^5.0",
+        "backpack/backupmanager": "^3.0",
+        "backpack/crud": "4.1.*",
+		"backpack/filemanager": "^1.0",
+        "backpack/langfilemanager": "^3.0",
+        "backpack/logmanager": "^4.0",
+        "backpack/pagemanager": "^3.0",
+        "backpack/permissionmanager": "^6.0",
         "backpack/settings": "^3.0",
         "barryvdh/laravel-elfinder": "^0.4.3",
         "bluemmb/faker-picsum-photos-provider": "^1.0",
@@ -31,7 +32,7 @@
         "spatie/laravel-translatable": "^4.3"
     },
     "require-dev": {
-        "backpack/generators": "^2.0",
+        "backpack/generators": "^3.0",
         "barryvdh/laravel-debugbar": "^3.2",
         "facade/ignition": "^2.0",
         "fzaninotto/faker": "^1.4",

@@ -18,7 +18,7 @@ trait SaveMedia
         }
 
         // if a base64 was sent, store it in the db
-        if (starts_with($value, 'data:image')) {
+        if (Str::startsWith($value, 'data:image')) {
             $format = substr($value, 11, 3);
 
             // jpeg exception
@@ -27,7 +27,7 @@ trait SaveMedia
             }
 
             $timestamp = Carbon::now()->timestamp;
-            $filename = str_slug("$name $timestamp") . ".$format";
+            $filename = Str::slug("$name $timestamp") . ".$format";
 
             $image = Image::make($value);
 

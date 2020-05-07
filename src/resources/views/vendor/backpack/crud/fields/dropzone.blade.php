@@ -55,7 +55,7 @@
     </style>
 @endpush
 
-<div @include('crud::inc.field_wrapper_attributes') >
+@include('crud::fields.inc.wrapper_start')
     <label>{{ $field['label'] }}</label>
     <input type='hidden' name='{{ $field['name'] }}' value='' />
     <div id="{{ $field['name'] }}-existing" class="dropzone dropzone-previews">
@@ -68,7 +68,7 @@
                 continue;
             }
 
-            if(!starts_with($path, 'http')) {
+            if(!Str::startsWith($path, 'http')) {
                 $file = new \App\Helpers\FileHelper;
 
                 // If it's on a disk
@@ -118,7 +118,7 @@
             </div>
         </div>
     </template>
-</div>
+@include('crud::fields.inc.wrapper_end')
 
 @push('crud_fields_scripts')
     <script src="{{ asset('gemadigital/js/dropzone.min.js') }}"></script>

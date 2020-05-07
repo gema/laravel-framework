@@ -14,13 +14,13 @@ $items = json_encode(array_filter($items));
 
 @endphp
 
-<div ng-app="backPackTableApp" ng-controller="tableControllerDouble" @include('crud::inc.field_wrapper_attributes') >
-
+<div ng-app="backPackTableApp" ng-controller="tableControllerDouble">
+@include('crud::fields.inc.wrapper_start')
     @if( $field['label'] != '' )
     <label>{!! $field['label'] !!}</label>
     @endif
 
-    @include('crud::inc.field_translatable_icon')
+    @include('crud::fields.inc.translatable_icon')
 
     <input class="array-json" type="hidden" id="{{ $field['name'] }}" name="{{ $field['name'] }}">
 
@@ -36,11 +36,11 @@ $items = json_encode(array_filter($items));
                             {{$column['label'] }}
                         </th>
                         @if($column['type'] == 'browse')
-                        <th style="width: 30px" class="text-center" ng-if="max == -1 || max > 1"> {{-- <i class="fa fa-cloud-upload"></i> --}} </th>
+                        <th style="width: 30px" class="text-center" ng-if="max == -1 || max > 1"> {{-- <i class="la la-cloud-upload"></i> --}} </th>
                         @endif
                     @endforeach
-                    <th style="width: 30px" class="text-center" ng-if="max == -1 || max > 1"> {{-- <i class="fa fa-sort"></i> --}} </th>
-                    <th style="width: 30px" class="text-center" ng-if="max == -1 || max > 1"> {{-- <i class="fa fa-trash"></i> --}} </th>
+                    <th style="width: 30px" class="text-center" ng-if="max == -1 || max > 1"> {{-- <i class="la la-sort"></i> --}} </th>
+                    <th style="width: 30px" class="text-center" ng-if="max == -1 || max > 1"> {{-- <i class="la la-trash"></i> --}} </th>
                 </tr>
             </thead>
 
@@ -82,7 +82,7 @@ $items = json_encode(array_filter($items));
                                     type="button"
                                     ng-click="browseItem('{{ $field['name'] }}', {{ $mimes }}, item,'{{ $key }}',$index)"
                                     class="btn btn-sm btn-default popup_selector" />
-                                <i class="fa fa-cloud-upload"></i></button>
+                                <i class="la la-cloud-upload"></i></button>
                             </td>
                         @endif
 
@@ -90,11 +90,11 @@ $items = json_encode(array_filter($items));
 
                     <td ng-if="max == -1 || max > 1">
                         <span class="btn btn-sm btn-default sort-handle"><span class="sr-only">sort item</span>
-                        <i class="fa fa-sort" role="presentation" aria-hidden="true"></i></span>
+                        <i class="la la-sort" role="presentation" aria-hidden="true"></i></span>
                     </td>
                     <td ng-if="max == -1 || max > 1">
                         <button ng-hide="min > -1 && $index < min" class="btn btn-sm btn-default" type="button" ng-click="removeItem(item);"><span class="sr-only">delete item</span>
-                        <i class="fa fa-trash" role="presentation" aria-hidden="true"></i></button>
+                        <i class="la la-trash" role="presentation" aria-hidden="true"></i></button>
                     </td>
 
                 </tr>
@@ -104,7 +104,7 @@ $items = json_encode(array_filter($items));
         </table>
 
         <div class="array-controls btn-group m-t-10">
-            <button ng-if="max == -1 || items.length < max" class="btn btn-sm btn-default" type="button" ng-click="addItem()"><i class="fa fa-plus"></i> {{trans('backpack::crud.add')}} {{ $item_name }}</button>
+            <button ng-if="max == -1 || items.length < max" class="btn btn-sm btn-default" type="button" ng-click="addItem()"><i class="la la-plus"></i> {{trans('backpack::crud.add')}} {{ $item_name }}</button>
         </div>
 
     </div>
@@ -113,6 +113,7 @@ $items = json_encode(array_filter($items));
     @if (isset($field['hint']))
         <p class="help-block">{!! $field['hint'] !!}</p>
     @endif
+@include('crud::fields.inc.wrapper_end')
 </div>
 
 {{-- ########################################## --}}

@@ -36,7 +36,7 @@ class FileHelper
 
     private static function isType($file_path, $type)
     {
-        return \File::exists($file_path) && starts_with(\File::mimeType($file_path), $type);
+        return \File::exists($file_path) && Str::startsWith(\File::mimeType($file_path), $type);
     }
 
     public static function replaceExtension($file_path, $newExtension)

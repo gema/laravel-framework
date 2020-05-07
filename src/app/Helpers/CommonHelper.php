@@ -103,7 +103,7 @@ if (!function_exists('is')) {
 if (!function_exists('aurl')) {
     function aurl($disk, $path)
     {
-        return starts_with($path, 'http') ? $path : Storage::disk($disk)->url($path);
+        return Str::startsWith($path, 'http') ? $path : Storage::disk($disk)->url($path);
     }
 }
 
@@ -208,7 +208,7 @@ if (!function_exists('sized_image')) {
 }
 
 if (!function_exists('__fallback')) {
-    function __fallback(string $key, ?string $fallback = null, ?string $locale = null, ?array $replace = [])
+    function __fallback(string $key,  ? string $fallback = null,  ? string $locale = null,  ? array $replace = [])
     {
         if (\Illuminate\Support\Facades\Lang::has($key, $locale)) {
             return trans($key, $replace, $locale);
@@ -221,7 +221,7 @@ if (!function_exists('__fallback')) {
 if (!function_exists('backpack_user_from_auth')) {
     function backpack_user_from_auth()
     {
-        $user = new \App\Models\BackpackUser();
+        $user = new \App\User();
         $user->id = Auth::user()->id ?? null;
         return $user;
     }

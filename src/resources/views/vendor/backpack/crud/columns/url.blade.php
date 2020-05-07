@@ -3,5 +3,5 @@ $value = data_get($entry, $column['name']);
 @endphp
 
 <a target="_blank" href="{{ (strpos($value, 'http') === 0 ? $value : 'https://'.$value) }}">
-    {{ str_limit(strip_tags($value), array_key_exists('limit', $column) ? $column['limit'] : 50, "[...]") }}
+    {{ Str::limit(strip_tags($value), array_key_exists('limit', $column) ? $column['limit'] : 50, "[...]") }}
 </a>
