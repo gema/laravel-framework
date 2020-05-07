@@ -1,11 +1,11 @@
 <?php
 
-namespace GemaDigital\Framework\App\Events;
+namespace GemaDigital\Framework\app\Events;
 
 use Auth;
 use Carbon\Carbon;
-use GemaDigital\Framework\App\Events\SerializesEvents;
-use GemaDigital\Framework\App\Events\ShouldBroadcast;
+use GemaDigital\Framework\app\Events\SerializesEvents;
+use GemaDigital\Framework\app\Events\ShouldBroadcast;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Foundation\Events\Dispatchable;

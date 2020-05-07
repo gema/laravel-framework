@@ -1,6 +1,6 @@
 <?php
 
-namespace GemaDigital\Framework\App\Models\Traits;
+namespace GemaDigital\Framework\app\Models\Traits;
 
 use Carbon\Carbon;
 use Config;

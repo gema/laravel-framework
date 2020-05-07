@@ -1,6 +1,6 @@
 <?php
 
-namespace GemaDigital\Framework\App\Models;
+namespace GemaDigital\Framework\app\Models;
 
 class Model extends \Illuminate\Database\Eloquent\Model
 {

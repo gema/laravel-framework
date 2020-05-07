@@ -1,6 +1,6 @@
 <?php
 
-namespace GemaDigital\Framework\App\Http\Controllers\Admin;
+namespace GemaDigital\Framework\app\Http\Controllers\Admin;
 
 use Artisan;
 use Illuminate\Http\Request;

@@ -1,6 +1,6 @@
 <?php
 
-namespace GemaDigital\Framework\App\Events;
+namespace GemaDigital\Framework\app\Events;
 
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast as BaseShouldBroadcast;
 

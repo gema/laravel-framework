@@ -1,6 +1,6 @@
 <?php
 
-namespace GemaDigital\Framework\App\Helpers;
+namespace GemaDigital\Framework\app\Helpers;
 
 use Config;
 use Laravel\Passport\HasApiTokens as OriginalHasApiTokens;

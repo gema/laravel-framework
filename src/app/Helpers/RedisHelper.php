@@ -1,8 +1,8 @@
 <?php
 
-namespace GemaDigital\Framework\App\Helpers;
+namespace GemaDigital\Framework\app\Helpers;
 
-use GemaDigital\Framework\App\Events\BaseEvent;
+use GemaDigital\Framework\app\Events\BaseEvent;
 use Illuminate\Support\Facades\Redis;
 
 trait RedisHelper

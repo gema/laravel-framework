@@ -1,6 +1,6 @@
 <?php
 
-namespace GemaDigital\Framework\App\Helpers\Composer;
+namespace GemaDigital\Framework\app\Helpers\Composer;
 
 use Composer\Script\Event;
 

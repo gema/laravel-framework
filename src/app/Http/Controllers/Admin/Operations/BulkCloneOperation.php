@@ -1,8 +1,8 @@
 <?php
 
-namespace GemaDigital\Framework\App\Http\Controllers\Admin\Operations;
+namespace GemaDigital\Framework\app\Http\Controllers\Admin\Operations;
 
-use GemaDigital\Framework\App\Http\Controllers\Admin\CrudController;
+use GemaDigital\Framework\app\Http\Controllers\Admin\CrudController;
 
 trait BulkCloneOperation
 {

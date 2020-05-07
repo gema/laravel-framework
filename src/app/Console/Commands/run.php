@@ -1,6 +1,6 @@
 <?php
 
-namespace GemaDigital\Framework\App\Console\Commands;
+namespace GemaDigital\Framework\app\Console\Commands;
 
 use Illuminate\Console\Command;
 

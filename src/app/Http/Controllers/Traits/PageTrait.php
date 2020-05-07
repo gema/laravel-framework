@@ -1,6 +1,6 @@
 <?php
 
-namespace GemaDigital\Framework\App\Http\Controllers\Traits;
+namespace GemaDigital\Framework\app\Http\Controllers\Traits;
 
 use Backpack\PageManager\app\Models\Page;
 use Cache;

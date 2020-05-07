@@ -1,8 +1,8 @@
 <?php
 
-namespace GemaDigital\Framework\App\Http\Controllers\Admin;
+namespace GemaDigital\Framework\app\Http\Controllers\Admin;
 
-use GemaDigital\Framework\App\Helpers\EnumHelper;
+use GemaDigital\Framework\app\Helpers\EnumHelper;
 
 class UserCrudController extends \Backpack\PermissionManager\app\Http\Controllers\UserCrudController
 {

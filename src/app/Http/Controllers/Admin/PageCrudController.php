@@ -1,6 +1,6 @@
 <?php
 
-namespace GemaDigital\Framework\App\Http\Controllers\Admin;
+namespace GemaDigital\Framework\app\Http\Controllers\Admin;
 
 class PageCrudController extends \Backpack\PageManager\app\Http\Controllers\Admin\PageCrudController
 {
