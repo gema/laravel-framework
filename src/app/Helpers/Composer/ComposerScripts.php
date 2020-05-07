@@ -16,9 +16,9 @@ class ComposerScripts
     {
         switch (DIRECTORY_SEPARATOR) {
             case '/': // unix
-                exec('unlink "public\packages"');
+                exec('unlink "public/packages"');
                 exec('ln -s "../vendor/backpack/crud/src/public/packages" "public/packages"');
-                exec('unlink "public\gemadigital"');
+                exec('unlink "public/gemadigital"');
                 exec('ln -s "../vendor/gemadigital/framework/src/public/gemadigital" "public/gemadigital"');
 
                 // ElFinder Assets
