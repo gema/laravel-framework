@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Config;
 use Image;
 use Storage;
+use Str;
 
 trait SaveMedia
 {

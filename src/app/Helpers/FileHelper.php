@@ -2,6 +2,9 @@
 
 namespace GemaDigital\Framework\app\Helpers;
 
+use Str;
+use File;
+
 class FileHelper
 {
     // Check if file mime type is Application
@@ -36,7 +39,7 @@ class FileHelper
 
     private static function isType($file_path, $type)
     {
-        return \File::exists($file_path) && Str::startsWith(\File::mimeType($file_path), $type);
+        return File::exists($file_path) && Str::startsWith(File::mimeType($file_path), $type);
     }
 
     public static function replaceExtension($file_path, $newExtension)

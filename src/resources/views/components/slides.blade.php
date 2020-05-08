@@ -2,7 +2,6 @@
 <link rel="preload" href="{{ aurl('uploads', $slides[0]->image) }}" as="image" />
 @endsection
 
-
 <div class="slider">
     <div class="flex-slider swipeable" auto-scroll="5000">
         <ul class="pages">
@@ -11,7 +10,8 @@
                 <div class="container slides">
                     <div class="content">
                         <div class="overflow">
-                            <div class="blur" style="background-image: url({{ aurl('uploads', $slide->image) }});"></div>
+                            <div class="blur" style="background-image: url({{ aurl('uploads', $slide->image) }});">
+                            </div>
                         </div>
                         <div class="excerpt">
                             <h2>{{ $slide->title }}</h2>

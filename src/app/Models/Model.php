@@ -2,6 +2,8 @@
 
 namespace GemaDigital\Framework\app\Models;
 
+use Str;
+
 class Model extends \Illuminate\Database\Eloquent\Model
 {
     // Scopes

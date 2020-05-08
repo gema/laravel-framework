@@ -103,7 +103,7 @@ if (!function_exists('is')) {
 if (!function_exists('aurl')) {
     function aurl($disk, $path)
     {
-        return Str::startsWith($path, 'http') ? $path : Storage::disk($disk)->url($path);
+        return \Str::startsWith($path, 'http') ? $path : Storage::disk($disk)->url($path);
     }
 }
 
