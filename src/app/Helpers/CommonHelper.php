@@ -1,5 +1,12 @@
 <?php
 
+if (!function_exists('user')) {
+    function user()
+    {
+        return \Auth::user();
+    }
+}
+
 if (!function_exists('debugMode')) {
     function debugMode()
     {
@@ -32,7 +39,9 @@ if (!function_exists('data_get_first')) {
 if (!function_exists('hasRole')) {
     function hasRole($role)
     {
-        return backpack_user() && backpack_user()->hasRole($role);
+        $user = backpack_user() ?: user();
+
+        return $user && $user->hasRole($role);
     }
 }
 
@@ -57,7 +66,7 @@ if (!function_exists('hasPermission')) {
 if (!function_exists('admin')) {
     function admin()
     {
-        return backpack_user() && backpack_user()->hasRole('admin');
+        return hasRole('admin');
     }
 }
 
@@ -215,15 +224,6 @@ if (!function_exists('__fallback')) {
         }
 
         return $fallback;
-    }
-}
-
-if (!function_exists('backpack_user_from_auth')) {
-    function backpack_user_from_auth()
-    {
-        $user = new \App\User();
-        $user->id = Auth::user()->id ?? null;
-        return $user;
     }
 }
 
