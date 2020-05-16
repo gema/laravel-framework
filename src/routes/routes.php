@@ -40,7 +40,7 @@ Route::group(
                 Route::get('actions', 'AdminActionsController@actions')->name('actions');
 
                 // API
-                Route::get('/api/{entity}/ajax/{action}/{extra?}', '\App\Http\Controllers\Admin\APICrudController@ajax');
+                Route::any('/api/{entity}/ajax/{action}/{arg1?}/{arg2?}/{arg3?}', '\App\Http\Controllers\Admin\APICrudController@ajax');
 
                 // Dropzone
                 Route::post('dropzone/{disk}/{column}/{path}/{media}/{sizes}/{model}/remove', 'CrudController@handleDropzoneRemoveRaw');
