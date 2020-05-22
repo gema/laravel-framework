@@ -44,12 +44,11 @@ class Model extends \Illuminate\Database\Eloquent\Model
          */
         method_exists(__CLASS__, 'creating') && static::creating(function ($element) {
             self::call($element, 'beforeCreate');
-            self::call($element, 'beforeSync', 'create');
         });
 
         method_exists(__CLASS__, 'created') && static::created(function ($element) {
             self::call($element, 'afterCreate');
-            self::call($element, 'afterSync', 'create');
+            self::call($element, 'sync', 'create');
         });
 
         /**
@@ -57,12 +56,11 @@ class Model extends \Illuminate\Database\Eloquent\Model
          */
         method_exists(__CLASS__, 'updating') && static::updating(function ($element) {
             self::call($element, 'beforeUpdate');
-            self::call($element, 'beforeSync', 'update');
         });
 
         method_exists(__CLASS__, 'updated') && static::updated(function ($element) {
             self::call($element, 'afterUpdate');
-            self::call($element, 'afterSync', 'update');
+            self::call($element, 'sync', 'update');
         });
 
         /**
@@ -70,12 +68,10 @@ class Model extends \Illuminate\Database\Eloquent\Model
          */
         method_exists(__CLASS__, 'saving') && static::saving(function ($element) {
             self::call($element, 'beforeSave');
-            self::call($element, 'beforeSync', 'save');
         });
 
         method_exists(__CLASS__, 'saved') && static::saved(function ($element) {
             self::call($element, 'afterSave');
-            self::call($element, 'afterSync', 'save');
         });
 
         /**
@@ -83,12 +79,11 @@ class Model extends \Illuminate\Database\Eloquent\Model
          */
         method_exists(__CLASS__, 'deleting') && static::deleting(function ($element) {
             self::call($element, 'beforeDelete');
-            self::call($element, 'beforeSync', 'delete');
+            self::call($element, 'sync', 'delete');
         });
 
         method_exists(__CLASS__, 'deleted') && static::deleted(function ($element) {
             self::call($element, 'afterDelete');
-            self::call($element, 'afterSync', 'delete');
         });
 
         /**
@@ -96,12 +91,11 @@ class Model extends \Illuminate\Database\Eloquent\Model
          */
         method_exists(__CLASS__, 'restoring') && static::restoring(function ($element) {
             self::call($element, 'beforeRestore');
-            self::call($element, 'beforeSync', 'restore');
         });
 
         method_exists(__CLASS__, 'restored') && static::restored(function ($element) {
             self::call($element, 'afterRestore');
-            self::call($element, 'afterSync', 'restore');
+            self::call($element, 'sync', 'restore');
         });
     }
 
