@@ -35,18 +35,18 @@ class Model extends \Illuminate\Database\Eloquent\Model
         /**
          * Retrieve
          */
-        static::retrieved(function ($element) {
+        method_exists(__CLASS__, 'retrieved') && static::retrieved(function ($element) {
             self::call($element, 'afterRetrieve');
         });
 
         /**
          * Create
          */
-        static::creating(function ($element) {
+        method_exists(__CLASS__, 'creating') && static::creating(function ($element) {
             self::call($element, 'beforeCreate');
         });
 
-        static::created(function ($element) {
+        method_exists(__CLASS__, 'created') && static::created(function ($element) {
             self::call($element, 'afterCreate');
             self::call($element, 'sync', 'create');
         });
@@ -54,11 +54,11 @@ class Model extends \Illuminate\Database\Eloquent\Model
         /**
          * Update
          */
-        static::updating(function ($element) {
+        method_exists(__CLASS__, 'updating') && static::updating(function ($element) {
             self::call($element, 'beforeUpdate');
         });
 
-        static::updated(function ($element) {
+        method_exists(__CLASS__, 'updated') && static::updated(function ($element) {
             self::call($element, 'afterUpdate');
             self::call($element, 'sync', 'update');
         });
@@ -66,34 +66,34 @@ class Model extends \Illuminate\Database\Eloquent\Model
         /**
          * Save
          */
-        static::saving(function ($element) {
+        method_exists(__CLASS__, 'saving') && static::saving(function ($element) {
             self::call($element, 'beforeSave');
         });
 
-        static::saved(function ($element) {
+        method_exists(__CLASS__, 'saved') && static::saved(function ($element) {
             self::call($element, 'afterSave');
         });
 
         /**
          * Delete
          */
-        static::deleting(function ($element) {
+        method_exists(__CLASS__, 'deleting') && static::deleting(function ($element) {
             self::call($element, 'beforeDelete');
             self::call($element, 'sync', 'delete');
         });
 
-        static::deleted(function ($element) {
+        method_exists(__CLASS__, 'deleted') && static::deleted(function ($element) {
             self::call($element, 'afterDelete');
         });
 
         /**
          * Restore
          */
-        static::restoring(function ($element) {
+        method_exists(__CLASS__, 'restoring') && static::restoring(function ($element) {
             self::call($element, 'beforeRestore');
         });
 
-        static::restored(function ($element) {
+        method_exists(__CLASS__, 'restored') && static::restored(function ($element) {
             self::call($element, 'afterRestore');
             self::call($element, 'sync', 'restore');
         });
