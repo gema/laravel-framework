@@ -48,7 +48,8 @@ abstract class BaseEvent implements ShouldBroadcast
 
     public function getUserData()
     {
-        return (object) Auth::user()->only(['id', 'name', 'email']) ?? null;
+        $user = Auth::user();
+        return $user ? (object) $user->only(['id', 'name', 'email']) : null;
     }
 
     public function __toString()
