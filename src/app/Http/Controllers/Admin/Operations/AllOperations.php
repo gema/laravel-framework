@@ -4,12 +4,15 @@ namespace GemaDigital\Framework\app\Http\Controllers\Admin\Operations;
 
 trait AllOperations
 {
-    use ListOperation;
-    use CreateOperation;
-    use UpdateOperation;
-    use CloneOperation;
-    use DeleteOperation;
-    use BulkDeleteOperation;
     use BulkCloneOperation;
+    use BulkDeleteOperation;
+    use CloneOperation;
+    use CreateOperation;
+    use DeleteOperation;
+    use FetchOperation;
+    use InlineCreateOperation;
+    use ListOperation;
     use ReorderOperation;
+    use ShowOperation;
+    use UpdateOperation;
 }
