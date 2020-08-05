@@ -35,7 +35,9 @@ class FrameworkServiceProvider extends ServiceProvider
             return \Faker\Factory::create('pt_PT');
         });
 
-        // Blade SVG Directive
+        // Blade directives
+
+        // SVG
         \Blade::directive('svg', function ($arguments) {
             list($path, $class, $style) = array_pad(explode(',', trim($arguments . ',,', '() ')), 2, '');
             $path = trim($path, "' ");
@@ -47,6 +49,40 @@ class FrameworkServiceProvider extends ServiceProvider
             $svg->documentElement->setAttribute('class', $class);
             $svg->documentElement->setAttribute('style', $style);
             return $svg->saveXML($svg->documentElement);
+        });
+
+        // Is (Role, Permission)
+        \Blade::directive('is', function ($roles, $permissions = null) {
+            return "<?php if (is($roles, $permissions)) { ?>";
+        });
+
+        \Blade::directive('elseis', function () {
+            return '<?php } else { ?>';
+        });
+
+        \Blade::directive('endis', function () {
+            return '<?php } ?>';
+        });
+
+        // Has (permissions)
+        \Blade::directive('hasAll', function ($permissions) {
+            return "<?php if (hasAllPermissions($permissions)) { ?>";
+        });
+
+        \Blade::directive('hasAny', function ($permissions) {
+            return "<?php if (hasAnyPermissions($permissions)) { ?>";
+        });
+
+        \Blade::directive('has', function ($permission) {
+            return "<?php if (hasPermission($permission)) { ?>";
+        });
+
+        \Blade::directive('elsehas', function () {
+            return '<?php } else { ?>';
+        });
+
+        \Blade::directive('endhas', function () {
+            return '<?php } ?>';
         });
     }
 

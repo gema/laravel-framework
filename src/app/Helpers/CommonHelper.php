@@ -45,21 +45,51 @@ if (!function_exists('hasRole')) {
     }
 }
 
-if (!function_exists('hasPermission')) {
-    function hasPermission($permissions)
+if (!function_exists('hasAnyPermissions')) {
+    function hasAnyPermissions($permissions)
     {
-        if (backpack_user()) {
+        $user = backpack_user() ?: user();
+
+        if ($user) {
             if (!is_array($permissions)) {
                 $permissions = [$permissions];
             }
 
             foreach ($permissions as $permission) {
-                if (backpack_user()->checkPermissionTo($permission, backpack_guard_name())) {
+                if ($user->checkPermissionTo($permission, backpack_guard_name())) {
                     return true;
                 }
             }
         }
         return false;
+    }
+}
+
+if (!function_exists('hasAllPermissions')) {
+    function hasAllPermissions($permissions)
+    {
+        $user = backpack_user() ?: user();
+
+        if ($user) {
+            if (!is_array($permissions)) {
+                $permissions = [$permissions];
+            }
+
+            $value = true;
+            foreach ($permissions as $permission) {
+                $value &= $user->checkPermissionTo($permission, backpack_guard_name());
+            }
+
+            return $value;
+        }
+        return false;
+    }
+}
+
+if (!function_exists('hasPermission')) {
+    function hasPermission($permissions)
+    {
+        return hasAnyPermissions($permissions);
     }
 }
 
@@ -217,7 +247,7 @@ if (!function_exists('sized_image')) {
 }
 
 if (!function_exists('__fallback')) {
-    function __fallback(string $key,  ? string $fallback = null,  ? string $locale = null,  ? array $replace = [])
+    function __fallback(string $key, ?string $fallback = null, ?string $locale = null, ?array $replace = [])
     {
         if (\Illuminate\Support\Facades\Lang::has($key, $locale)) {
             return trans($key, $replace, $locale);
