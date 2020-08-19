@@ -11,6 +11,11 @@ class EnumHelper
         return Config::get("enums.$name");
     }
 
+    public static function flip($name)
+    {
+        return array_flip(self::get($name));
+    }
+
     public static function values($name, $join = null)
     {
         $data = array_values(self::get($name));
