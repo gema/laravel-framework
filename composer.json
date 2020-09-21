@@ -1,11 +1,11 @@
 {
     "name": "gemadigital/framework",
     "description": "GemaDigital Framework",
-    "license": "license",
+    "license": "MIT",
     "authors": [
         {
             "name": "António Almeida",
-            "email": "antonioalmeida@gemadigital.com",
+            "email": "promatik@gmail.com",
             "homepage": "https://promatik.pt"
         }
     ],
