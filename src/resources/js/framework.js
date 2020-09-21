@@ -10,7 +10,7 @@ Node.prototype.queryAll = function queryAll(selector) { return this.querySelecto
 NodeList.prototype.query = function query(selector) { return this.queryAll(selector)[0]; };
 NodeList.prototype.queryAll = function queryAll(selector) {
   const results = [];
-  this.map((elem) => results.push(...elem.first(selector)));
+  this.map(elem => results.push(...elem.first(selector)));
   return results;
 };
 
@@ -18,14 +18,14 @@ NodeList.prototype.queryAll = function queryAll(selector) {
 Node.prototype.sibling = function sibling(query) { return this.siblings(query)[0]; };
 Node.prototype.siblings = function siblings(query) {
   const elems = query ? this.parentElement.queryAll(query) : this.parentElement.children;
-  return elems.filter((e) => this !== e);
+  return elems.filter(e => this !== e);
 };
 
 // Index of node
 Node.prototype.index = function index() {
   let elem = this;
-  let i = 0;
-  while (elem) { elem = elem.previousElementSibling; i++; }
+  let i = -1;
+  while (elem) { elem = elem.previousElementSibling; i += 1; }
   return i;
 };
 
@@ -36,5 +36,5 @@ export function template(selector) {
 
 // Admin panel
 export function adminShortcut() {
-  window.addEventListener('keypress', (e) => e.shiftKey && e.keyCode === 88 && (window.location.href = '/admin'), false);
+  window.addEventListener('keypress', e => e.shiftKey && e.keyCode === 88 && (window.location.href = '/admin'), false);
 }
