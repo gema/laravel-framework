@@ -57,8 +57,8 @@ trait HandleDropzoneUploadHelper
 
     public function handleDropzoneRemoveImage($disk, $column, $path, $sizes, $model)
     {
-        $id = $this->request->get('id');
-        $filepath = $this->request->get('filepath');
+        $id = request()->get('id');
+        $filepath = request()->get('filepath');
 
         try
         {
@@ -93,7 +93,7 @@ trait HandleDropzoneUploadHelper
     {
         try
         {
-            $file = $this->request->file('file');
+            $file = request()->file('file');
 
             if (!$this->compareMimeTypes($file, ['image'])) {
                 return response('Not a valid image type', 412);
@@ -136,7 +136,7 @@ trait HandleDropzoneUploadHelper
     {
         try
         {
-            $file = $this->request->file('file');
+            $file = request()->file('file');
             $final_path = Storage::disk($disk)->getDriver()->getAdapter()->getPathPrefix() . $path;
 
             if (!$this->compareMimeTypes($file, ['video'])) {
@@ -172,8 +172,8 @@ trait HandleDropzoneUploadHelper
 
     public function handleDropzoneRemoveVideo($disk, $column, $path, $sizes, $model)
     {
-        $id = $this->request->get('id');
-        $filepath = $this->request->get('filepath');
+        $id = request()->get('id');
+        $filepath = request()->get('filepath');
 
         try
         {
