@@ -2,6 +2,7 @@
 
 namespace GemaDigital\Framework\app\Http\Controllers\Admin;
 
+use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 use GemaDigital\Framework\app\Helpers\HandleDropzoneUploadHelper;
 use Illuminate\Http\Request;
 
@@ -20,7 +21,7 @@ class CrudController extends \Backpack\CRUD\app\Http\Controllers\CrudController
     {
         parent::setupConfigurationForCurrentOperation();
 
-        // Check authorization for cRUD
+        // Check authorization for CRUD
         $this->crud->id = $this->crud->getCurrentEntryId();
 
         if ($this->crud->id && !$this->authorize($this->crud->id)) {
@@ -35,16 +36,16 @@ class CrudController extends \Backpack\CRUD\app\Http\Controllers\CrudController
 
     public function wantsJSON()
     {
-        return $this->request && strpos($this->request->headers->get('accept'), 'application/json') === 0;
+        return request() && strpos(request()->headers->get('accept'), 'application/json') === 0;
     }
 
     private $i = 0;
-    public function separator($title = '')
+    public function separator($title = null)
     {
-        return $this->crud->addField([
+        return CRUD::addField([
             'name' => 'separator' . $this->i++,
             'type' => 'custom_html',
-            'value' => $title ? "<hr /><h2>$title</h2>" : '<hr />',
+            'value' => '<hr />' . ($title ? "<h2>$title</h2>" : ''),
             'wrapperAttributes' => [
                 'style' => 'margin:0',
             ],

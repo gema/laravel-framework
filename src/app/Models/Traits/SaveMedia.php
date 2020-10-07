@@ -78,7 +78,7 @@ trait SaveMedia
 
     public function uploadMultipleFilesToDiskKeepFileName($value, $attribute_name, $disk, $destination_path)
     {
-        $request = \Request::instance();
+        $request = request();
         $attribute_value = (array) $this->{$attribute_name};
         $files_to_clear = $request->get('clear_' . $attribute_name);
 

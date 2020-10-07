@@ -2,6 +2,7 @@
 
 namespace GemaDigital\Framework\app\Http\Controllers\Admin;
 
+use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 use GemaDigital\Framework\app\Helpers\EnumHelper;
 
 class UserCrudController extends \Backpack\PermissionManager\app\Http\Controllers\UserCrudController
@@ -10,7 +11,7 @@ class UserCrudController extends \Backpack\PermissionManager\app\Http\Controller
     {
         parent::setup();
 
-        $this->crud->enableExportButtons();
+        CRUD::enableExportButtons();
     }
 
     public function setupListOperation()
@@ -20,13 +21,13 @@ class UserCrudController extends \Backpack\PermissionManager\app\Http\Controller
 
     public function setupFields()
     {
-        $this->crud->addField([
+        CRUD::addField([
             'label' => __('Phone'),
             'name' => 'phone',
             'type' => 'text',
         ])->afterField('email');
 
-        $this->crud->addField([
+        CRUD::addField([
             'name' => 'status',
             'label' => __('Status'),
             'type' => 'select_from_array',

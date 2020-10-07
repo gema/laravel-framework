@@ -2,6 +2,8 @@
 
 namespace GemaDigital\Framework\app\Http\Controllers\Admin;
 
+use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
+
 class PageCrudController extends \Backpack\PageManager\app\Http\Controllers\Admin\PageCrudController
 {
     public function setup($template_name = false)
@@ -9,17 +11,17 @@ class PageCrudController extends \Backpack\PageManager\app\Http\Controllers\Admi
         parent::setup($template_name);
 
         if (!is('admin')) {
-            $this->crud->denyAccess(['list', 'update']);
+            CRUD::denyAccess(['list', 'update']);
         }
 
-        $this->crud->denyAccess(['create', 'delete']);
+        CRUD::denyAccess(['create', 'delete']);
     }
 
     public function addDefaultPageFields($template = false)
     {
         $result = parent::addDefaultPageFields($template);
-        $this->crud->modifyField('template', ['readonly' => 'readonly', 'style' => 'pointer-events: none;']);
-        $this->crud->modifyField('slug', ['attributes' => ['readonly' => 'readonly']]);
+        CRUD::modifyField('template', ['readonly' => 'readonly', 'style' => 'pointer-events: none;']);
+        CRUD::modifyField('slug', ['attributes' => ['readonly' => 'readonly']]);
 
         return $result;
     }
@@ -28,7 +30,9 @@ class PageCrudController extends \Backpack\PageManager\app\Http\Controllers\Admi
     {
         $result = parent::update();
 
-        \Cache::forget('page_{request()->slug}_{request()->locale}');
+        $slug = request()->slug;
+        $locale = request()->locale;
+        \Cache::forget("page_$slug_$locale");
 
         return $result;
     }
