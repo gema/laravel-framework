@@ -32,7 +32,7 @@ class PageCrudController extends \Backpack\PageManager\app\Http\Controllers\Admi
 
         $slug = request()->slug;
         $locale = request()->locale;
-        \Cache::forget("page_$slug_$locale");
+        \Cache::forget("page_{$slug}_{$locale}");
 
         return $result;
     }
