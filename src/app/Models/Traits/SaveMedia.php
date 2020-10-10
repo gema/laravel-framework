@@ -72,6 +72,9 @@ trait SaveMedia
 
     public function deleteImage($disk, $path, $filename, $sizes)
     {
+        // Get filename only
+        $filename = basename($filename);
+
         if ($filename) {
             // Delete main image
             Storage::disk($disk)->delete("$path/$filename");
