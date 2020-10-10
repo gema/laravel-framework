@@ -10,11 +10,17 @@ use Str;
 
 trait SaveMedia
 {
-    public function saveImage($model, $value, $path, $name, $sizes, $quality = 85, $attribute_name = 'image', $disk = 'uploads')
+    public function saveImage($model, $value, $path, $name, $sizes, $quality = 85, $attribute_name = 'image', $disk = 'uploads', $deleteOld = true)
     {
+        // Save old name in case of delete
+        $oldFile = $model->{$attribute_name};
+
         // if the image was erased
-        if ($value == null) {
-            Storage::disk($disk)->delete($model->{$attribute_name});
+        if ($value === null) {
+            if ($deleteOld) {
+                $this->deleteImage($disk, $path, $oldFile, $sizes);
+            }
+
             $model->attributes[$attribute_name] = null;
         }
 
@@ -51,13 +57,30 @@ trait SaveMedia
                 Storage::disk($disk)->put("$path/$size/$filename", $image->stream($format, $quality));
             }
 
-            return $model->attributes[$attribute_name];
+            // Delete old image
+            if ($deleteOld) {
+                $this->deleteImage($disk, $path, $oldFile, $sizes);
+            }
+
         } else {
             $model->attributes[$attribute_name] = $value;
         }
 
         // Clean path
         return $model->attributes[$attribute_name] = $this->cleanPath($model->attributes[$attribute_name], $disk);
+    }
+
+    public function deleteImage($disk, $path, $filename, $sizes)
+    {
+        if ($filename) {
+            // Delete main image
+            Storage::disk($disk)->delete("$path/$filename");
+
+            // Delete sizes
+            foreach ($sizes as $size) {
+                Storage::disk($disk)->delete("$path/$size/$filename");
+            }
+        }
     }
 
     public function cleanPath($path, $disk)
@@ -87,7 +110,7 @@ trait SaveMedia
         if ($files_to_clear) {
             $attribute_value = (array) $this->{$attribute_name};
             foreach ($files_to_clear as $key => $filename) {
-                \Storage::disk($disk)->delete($filename);
+                Storage::disk($disk)->delete($filename);
                 $attribute_value = array_where($attribute_value, function ($value, $key) use ($filename) {
                     return $value != $filename;
                 });
