@@ -37,4 +37,19 @@ class EnumHelper
 
         return $enum;
     }
+
+    public static function joinKeys($name, $join = ',')
+    {
+        return self::keys($name, $join);
+    }
+
+    public static function joinValues($name, $join = ',')
+    {
+        return self::values($name, $join);
+    }
+
+    public static function join($name, $join = ',')
+    {
+        return self::joinValues($name, $join);
+    }
 }
