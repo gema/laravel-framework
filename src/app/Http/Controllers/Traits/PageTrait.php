@@ -2,7 +2,6 @@
 
 namespace GemaDigital\Framework\app\Http\Controllers\Traits;
 
-use Backpack\PageManager\app\Models\Page;
 use Cache;
 use Session;
 
@@ -13,7 +12,9 @@ trait PageTrait
         $locale = Session::get('locale', \Config::get('app.locale'));
 
         $this->data = Cache::rememberForever("page_{$slug}_{$locale}", function () use ($slug) {
-            $page = Page::findBySlug($slug);
+            $page = class_exists(\App\Models\Page::class)
+            ? \App\Models\Page::findBySlug($slug)
+            : \Backpack\PageManager\app\Models\Page::findBySlug($slug);
 
             if (!$page) {
                 abort(404);
@@ -35,9 +36,14 @@ trait PageTrait
 
         // Page specific data
         if (method_exists($this, $this->data['page']->template)) {
-            $this->data = array_merge($this->data, call_user_func(array($this, $this->data['page']->template), $sub));
+            $this->data = array_merge($this->data, call_user_func([$this, $this->data['page']->template], $sub));
         }
 
         return view('pages.' . $this->data['page']->template, $this->data);
+    }
+
+    public function common()
+    {
+        return [];
     }
 }

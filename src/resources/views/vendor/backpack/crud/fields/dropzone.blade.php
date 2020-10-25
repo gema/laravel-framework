@@ -69,7 +69,7 @@
             }
 
             if(!Str::startsWith($path, 'http')) {
-                $file = new \App\Helpers\FileHelper;
+                $file = new \GemaDigital\Framework\app\Helpers\FileHelper;
 
                 // If it's on a disk
                 if(isset($field['disk'])) {
