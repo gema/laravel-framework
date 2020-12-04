@@ -22,7 +22,7 @@ class ComposerScripts
                 exec('ln -s "../vendor/gemadigital/framework/src/public/gemadigital" "public/gemadigital"');
 
                 // ElFinder Assets
-                exec('mkdir -p foo "vendor/backpack/crud/src/public/packages/barryvdh/elfinder"');
+                exec('mkdir -p "vendor/backpack/crud/src/public/packages/barryvdh/elfinder"');
                 foreach (['css', 'img', 'js', 'sounds'] as $folder) {
                     exec('unlink "vendor/backpack/crud/src/public/packages/barryvdh/elfinder/' . $folder . '"');
                     exec('ln -s "../../../../../../../../vendor/studio-42/elfinder/' . $folder . '" "vendor/backpack/crud/src/public/packages/barryvdh/elfinder/' . $folder . '"');
