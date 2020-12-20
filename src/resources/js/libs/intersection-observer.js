@@ -3,7 +3,7 @@
 export function init() {
   queryAll('.observable, [observable]').forEach(observable => {
     let status = false;
-    const threshold = parseFloat(observable.getAttribute('threshold')) || 1;
+    const threshold = parseFloat(observable.getAttribute('threshold') || 1);
     const once = observable.getAttribute('once') !== null;
 
     const revealContentObserver = new IntersectionObserver(entries => {
