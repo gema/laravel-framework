@@ -1620,16 +1620,16 @@
         },
         {
             "name": "egulias/email-validator",
-            "version": "2.1.24",
+            "version": "2.1.25",
             "source": {
                 "type": "git",
                 "url": "https://github.com/egulias/EmailValidator.git",
-                "reference": "ca90a3291eee1538cd48ff25163240695bd95448"
+                "reference": "0dbf5d78455d4d6a41d186da50adc1122ec066f4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/egulias/EmailValidator/zipball/ca90a3291eee1538cd48ff25163240695bd95448",
-                "reference": "ca90a3291eee1538cd48ff25163240695bd95448",
+                "url": "https://api.github.com/repos/egulias/EmailValidator/zipball/0dbf5d78455d4d6a41d186da50adc1122ec066f4",
+                "reference": "0dbf5d78455d4d6a41d186da50adc1122ec066f4",
                 "shasum": ""
             },
             "require": {
@@ -1676,7 +1676,7 @@
             ],
             "support": {
                 "issues": "https://github.com/egulias/EmailValidator/issues",
-                "source": "https://github.com/egulias/EmailValidator/tree/2.1.24"
+                "source": "https://github.com/egulias/EmailValidator/tree/2.1.25"
             },
             "funding": [
                 {
@@ -1684,7 +1684,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-11-14T15:56:27+00:00"
+            "time": "2020-12-29T14:50:06+00:00"
         },
         {
             "name": "graham-campbell/result-type",
@@ -2060,16 +2060,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v8.19.0",
+            "version": "v8.20.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "f5f331cee60f1bbe672503b7eb9ba5b22b2ceacb"
+                "reference": "b5d8573ab16027867eaa1ac148893833434f9b02"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/f5f331cee60f1bbe672503b7eb9ba5b22b2ceacb",
-                "reference": "f5f331cee60f1bbe672503b7eb9ba5b22b2ceacb",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/b5d8573ab16027867eaa1ac148893833434f9b02",
+                "reference": "b5d8573ab16027867eaa1ac148893833434f9b02",
                 "shasum": ""
             },
             "require": {
@@ -2223,7 +2223,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2020-12-15T16:16:31+00:00"
+            "time": "2020-12-22T21:21:19+00:00"
         },
         {
             "name": "laravel/socialite",
@@ -3893,16 +3893,16 @@
         },
         {
             "name": "spatie/laravel-backup",
-            "version": "6.14.1",
+            "version": "6.14.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-backup.git",
-                "reference": "f8bd2e719a76bd197c5cdec0172b2c9a7b6436da"
+                "reference": "3374e1eeb09ef32c6bfd495ae1f2f4de4b594922"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-backup/zipball/f8bd2e719a76bd197c5cdec0172b2c9a7b6436da",
-                "reference": "f8bd2e719a76bd197c5cdec0172b2c9a7b6436da",
+                "url": "https://api.github.com/repos/spatie/laravel-backup/zipball/3374e1eeb09ef32c6bfd495ae1f2f4de4b594922",
+                "reference": "3374e1eeb09ef32c6bfd495ae1f2f4de4b594922",
                 "shasum": ""
             },
             "require": {
@@ -3966,7 +3966,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/laravel-backup/issues",
-                "source": "https://github.com/spatie/laravel-backup/tree/6.14.1"
+                "source": "https://github.com/spatie/laravel-backup/tree/6.14.2"
             },
             "funding": [
                 {
@@ -3978,7 +3978,7 @@
                     "type": "other"
                 }
             ],
-            "time": "2020-12-16T07:40:24+00:00"
+            "time": "2020-12-23T10:13:12+00:00"
         },
         {
             "name": "spatie/laravel-cookie-consent",
@@ -7116,16 +7116,16 @@
         },
         {
             "name": "facade/ignition",
-            "version": "2.5.3",
+            "version": "2.5.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/facade/ignition.git",
-                "reference": "d8dc4f90ed469f9f9313b976fb078c20585d5c99"
+                "reference": "8e907d81244649c5ea746e2ec30c32c5f59df472"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/facade/ignition/zipball/d8dc4f90ed469f9f9313b976fb078c20585d5c99",
-                "reference": "d8dc4f90ed469f9f9313b976fb078c20585d5c99",
+                "url": "https://api.github.com/repos/facade/ignition/zipball/8e907d81244649c5ea746e2ec30c32c5f59df472",
+                "reference": "8e907d81244649c5ea746e2ec30c32c5f59df472",
                 "shasum": ""
             },
             "require": {
@@ -7189,7 +7189,7 @@
                 "issues": "https://github.com/facade/ignition/issues",
                 "source": "https://github.com/facade/ignition"
             },
-            "time": "2020-12-09T20:25:45+00:00"
+            "time": "2020-12-29T09:12:55+00:00"
         },
         {
             "name": "facade/ignition-contracts",
