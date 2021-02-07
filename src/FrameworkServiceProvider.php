@@ -84,6 +84,8 @@ class FrameworkServiceProvider extends ServiceProvider
         \Blade::directive('endhas', function () {
             return '<?php } ?>';
         });
+
+        \Blade::component('gemadigital::components.responsive-picture', 'responsive-picture');
     }
 
     /**
