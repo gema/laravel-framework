@@ -14,5 +14,6 @@ $image = $disk ?? null === false ? url($src) : Storage::disk($disk ?? 'uploads')
         alt="{{ $alt ?? '' }}"
         width="{{ $width ?? "100%" }}"
         height="{{ $height ?? "100%" }}"
+        loading="{{ $loading ?? "auto" }}"
         />
 </picture>
