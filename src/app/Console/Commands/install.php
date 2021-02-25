@@ -11,7 +11,7 @@ class install extends Command
      *
      * @var string
      */
-    protected $signature = 'install';
+    protected $signature = 'boilerplate:install';
 
     /**
      * The console command description.
@@ -44,6 +44,7 @@ class install extends Command
 
         if ($this->confirm("Do you wish to install Laravel using $database database on $host:$port?")) {
             exec('npm install');
+            exec('npm run prod');
             exec('php artisan key:generate');
             exec('php artisan migrate');
             exec('php artisan db:seed');

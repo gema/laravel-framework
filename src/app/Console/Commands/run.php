@@ -45,6 +45,7 @@ class run extends Command
         $db_port = env('DB_PORT');
         $env = env('APP_ENV');
         $debug = env('APP_DEBUG');
+        $dir = getcwd();
 
         $port = $url['port'];
         $host = $url['host'];
@@ -54,16 +55,21 @@ class run extends Command
         $this->info("$env environment");
         $this->info(($debug ? 'debug' : 'production') . ' mode');
 
-        // Empty Power Shell
-        popen('start powershell', 'r');
-
         // Git Garbage Collect
         pclose(popen('start /B powershell -Command -WindowStyle Minimized "git gc"', 'r'));
 
         // NPM Watch
-        pclose(popen('start powershell -Command "npm run watch"', 'r'));
+        $commands = [
+            // Artisan Serve
+            'wt --title "Artisan" -d "' . $dir . '" cmd /k "php artisan serve --port ' . $port . ' --host ' . $host . '"',
 
-        // Serve with env host and port
-        exec("php artisan serve --port $port --host $host");
+            // NPM run watch
+            'new-tab --title "Laravel Mix" -d "' . $dir . '" cmd /k "npm run watch"',
+
+            // Empty tab
+            'new-tab --title "' . $app_name . '" -d "' . $dir . '"',
+        ];
+
+        pclose(popen(join(' ; ', $commands), 'r'));
     }
 }
