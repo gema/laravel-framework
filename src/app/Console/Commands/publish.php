@@ -11,7 +11,7 @@ class publish extends Command
      *
      * @var string
      */
-    protected $signature = 'publish';
+    protected $signature = 'boilerplate:publish';
 
     /**
      * The console command description.
