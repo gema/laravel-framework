@@ -64,5 +64,9 @@
                 "Framework": "GemaDigital\\Framework\\Facades\\Framework"
             }
         }
+    },
+    "suggest": {
+        "league/flysystem-aws-s3-v3": "Required to connect to AWS S3 or a Digital Ocean Space.",
+        "eduardokum/laravel-mail-auto-embed": "Useful to embed images on emails."
     }
 }
