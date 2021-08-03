@@ -42,4 +42,9 @@ return [
             'success' => 'Maintenance Mode disabled',
         ],
     ],
+
+    'build' => [
+        'message' => 'Build',
+        'success' => 'Code builded',
+    ],
 ];

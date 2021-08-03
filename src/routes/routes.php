@@ -7,7 +7,6 @@ Route::group(
         'middleware' => 'web',
     ],
     function () {
-
         // Auth
         Route::group(
             [
@@ -38,6 +37,9 @@ Route::group(
                 Route::get('symlink', 'AdminActionsController@symlink')->name('symlink');
                 Route::post('symlink/run', 'AdminActionsController@symlinkRun')->name('symlink_run');
                 Route::get('actions', 'AdminActionsController@actions')->name('actions');
+
+                // Build
+                Route::post('build', 'BuildController@build')->name('build');
 
                 // API
                 Route::any('/api/{entity}/ajax/{action}/{arg1?}/{arg2?}/{arg3?}', '\App\Http\Controllers\Admin\APICrudController@ajax');
@@ -82,7 +84,6 @@ Route::group(
         'namespace' => 'GemaDigital\Framework\app\Http\Controllers',
     ],
     function () {
-
         // Bitbucket
         Route::any('bitbucket/webhook', 'BitbucketController@webhook');
     });
@@ -94,7 +95,6 @@ Route::group(
         'namespace' => '\App\Http\Controllers\Admin',
         'middleware' => ['web', config('backpack.base.middleware_key', 'admin')],
     ], function () {
-
         // User
         Route::crud('user', 'UserCrudController');
     });

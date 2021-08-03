@@ -30,4 +30,5 @@ return [
     'deactivate_message' => 'Quer mesmo desactivar todos?',
     'deactivate_all' => 'Desactivar todos',
     'location' => 'Localização',
+    'build' => 'Build',
 ];

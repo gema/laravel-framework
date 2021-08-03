@@ -30,4 +30,5 @@ return [
     'deactivate_message' => 'Do you really want to deactivate all?',
     'deactivate_all' => 'Deactivate all',
     'location' => 'Location',
+    'build' => 'Build',
 ];

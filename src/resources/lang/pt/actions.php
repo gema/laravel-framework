@@ -42,4 +42,9 @@ return [
             'success' => 'Modo de manuntenção desactivado',
         ],
     ],
+
+    'build' => [
+        'message' => 'Compilar',
+        'success' => 'Código compilado',
+    ],
 ];
