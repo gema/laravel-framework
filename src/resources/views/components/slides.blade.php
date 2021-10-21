@@ -3,7 +3,7 @@
 @endsection
 
 <div class="slider">
-    <div class="flex-slider swipeable" auto-scroll="5000">
+    <div class="flex-slider" swipeable auto-scroll="5000">
         <ul class="pages">
             @foreach ($slides as $slide)
             <li class="slide" style="background-image: url({{ aurl('uploads', $slide->image) }});">
@@ -15,7 +15,7 @@
                         </div>
                         <div class="excerpt">
                             <h2>{{ $slide->title }}</h2>
-                            <p>{{ Str::limit($slide->description,300) }}</p>
+                            <p>{{ Str::limit($slide->description, 300) }}</p>
                             @if($slide->url)
                             <a class="knowmore" href="{{ $slide->url }}" target="_blank">{{ __('ui.knowmore') }}</a>
                             @endif
@@ -27,7 +27,7 @@
         </ul>
         <ul class="dots">
             @foreach($slides as $slide)
-            <li class="{{ $loop->iteration == 1 ? 'active' : '' }}"></li>
+            <li class="{{ $loop->iteration === 1 ? 'active' : '' }}"></li>
             @endforeach
         </ul>
     </div>
