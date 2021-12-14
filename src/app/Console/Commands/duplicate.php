@@ -38,13 +38,13 @@ class duplicate extends Command
      */
     public function handle()
     {
-        $app_name = preg_replace('/[^0-9a-zA-Z_]/', '', preg_replace("/\s/", '-', strtolower(env('APP_NAME'))));
-        $app_date = Carbon::now()->format('Ymdhms');
+        $appName = preg_replace('/[^0-9a-zA-Z_-]/', '', preg_replace("/\s/", '-', strtolower(env('APP_NAME'))));
+        $appDate = Carbon::now()->format('YmdHis');
 
-        $zipName = "$app_name-$app_date.zip";
-        $zipPath = base_path() . '\\' . $zipName;
+        $zipName = "$appName-$appDate.zip";
+        $zipPath = base_path($zipName);
 
-        $this->info("Packaging $app_name to '$zipName'");
+        $this->info("Packaging $appName to '$zipName'");
 
         $exclude = [
             '.git',
@@ -55,8 +55,11 @@ class duplicate extends Command
             'resources/ffmpeg',
             'storage/logs',
             'storage/debugbar',
+            'auth.json',
+            'sftp-config.json',
+            '*.zip',
         ];
 
-        $this->info(exec('"%ProgramFiles%\7-Zip\7z.exe" a ' . $zipName . ' -mx0 -xr!' . implode(' -mx0 -xr!', $exclude)));
+        $this->info(exec('"%ProgramFiles%\7-Zip\7z.exe" a ' . $zipName . ' -spf -xr0!' . implode(' -xr0!', $exclude)));
     }
 }
