@@ -29,8 +29,8 @@
         "laravel/framework": "^8.0",
         "laravel/socialite": "^5.0",
         "laravel/tinker": "^2.0",
-        "spatie/laravel-cookie-consent": "^2.10",
-        "spatie/laravel-translatable": "^4.3"
+        "spatie/laravel-cookie-consent": "^3.2",
+        "spatie/laravel-translatable": "^5.2"
     },
     "require-dev": {
         "backpack/generators": "^3.0",
@@ -68,5 +68,10 @@
     "suggest": {
         "league/flysystem-aws-s3-v3": "Required to connect to AWS S3 or a Digital Ocean Space.",
         "eduardokum/laravel-mail-auto-embed": "Useful to embed images on emails."
+    },
+    "config": {
+        "allow-plugins": {
+            "composer/package-versions-deprecated": true
+        }
     }
 }
