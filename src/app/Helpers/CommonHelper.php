@@ -32,6 +32,7 @@ if (!function_exists('data_get_first')) {
     function data_get_first($target, $key, $attribute, $default = 0)
     {
         $value = data_get($target, $key);
+
         return count($value) ? $value[0]->{$attribute} : $default;
     }
 }
@@ -61,6 +62,7 @@ if (!function_exists('hasAnyPermissions')) {
                 }
             }
         }
+
         return false;
     }
 }
@@ -82,6 +84,7 @@ if (!function_exists('hasAllPermissions')) {
 
             return $value;
         }
+
         return false;
     }
 }
@@ -126,7 +129,7 @@ if (!function_exists('restrictTo')) {
         }
 
         // View as Role and Permissions
-        else if ($session_role && $session_permissions && $permissions) {
+        elseif ($session_role && $session_permissions && $permissions) {
             return in_array($session_role, $roles) || sizeof(array_intersect($session_permissions, array_values($permissions)));
         }
     }
@@ -154,6 +157,7 @@ if (!function_exists('map_contains')) {
                 return $value;
             }
         }
+
         return $default;
     }
 }
@@ -198,6 +202,7 @@ if (!function_exists('json_response')) {
         }
 
         $response = json_encode($response);
+
         return response($response, $status)
             ->header('Content-Type', 'text/json')
             ->header('Content-Length', strlen($response));
@@ -242,6 +247,7 @@ if (!function_exists('sized_image')) {
         if (($pos = strrpos($path, '/')) !== false) {
             $path = substr_replace($path, "/$size/", $pos, 1);
         }
+
         return $path;
     }
 }

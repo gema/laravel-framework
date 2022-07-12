@@ -19,12 +19,14 @@ class EnumHelper
     public static function values($name, $join = null)
     {
         $data = array_values(self::get($name));
+
         return $join ? join($join, $data) : $data;
     }
 
     public static function keys($name, $join = null)
     {
         $data = array_keys(self::get($name));
+
         return $join ? join($join, $data) : $data;
     }
 

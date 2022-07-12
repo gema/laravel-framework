@@ -12,7 +12,7 @@ class BitbucketController extends Controller
         $event = $request->header('X-Event-Key');
         $payload = json_decode($request->getContent(), true);
 
-        $class = 'App\Http\Controllers\BitbucketController';
+        $class = \App\Http\Controllers\BitbucketController::class;
         if (class_exists($class)) {
             $instance = new $class();
             echo $instance->webhook($event, $payload);

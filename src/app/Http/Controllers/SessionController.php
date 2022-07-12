@@ -11,6 +11,7 @@ class SessionController extends Controller
     public function flush(Request $request)
     {
         Session::flush();
+
         return redirect(url()->previous());
     }
 }

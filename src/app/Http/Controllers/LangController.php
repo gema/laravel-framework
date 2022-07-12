@@ -10,6 +10,7 @@ class LangController extends Controller
     public function setLang($locale)
     {
         Session::put('locale', $locale);
+
         return redirect(url()->previous());
     }
 }

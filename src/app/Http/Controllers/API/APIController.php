@@ -32,6 +32,7 @@ class APIController extends Controller
 
         $resp = curl_exec($curl);
         curl_close($curl);
+
         return $resp;
     }
 
@@ -39,6 +40,7 @@ class APIController extends Controller
     public function json_decode_safe($data)
     {
         $json = json_decode($data);
+
         return json_last_error() === 0 ? $json : $data;
     }
 }

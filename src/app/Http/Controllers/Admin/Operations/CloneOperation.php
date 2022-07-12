@@ -10,7 +10,8 @@ trait CloneOperation
         clone as cloneTrait;
     }
 
-    function clone ($id) {
+    public function clone($id)
+    {
         $result = $this->cloneTrait($id);
         $this->sync(CrudController::CLONED);
 

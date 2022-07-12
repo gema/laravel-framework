@@ -53,7 +53,7 @@ class run extends Command
         $this->info("Running $app_name on $host:$port");
         $this->info("$db_connection on $db_host:$db_port connected to $db_name");
         $this->info("$env environment");
-        $this->info(($debug ? 'debug' : 'production') . ' mode');
+        $this->info(($debug ? 'debug' : 'production').' mode');
 
         // Git Garbage Collect
         pclose(popen('start /B powershell -Command -WindowStyle Minimized "git gc"', 'r'));
@@ -61,13 +61,13 @@ class run extends Command
         // NPM Watch
         $commands = [
             // Artisan Serve
-            'wt --title "Artisan" -d "' . $dir . '" cmd /k "php artisan serve --port ' . $port . ' --host ' . $host . '"',
+            'wt --title "Artisan" -d "'.$dir.'" cmd /k "php artisan serve --port '.$port.' --host '.$host.'"',
 
             // NPM run watch
-            'new-tab --title "Laravel Mix" -d "' . $dir . '" cmd /k "npm run watch"',
+            'new-tab --title "Laravel Mix" -d "'.$dir.'" cmd /k "npm run watch"',
 
             // Empty tab
-            'new-tab --title "' . $app_name . '" -d "' . $dir . '"',
+            'new-tab --title "'.$app_name.'" -d "'.$dir.'"',
         ];
 
         pclose(popen(join(' ; ', $commands), 'r'));

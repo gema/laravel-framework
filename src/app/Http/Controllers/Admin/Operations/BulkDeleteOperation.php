@@ -10,7 +10,7 @@ trait BulkDeleteOperation
         bulkDelete as bulkDeleteTrait;
     }
 
-    function bulkDelete()
+    public function bulkDelete()
     {
         $result = $this->bulkDeleteTrait();
         $this->sync(CrudController::DESTROYED);

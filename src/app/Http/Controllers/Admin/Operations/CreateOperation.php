@@ -10,7 +10,7 @@ trait CreateOperation
         store as storeTrait;
     }
 
-    function store()
+    public function store()
     {
         $result = $this->storeTrait();
         $this->sync(CrudController::CREATED);

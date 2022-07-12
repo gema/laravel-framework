@@ -36,5 +36,4 @@ class PageCrudController extends \Backpack\PageManager\app\Http\Controllers\Admi
 
         return $result;
     }
-
 }

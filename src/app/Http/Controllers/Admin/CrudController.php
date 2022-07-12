@@ -4,17 +4,16 @@ namespace GemaDigital\Framework\app\Http\Controllers\Admin;
 
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 use GemaDigital\Framework\app\Helpers\HandleDropzoneUploadHelper;
-use Illuminate\Http\Request;
 
 class CrudController extends \Backpack\CRUD\app\Http\Controllers\CrudController
 {
     use HandleDropzoneUploadHelper;
 
-    const CREATED = 'create';
-    const CLONED = 'clone';
-    const DESTROYED = 'destroy';
-    const REORDERED = 'reorder';
-    const UPDATED = 'update';
+    public const CREATED = 'create';
+    public const CLONED = 'clone';
+    public const DESTROYED = 'destroy';
+    public const REORDERED = 'reorder';
+    public const UPDATED = 'update';
 
     // Hack to access setup without touching the setup()
     public function setupConfigurationForCurrentOperation()
@@ -40,12 +39,13 @@ class CrudController extends \Backpack\CRUD\app\Http\Controllers\CrudController
     }
 
     private $i = 0;
+
     public function separator($title = null)
     {
         return CRUD::addField([
-            'name' => 'separator' . $this->i++,
+            'name' => 'separator'.$this->i++,
             'type' => 'custom_html',
-            'value' => '<hr />' . ($title ? "<h2>$title</h2>" : ''),
+            'value' => '<hr />'.($title ? "<h2>$title</h2>" : ''),
             'wrapperAttributes' => [
                 'style' => 'margin:0',
             ],
@@ -55,6 +55,7 @@ class CrudController extends \Backpack\CRUD\app\Http\Controllers\CrudController
     public function getEntryID()
     {
         preg_match('/\w+\/(\d+)/', $_SERVER['REQUEST_URI'], $matches);
+
         return $matches && sizeof($matches) > 1 ? intval($matches[1]) : null;
     }
 
@@ -65,5 +66,6 @@ class CrudController extends \Backpack\CRUD\app\Http\Controllers\CrudController
 
     // Overrides to deal with cache
     public function sync($operation)
-    {}
+    {
+    }
 }

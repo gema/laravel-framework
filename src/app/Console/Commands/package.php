@@ -43,7 +43,7 @@ class package extends Command
         $app_date = Carbon::now()->format('Ymdhms');
 
         $zipName = "$app_name-$app_date.zip";
-        $zipPath = base_path() . '\\' . $zipName;
+        $zipPath = base_path().'\\'.$zipName;
 
         $this->info("Packaging $app_name to '$zipName'");
 
@@ -61,7 +61,7 @@ class package extends Command
         ];
 
         if ($this->confirm('Try to use 7zip instead of PHP Zip?', 'yes')) {
-            $this->info(exec('"%ProgramFiles%\7-Zip\7z.exe" a ' . $zipName . ' ' . implode(' ', $files)));
+            $this->info(exec('"%ProgramFiles%\7-Zip\7z.exe" a '.$zipName.' '.implode(' ', $files)));
         } else {
             $zip = Zip::create($zipPath);
             $zip->add($files);

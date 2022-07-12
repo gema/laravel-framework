@@ -52,5 +52,6 @@ class UserCrudController extends \Backpack\PermissionManager\app\Http\Controller
 
     // Overrides to deal with cache
     public function sync($operation)
-    {}
+    {
+    }
 }

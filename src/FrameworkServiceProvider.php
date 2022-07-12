@@ -21,10 +21,10 @@ class FrameworkServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->loadTranslationsFrom(__DIR__ . '/resources/lang', 'gemadigital');
-        $this->loadViewsFrom(__DIR__ . '/resources/views', 'gemadigital');
-        $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
-        $this->loadRoutesFrom(__DIR__ . '/routes/routes.php');
+        $this->loadTranslationsFrom(__DIR__.'/resources/lang', 'gemadigital');
+        $this->loadViewsFrom(__DIR__.'/resources/views', 'gemadigital');
+        $this->loadMigrationsFrom(__DIR__.'/database/migrations');
+        $this->loadRoutesFrom(__DIR__.'/routes/routes.php');
 
         // Publishing is only necessary when using the CLI.
         if ($this->app->runningInConsole()) {
@@ -40,7 +40,7 @@ class FrameworkServiceProvider extends ServiceProvider
 
         // SVG
         \Blade::directive('svg', function ($arguments) {
-            list($path, $class, $style) = array_pad(explode(',', trim($arguments . ',,', '() ')), 2, '');
+            list($path, $class, $style) = array_pad(explode(',', trim($arguments.',,', '() ')), 2, '');
             $path = trim($path, "' ");
             $class = trim($class, "' ");
             $style = trim($style, "' ");
@@ -49,6 +49,7 @@ class FrameworkServiceProvider extends ServiceProvider
             $svg->load(public_path($path));
             $svg->documentElement->setAttribute('class', $class);
             $svg->documentElement->setAttribute('style', $style);
+
             return $svg->saveXML($svg->documentElement);
         });
 
@@ -98,7 +99,7 @@ class FrameworkServiceProvider extends ServiceProvider
     {
         // Register the service the package provides.
         $this->app->singleton('framework', function ($app) {
-            return new Framework;
+            return new Framework();
         });
 
         // register all configs
@@ -127,18 +128,18 @@ class FrameworkServiceProvider extends ServiceProvider
     {
         // Publishing the configuration file.
         $this->publishes([
-            __DIR__ . '/config/framework.php' => config_path('gemadigital.php'),
-            __DIR__ . '/config/enums.php' => config_path('enums.php'),
+            __DIR__.'/config/framework.php' => config_path('gemadigital.php'),
+            __DIR__.'/config/enums.php' => config_path('enums.php'),
         ]);
 
         // Publishing the views.
         $this->publishes([
-            __DIR__ . '/resources/views/vendor/backpack/crud' => base_path('resources/views/vendor/backpack/crud'),
+            __DIR__.'/resources/views/vendor/backpack/crud' => base_path('resources/views/vendor/backpack/crud'),
         ], 'framework.views');
 
         // Publishing the translation files.
         $this->publishes([
-            __DIR__ . '/resources/lang' => resource_path('lang/vendor/gemadigital'),
+            __DIR__.'/resources/lang' => resource_path('lang/vendor/gemadigital'),
         ], 'framework.views');
 
         // Registering package commands.
@@ -150,7 +151,7 @@ class FrameworkServiceProvider extends ServiceProvider
      */
     public function loadHelpers()
     {
-        require_once __DIR__ . '/app/Helpers/CommonHelper.php';
+        require_once __DIR__.'/app/Helpers/CommonHelper.php';
     }
 
     /**
@@ -159,15 +160,15 @@ class FrameworkServiceProvider extends ServiceProvider
     public function loadConfigs()
     {
         // Framework config
-        $this->mergeConfigFrom(__DIR__ . '/config/framework.php', 'gemadigital');
+        $this->mergeConfigFrom(__DIR__.'/config/framework.php', 'gemadigital');
 
         // Services config
-        $this->mergeConfigFrom(__DIR__ . '/config/services.php', 'services');
+        $this->mergeConfigFrom(__DIR__.'/config/services.php', 'services');
 
         // Enums config
-        $this->mergeConfigFrom(__DIR__ . '/config/enums.php', 'enums');
+        $this->mergeConfigFrom(__DIR__.'/config/enums.php', 'enums');
 
         // File Systems config
-        $this->mergeConfigFrom(__DIR__ . '/config/filesystems.php', 'filesystems');
+        $this->mergeConfigFrom(__DIR__.'/config/filesystems.php', 'filesystems');
     }
 }

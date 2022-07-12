@@ -10,6 +10,7 @@ class UnityHelper
             foreach ($item as $key => $value) {
                 $item[$key] = self::stripTags($value);
             }
+
             return $item;
         }
 
@@ -25,6 +26,7 @@ class UnityHelper
             $item = str_replace('[/B]', '</b>', $item);
             $item = stripslashes($item);
         }
+
         return $item;
     }
 }

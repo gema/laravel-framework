@@ -13,8 +13,8 @@ trait PageTrait
 
         $this->data = Cache::rememberForever("page_{$slug}_{$locale}", function () use ($slug) {
             $page = class_exists(\App\Models\Page::class)
-            ? \App\Models\Page::findBySlug($slug)
-            : \Backpack\PageManager\app\Models\Page::findBySlug($slug);
+                ? \App\Models\Page::findBySlug($slug)
+                : \Backpack\PageManager\app\Models\Page::findBySlug($slug);
 
             if (!$page) {
                 abort(404);
@@ -39,7 +39,7 @@ trait PageTrait
             $this->data = array_merge($this->data, call_user_func([$this, $this->data['page']->template], $sub));
         }
 
-        return view('pages.' . $this->data['page']->template, $this->data);
+        return view('pages.'.$this->data['page']->template, $this->data);
     }
 
     public function common()

@@ -10,7 +10,7 @@ trait DeleteOperation
         destroy as destroyTrait;
     }
 
-    function destroy($id)
+    public function destroy($id)
     {
         $result = $this->destroyTrait($id);
         $this->sync(CrudController::DESTROYED);

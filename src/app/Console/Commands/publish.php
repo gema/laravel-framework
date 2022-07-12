@@ -40,8 +40,7 @@ class publish extends Command
         if ($this->confirm('Do you wish to publish framework assets?')) {
             $force = $this->confirm('Do you want to force the replace of older assets?');
 
-            exec('php artisan vendor:publish --provider="GemaDigital\Framework\FrameworkServiceProvider"' . ($force ? ' --force' : ''));
+            exec('php artisan vendor:publish --provider="GemaDigital\Framework\FrameworkServiceProvider"'.($force ? ' --force' : ''));
         }
-
     }
 }

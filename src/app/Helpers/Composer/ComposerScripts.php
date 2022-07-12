@@ -9,7 +9,8 @@ class ComposerScripts
     /**
      * Handle the post-install Composer event.
      *
-     * @param  \Composer\Script\Event  $event
+     * @param \Composer\Script\Event $event
+     *
      * @return void
      */
     public static function postInstall()
@@ -24,8 +25,8 @@ class ComposerScripts
                 // ElFinder Assets
                 exec('mkdir -p "vendor/backpack/crud/src/public/packages/barryvdh/elfinder"');
                 foreach (['css', 'img', 'js', 'sounds'] as $folder) {
-                    exec('unlink "vendor/backpack/crud/src/public/packages/barryvdh/elfinder/' . $folder . '"');
-                    exec('ln -s "../../../../../../../../vendor/studio-42/elfinder/' . $folder . '" "vendor/backpack/crud/src/public/packages/barryvdh/elfinder/' . $folder . '"');
+                    exec('unlink "vendor/backpack/crud/src/public/packages/barryvdh/elfinder/'.$folder.'"');
+                    exec('ln -s "../../../../../../../../vendor/studio-42/elfinder/'.$folder.'" "vendor/backpack/crud/src/public/packages/barryvdh/elfinder/'.$folder.'"');
                 }
                 break;
             case '\\': // windows
@@ -37,8 +38,8 @@ class ComposerScripts
                 // ElFinder Assets
                 exec('if not exist "vendor/backpack/crud/src/public/packages/barryvdh/elfinder" mkdir "vendor/backpack/crud/src/public/packages/barryvdh/elfinder"');
                 foreach (['css', 'img', 'js', 'sounds'] as $folder) {
-                    exec('if exist "vendor/backpack/crud/src/public/packages/barryvdh/elfinder/' . $folder . '" rmdir "vendor/backpack/crud/src/public/packages/barryvdh/elfinder/' . $folder . '" /s /q');
-                    exec('mklink /J "vendor/backpack/crud/src/public/packages/barryvdh/elfinder/' . $folder . '" "vendor/studio-42/elfinder/' . $folder . '"');
+                    exec('if exist "vendor/backpack/crud/src/public/packages/barryvdh/elfinder/'.$folder.'" rmdir "vendor/backpack/crud/src/public/packages/barryvdh/elfinder/'.$folder.'" /s /q');
+                    exec('mklink /J "vendor/backpack/crud/src/public/packages/barryvdh/elfinder/'.$folder.'" "vendor/studio-42/elfinder/'.$folder.'"');
                 }
                 break;
         }

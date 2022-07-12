@@ -2,7 +2,6 @@
 
 namespace GemaDigital\Framework\app\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
 class APICrudController extends Controller
@@ -10,7 +9,8 @@ class APICrudController extends Controller
     public function ajax()
     {
         $args = func_get_args();
-        return call_user_func_array([$this, $args[0] . $args[1]], array_slice($args, 2));
+
+        return call_user_func_array([$this, $args[0].$args[1]], array_slice($args, 2));
     }
 
     /*
@@ -21,6 +21,7 @@ class APICrudController extends Controller
     public function getSearchParam()
     {
         $request = request();
+
         return $request->input('q') ?: $request->input('term') ?: false;
     }
 

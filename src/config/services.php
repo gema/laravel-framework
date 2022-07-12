@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Third Party Services
@@ -17,14 +16,13 @@ return [
     'facebook' => [
         'client_id' => env('FACEBOOK_CLIENT_ID'),
         'client_secret' => env('FACEBOOK_CLIENT_SECRET'),
-        'redirect' => env('APP_URL') . 'login/facebook/callback',
+        'redirect' => env('APP_URL').'login/facebook/callback',
     ],
 
     'google' => [
         'analytics' => env('GOOGLE_ANALYTICS'),
         'client_id' => env('GOOGLE_CLIENT_ID'),
         'client_secret' => env('GOOGLE_CLIENT_SECRET'),
-        'redirect' => env('APP_URL') . 'login/google/callback',
+        'redirect' => env('APP_URL').'login/google/callback',
     ],
-
 ];

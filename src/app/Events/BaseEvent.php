@@ -13,7 +13,10 @@ use Illuminate\Queue\SerializesModels;
 
 abstract class BaseEvent implements ShouldBroadcast
 {
-    use Dispatchable, InteractsWithSockets, SerializesModels, SerializesEvents;
+    use Dispatchable;
+    use InteractsWithSockets;
+    use SerializesModels;
+    use SerializesEvents;
 
     public $channel;
     public $user;
@@ -49,6 +52,7 @@ abstract class BaseEvent implements ShouldBroadcast
     public function getUserData()
     {
         $user = Auth::user();
+
         return $user ? (object) $user->only(['id', 'name', 'email']) : null;
     }
 

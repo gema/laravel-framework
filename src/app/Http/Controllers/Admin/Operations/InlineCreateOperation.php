@@ -10,7 +10,7 @@ trait InlineCreateOperation
         storeInlineCreate as storeInlineCreateTrait;
     }
 
-    function storeInlineCreate()
+    public function storeInlineCreate()
     {
         $result = $this->storeInlineCreateTrait();
         $this->sync(CrudController::CREATED);

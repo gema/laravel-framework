@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 
 class MaintenanceController extends CrudController
 {
-
     public function up(Request $request)
     {
         return json_status(!Artisan::call('up'));
@@ -19,5 +18,4 @@ class MaintenanceController extends CrudController
             '--allow' => $_SERVER['REMOTE_ADDR'],
         ]));
     }
-
 }

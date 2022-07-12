@@ -11,13 +11,13 @@ use Socialite;
 
 class SocialLoginController extends Controller
 {
-    const FACEBOOK = 'facebook';
-    const GOOGLE = 'google';
-    const GITHUB = 'github';
-    const TWITTER = 'twitter';
+    public const FACEBOOK = 'facebook';
+    public const GOOGLE = 'google';
+    public const GITHUB = 'github';
+    public const TWITTER = 'twitter';
 
     /**
-     * GOOGLE
+     * GOOGLE.
      */
     public function googleLogin()
     {
@@ -30,7 +30,7 @@ class SocialLoginController extends Controller
     }
 
     /**
-     * FACEBOOK
+     * FACEBOOK.
      */
     public function facebookLogin()
     {

@@ -5,7 +5,7 @@ namespace GemaDigital\Framework\app\Models;
 class Model extends \Illuminate\Database\Eloquent\Model
 {
     /**
-     * Scopes
+     * Scopes.
      */
     public static function findById(string $id)
     {
@@ -28,18 +28,18 @@ class Model extends \Illuminate\Database\Eloquent\Model
     }
 
     /**
-     * Events Helper
+     * Events Helper.
      */
     protected static function booted()
     {
-        /**
+        /*
          * Retrieve
          */
         method_exists(__CLASS__, 'retrieved') && static::retrieved(function ($element) {
             self::call($element, 'afterRetrieve');
         });
 
-        /**
+        /*
          * Create
          */
         method_exists(__CLASS__, 'creating') && static::creating(function ($element) {
@@ -51,7 +51,7 @@ class Model extends \Illuminate\Database\Eloquent\Model
             self::call($element, 'sync', 'create');
         });
 
-        /**
+        /*
          * Update
          */
         method_exists(__CLASS__, 'updating') && static::updating(function ($element) {
@@ -63,7 +63,7 @@ class Model extends \Illuminate\Database\Eloquent\Model
             self::call($element, 'sync', 'update');
         });
 
-        /**
+        /*
          * Save
          */
         method_exists(__CLASS__, 'saving') && static::saving(function ($element) {
@@ -74,7 +74,7 @@ class Model extends \Illuminate\Database\Eloquent\Model
             self::call($element, 'afterSave');
         });
 
-        /**
+        /*
          * Delete
          */
         method_exists(__CLASS__, 'deleting') && static::deleting(function ($element) {
@@ -86,7 +86,7 @@ class Model extends \Illuminate\Database\Eloquent\Model
             self::call($element, 'afterDelete');
         });
 
-        /**
+        /*
          * Restore
          */
         method_exists(__CLASS__, 'restoring') && static::restoring(function ($element) {

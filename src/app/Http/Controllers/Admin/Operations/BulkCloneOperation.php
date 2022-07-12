@@ -10,7 +10,7 @@ trait BulkCloneOperation
         bulkClone as bulkCloneTrait;
     }
 
-    function bulkClone()
+    public function bulkClone()
     {
         $result = $this->bulkCloneTrait();
         $this->sync(CrudController::CLONED);

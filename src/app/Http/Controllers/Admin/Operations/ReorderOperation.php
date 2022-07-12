@@ -10,7 +10,7 @@ trait ReorderOperation
         saveReorder as saveReorderTrait;
     }
 
-    function saveReorder()
+    public function saveReorder()
     {
         $result = $this->saveReorderTrait();
         $this->sync(CrudController::REORDERED);

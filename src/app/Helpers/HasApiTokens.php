@@ -16,7 +16,7 @@ trait HasApiTokens
      *
      * @return \Laravel\Passport\Token|null
      */
-    function token()
+    public function token()
     {
         return $this->parentToken() ?: $this->createToken(Config::get('app.name'))->accessToken;
     }

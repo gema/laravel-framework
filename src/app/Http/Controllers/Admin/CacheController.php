@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 
 class CacheController extends CrudController
 {
-
     public function flush(Request $request)
     {
         return json_status(Cache::flush());
@@ -43,5 +42,4 @@ class CacheController extends CrudController
     {
         return json_status(!Artisan::call('view:clear'));
     }
-
 }

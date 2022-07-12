@@ -2,8 +2,8 @@
 
 namespace GemaDigital\Framework\app\Helpers;
 
-use Str;
 use File;
+use Str;
 
 class FileHelper
 {
@@ -44,6 +44,6 @@ class FileHelper
 
     public static function replaceExtension($file_path, $newExtension)
     {
-        return substr($file_path, 0, strrpos($file_path, '.') + 1) . $newExtension;
+        return substr($file_path, 0, strrpos($file_path, '.') + 1).$newExtension;
     }
 }

@@ -32,8 +32,7 @@ class AdminActionsController extends Controller
     public function symlinkRun(Request $request)
     {
         if (admin()) {
-            echo symlink(base_path() . $request->input('target'), base_path() . $request->input('link')) ? 'Success' : 'Error';
+            echo symlink(base_path().$request->input('target'), base_path().$request->input('link')) ? 'Success' : 'Error';
         }
     }
-
 }

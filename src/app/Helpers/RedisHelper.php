@@ -17,5 +17,4 @@ trait RedisHelper
             'event' => $event->toArray(),
         ];
     }
-
 }

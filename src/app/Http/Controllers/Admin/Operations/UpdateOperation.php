@@ -10,7 +10,7 @@ trait UpdateOperation
         update as updateTrait;
     }
 
-    function update()
+    public function update()
     {
         $result = $this->updateTrait();
         $this->sync(CrudController::UPDATED);

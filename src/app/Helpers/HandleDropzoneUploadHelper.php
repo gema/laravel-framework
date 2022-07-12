@@ -60,8 +60,7 @@ trait HandleDropzoneUploadHelper
         $id = request()->get('id');
         $filepath = request()->get('filepath');
 
-        try
-        {
+        try {
             $filename = basename($filepath);
 
             // Remove File from disk
@@ -85,14 +84,13 @@ trait HandleDropzoneUploadHelper
 
             return response()->json(['success' => true]);
         } catch (Exception $e) {
-            return response('Unknown error' . $e, 412);
+            return response('Unknown error'.$e, 412);
         }
     }
 
     public function handleDropzoneUploadImage($disk, $column, $path, $sizes, $save_original, $quality)
     {
-        try
-        {
+        try {
             $file = request()->file('file');
 
             if (!$this->compareMimeTypes($file, ['image'])) {
@@ -110,14 +108,14 @@ trait HandleDropzoneUploadHelper
 
             // Save original or its max width version
             if (!$save_original && $image->width() > $sizes[0]) {
-                $image->resize($sizes[0], null, function ($c) {$c->aspectRatio();});
+                $image->resize($sizes[0], null, function ($c) {$c->aspectRatio(); });
             }
             Storage::disk($disk)->put("$path/$filename", $quality ? $image->stream($extension, $quality) : $image->stream());
 
             // Sizes
             foreach ($sizes as $size) {
                 if ($image->width() > $size) {
-                    $image->resize($size, null, function ($c) {$c->aspectRatio();});
+                    $image->resize($size, null, function ($c) {$c->aspectRatio(); });
                 }
 
                 Storage::disk($disk)->put("$path/$size/$filename", $quality ? $image->stream($extension, $quality) : $image->stream());
@@ -125,7 +123,7 @@ trait HandleDropzoneUploadHelper
 
             return response()->json(['success' => true, 'filename' => "$disk/$path/$filename"]);
         } catch (Exception $e) {
-            return response('Unknown error ' . $e, 412);
+            return response('Unknown error '.$e, 412);
         }
     }
 
@@ -134,10 +132,9 @@ trait HandleDropzoneUploadHelper
 
     public function handleDropzoneUploadVideo($disk, $column, $path, $sizes, $save_original, $quality)
     {
-        try
-        {
+        try {
             $file = request()->file('file');
-            $final_path = Storage::disk($disk)->getDriver()->getAdapter()->getPathPrefix() . $path;
+            $final_path = Storage::disk($disk)->getDriver()->getAdapter()->getPathPrefix().$path;
 
             if (!$this->compareMimeTypes($file, ['video'])) {
                 return response('Not a valid video type', 412);
@@ -166,7 +163,7 @@ trait HandleDropzoneUploadHelper
 
             return response()->json(['success' => true, 'filename' => "$disk/$path/$filename", 'thumbnail' => "$disk/$path/$thumbname"]);
         } catch (Exception $e) {
-            return response('Unknown error ' . $e, 412);
+            return response('Unknown error '.$e, 412);
         }
     }
 
@@ -175,8 +172,7 @@ trait HandleDropzoneUploadHelper
         $id = request()->get('id');
         $filepath = request()->get('filepath');
 
-        try
-        {
+        try {
             $filename = basename($filepath);
 
             // Remove File from disk
@@ -207,7 +203,7 @@ trait HandleDropzoneUploadHelper
 
             return response()->json(['success' => true]);
         } catch (Exception $e) {
-            return response('Unknown error' . $e, 412);
+            return response('Unknown error'.$e, 412);
         }
     }
 
@@ -216,18 +212,19 @@ trait HandleDropzoneUploadHelper
 
     private function getFileName($file, $random_name = false)
     {
-        $filename = preg_replace('/\\.[^.\\s]{3,4}$/', '', $file->getClientOriginalName()) . '_' . time();
+        $filename = preg_replace('/\\.[^.\\s]{3,4}$/', '', $file->getClientOriginalName()).'_'.time();
         if ($random_name) {
             $filename = md5($filename);
         }
 
-        return $filename . '.' . $file->extension();
+        return $filename.'.'.$file->extension();
     }
 
     private function replaceExtension($filename, $extension)
     {
         $info = pathinfo($filename);
-        return $info['filename'] . '.' . $extension;
+
+        return $info['filename'].'.'.$extension;
     }
 
     private function compareMimeTypes($file, $mimes)
