@@ -6,6 +6,7 @@ use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 use GemaDigital\Framework\app\Helpers\HandleDropzoneUploadHelper;
 
 class CrudController extends \Backpack\CRUD\app\Http\Controllers\CrudController
+
 {
     use HandleDropzoneUploadHelper;
 
@@ -23,7 +24,7 @@ class CrudController extends \Backpack\CRUD\app\Http\Controllers\CrudController
         // Check authorization for CRUD
         $this->crud->id = $this->crud->getCurrentEntryId();
 
-        if ($this->crud->id && !$this->authorize($this->crud->id)) {
+        if ($this->crud->id && ! $this->authorize($this->crud->id)) {
             abort(401);
         }
     }

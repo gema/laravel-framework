@@ -68,7 +68,7 @@ class APICrudController extends Controller
     */
     public function exampleSearch()
     {
-        return $this->entitySearch(Example::class, ['name', 'content']);
+        return $this->entitySearch(\GemaDigital\Framework\app\Models\Model::class, ['name', 'content']);
     }
 
     public function exampleFilter()

@@ -2,7 +2,9 @@
 
 namespace GemaDigital\Framework\app\Models;
 
-class Model extends \Illuminate\Database\Eloquent\Model
+use \Illuminate\Database\Eloquent\Model as OriginalModel;
+
+class Model extends OriginalModel
 {
     /**
      * Scopes.
@@ -87,15 +89,10 @@ class Model extends \Illuminate\Database\Eloquent\Model
         });
 
         /*
-         * Restore
+         * Retrieve
          */
-        method_exists(__CLASS__, 'restoring') && static::restoring(function ($element) {
-            self::call($element, 'beforeRestore');
-        });
-
-        method_exists(__CLASS__, 'restored') && static::restored(function ($element) {
-            self::call($element, 'afterRestore');
-            self::call($element, 'sync', 'restore');
+        method_exists(__CLASS__, 'retrieved') && static::retrieved(function ($element) {
+            self::call($element, 'beforeRetrieved');
         });
     }
 

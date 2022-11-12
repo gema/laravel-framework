@@ -3,9 +3,10 @@
 namespace GemaDigital\Framework\app\Http\Controllers\Admin;
 
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
+use Backpack\PermissionManager\app\Http\Controllers\UserCrudController as OriginalUserCrudController;
 use GemaDigital\Framework\app\Helpers\EnumHelper;
 
-class UserCrudController extends \Backpack\PermissionManager\app\Http\Controllers\UserCrudController
+class UserCrudController extends OriginalUserCrudController
 {
     public function setup()
     {

@@ -34,16 +34,16 @@ trait SaveMedia
             }
 
             $timestamp = Carbon::now()->timestamp;
-            $filename = Str::slug("$name $timestamp") . ".$format";
+            $filename = Str::slug("$name $timestamp").".$format";
 
             $image = Image::make($value);
 
             // Save original image
-            Storage::disk($disk)->put($path . $filename, $image->stream($format, $quality));
-            $model->attributes[$attribute_name] = str_replace(Config::get('app.url'), '', $path . $filename);
+            Storage::disk($disk)->put($path.$filename, $image->stream($format, $quality));
+            $model->attributes[$attribute_name] = str_replace(Config::get('app.url'), '', $path.$filename);
 
             // Save all sizes
-            if (!is_array($sizes)) {
+            if (! is_array($sizes)) {
                 $sizes = [$sizes];
             }
 
@@ -106,7 +106,7 @@ trait SaveMedia
     {
         $request = request();
         $attribute_value = (array) $this->{$attribute_name};
-        $files_to_clear = $request->get('clear_' . $attribute_name);
+        $files_to_clear = $request->get('clear_'.$attribute_name);
 
         // if a file has been marked for removal,
         // delete it from the disk and from the db
@@ -125,7 +125,7 @@ trait SaveMedia
             foreach ($request->file($attribute_name) as $file) {
                 if ($file->isValid()) {
                     // 1. Generate a new file name
-                    $new_file_name = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME) . '.' . time() . '.' . $file->getClientOriginalExtension();
+                    $new_file_name = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME).'.'.time().'.'.$file->getClientOriginalExtension();
 
                     // 2. Move the new file to the correct path
                     $file_path = $file->storeAs($destination_path, $new_file_name, $disk);

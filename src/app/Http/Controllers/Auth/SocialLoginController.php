@@ -103,7 +103,7 @@ class SocialLoginController extends Controller
 
         $user = User::whereEmail($providerUser->getEmail())->first();
 
-        if (!$user) {
+        if (! $user) {
             $user = User::create([
                 'email' => $providerUser->getEmail(),
                 'name' => $providerUser->getName(),

@@ -9,8 +9,6 @@ class ComposerScripts
     /**
      * Handle the post-install Composer event.
      *
-     * @param \Composer\Script\Event $event
-     *
      * @return void
      */
     public static function postInstall()

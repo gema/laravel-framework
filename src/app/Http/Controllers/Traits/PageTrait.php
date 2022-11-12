@@ -16,7 +16,7 @@ trait PageTrait
                 ? \App\Models\Page::findBySlug($slug)
                 : \Backpack\PageManager\app\Models\Page::findBySlug($slug);
 
-            if (!$page) {
+            if (! $page) {
                 abort(404);
             }
 

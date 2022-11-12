@@ -9,7 +9,7 @@ class ViewAsController extends Controller
 {
     public function viewAsRole($role)
     {
-        if (!admin()) {
+        if (! admin()) {
             abort(403);
         }
 
@@ -25,7 +25,7 @@ class ViewAsController extends Controller
 
     public function viewAsPermission($permission, $state)
     {
-        if (!admin()) {
+        if (! admin()) {
             abort(403);
         }
 

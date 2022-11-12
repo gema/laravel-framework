@@ -15,31 +15,31 @@ class CacheController extends CrudController
 
     public function config(Request $request)
     {
-        return json_status(!Artisan::call('config:cache'));
+        return json_status(! Artisan::call('config:cache'));
     }
 
     public function configClear(Request $request)
     {
-        return json_status(!Artisan::call('config:clear'));
+        return json_status(! Artisan::call('config:clear'));
     }
 
     public function route(Request $request)
     {
-        return json_status(!Artisan::call('route:cache'));
+        return json_status(! Artisan::call('route:cache'));
     }
 
     public function routeClear(Request $request)
     {
-        return json_status(!Artisan::call('route:clear'));
+        return json_status(! Artisan::call('route:clear'));
     }
 
     public function view(Request $request)
     {
-        return json_status(!Artisan::call('view:cache'));
+        return json_status(! Artisan::call('view:cache'));
     }
 
     public function viewClear(Request $request)
     {
-        return json_status(!Artisan::call('view:clear'));
+        return json_status(! Artisan::call('view:clear'));
     }
 }

@@ -3,14 +3,15 @@
 namespace GemaDigital\Framework\app\Http\Controllers\Admin;
 
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
+use Backpack\PageManager\app\Http\Controllers\Admin\PageCrudController as OriginalPageCrudController;
 
-class PageCrudController extends \Backpack\PageManager\app\Http\Controllers\Admin\PageCrudController
+class PageCrudController extends OriginalPageCrudController
 {
     public function setup($template_name = false)
     {
         parent::setup($template_name);
 
-        if (!is('admin')) {
+        if (! is('admin')) {
             CRUD::denyAccess(['list', 'update']);
         }
 

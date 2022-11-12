@@ -1,34 +1,34 @@
 <?php
 
-if (!function_exists('user')) {
+if (! function_exists('user')) {
     function user()
     {
         return \Auth::user();
     }
 }
 
-if (!function_exists('debugMode')) {
+if (! function_exists('debugMode')) {
     function debugMode()
     {
         return Config::get('app.debug', false);
     }
 }
 
-if (!function_exists('api')) {
+if (! function_exists('api')) {
     function api()
     {
         return app('App\Http\Controllers\Admin\APICrudController');
     }
 }
 
-if (!function_exists('collect_only')) {
+if (! function_exists('collect_only')) {
     function collect_only($model, $attributes)
     {
         return collect($model->toArray())->only($attributes)->all();
     }
 }
 
-if (!function_exists('data_get_first')) {
+if (! function_exists('data_get_first')) {
     function data_get_first($target, $key, $attribute, $default = 0)
     {
         $value = data_get($target, $key);
@@ -37,7 +37,7 @@ if (!function_exists('data_get_first')) {
     }
 }
 
-if (!function_exists('hasRole')) {
+if (! function_exists('hasRole')) {
     function hasRole($role)
     {
         $user = backpack_user() ?: user();
@@ -46,13 +46,13 @@ if (!function_exists('hasRole')) {
     }
 }
 
-if (!function_exists('hasAnyPermissions')) {
+if (! function_exists('hasAnyPermissions')) {
     function hasAnyPermissions($permissions)
     {
         $user = backpack_user() ?: user();
 
         if ($user) {
-            if (!is_array($permissions)) {
+            if (! is_array($permissions)) {
                 $permissions = [$permissions];
             }
 
@@ -67,13 +67,13 @@ if (!function_exists('hasAnyPermissions')) {
     }
 }
 
-if (!function_exists('hasAllPermissions')) {
+if (! function_exists('hasAllPermissions')) {
     function hasAllPermissions($permissions)
     {
         $user = backpack_user() ?: user();
 
         if ($user) {
-            if (!is_array($permissions)) {
+            if (! is_array($permissions)) {
                 $permissions = [$permissions];
             }
 
@@ -89,28 +89,28 @@ if (!function_exists('hasAllPermissions')) {
     }
 }
 
-if (!function_exists('hasPermission')) {
+if (! function_exists('hasPermission')) {
     function hasPermission($permissions)
     {
         return hasAnyPermissions($permissions);
     }
 }
 
-if (!function_exists('admin')) {
+if (! function_exists('admin')) {
     function admin()
     {
         return hasRole('admin');
     }
 }
 
-if (!function_exists('restrictTo')) {
+if (! function_exists('restrictTo')) {
     function restrictTo($roles, $permissions = null)
     {
         $session_role = Session::get('role', null);
         $session_permissions = Session::get('permissions', null);
 
         // Default
-        if (!$session_role && !$session_permissions) {
+        if (! $session_role && ! $session_permissions) {
             return ($roles && hasRole($roles)) || ($permissions && hasPermission($permissions));
         }
 
@@ -124,7 +124,7 @@ if (!function_exists('restrictTo')) {
         }
 
         // View as Role only
-        if ($session_role && (!$session_permissions || !$permissions)) {
+        if ($session_role && (! $session_permissions || ! $permissions)) {
             return in_array($session_role, $roles);
         }
 
@@ -135,21 +135,21 @@ if (!function_exists('restrictTo')) {
     }
 }
 
-if (!function_exists('is')) {
+if (! function_exists('is')) {
     function is($roles, $permissions = null)
     {
         return restrictTo($roles, $permissions);
     }
 }
 
-if (!function_exists('aurl')) {
+if (! function_exists('aurl')) {
     function aurl($disk, $path)
     {
         return \Str::startsWith($path, 'http') ? $path : Storage::disk($disk)->url($path);
     }
 }
 
-if (!function_exists('map_contains')) {
+if (! function_exists('map_contains')) {
     function map_contains($needle_map, $haystack, $default = -1)
     {
         foreach ($needle_map as $needle => $value) {
@@ -162,7 +162,7 @@ if (!function_exists('map_contains')) {
     }
 }
 
-if (!function_exists('map_transform')) {
+if (! function_exists('map_transform')) {
     function map_transform($value, $map)
     {
         if (in_array($value, $map)) {
@@ -173,7 +173,7 @@ if (!function_exists('map_transform')) {
     }
 }
 
-if (!function_exists('json_response')) {
+if (! function_exists('json_response')) {
     function json_response($data = null, $code = 0, $status = 200, $errors = null, $exception = null)
     {
         $response = [
@@ -183,7 +183,7 @@ if (!function_exists('json_response')) {
         ];
 
         if (debugMode()) {
-            $time = number_format((microtime(true) - LARAVEL_START), 6) * 1e6;
+            $time = floatval(number_format((microtime(true) - LARAVEL_START), 6)) * 1e6;
             $timeData = $time > 1e6 ? [$time / 1e6, 'seconds'] : (
                 $time > 1e3 ? [$time / 1e3, 'miliseconds'] : (
                     [$time, 'microseconds']
@@ -205,11 +205,11 @@ if (!function_exists('json_response')) {
 
         return response($response, $status)
             ->header('Content-Type', 'text/json')
-            ->header('Content-Length', strlen($response));
+            ->header('Content-Length', strval(strlen($response)));
     }
 }
 
-if (!function_exists('json_response_raw')) {
+if (! function_exists('json_response_raw')) {
     function json_response_raw($raw = null, $code = 0, $status = 200, $errors = null, $exception = null)
     {
         $response = [
@@ -223,25 +223,25 @@ if (!function_exists('json_response_raw')) {
 
         return response($response, $status)
             ->header('Content-Type', 'text/json')
-            ->header('Content-Length', strlen($response));
+            ->header('Content-Length', strval(strlen($response)));
     }
 }
 
-if (!function_exists('json_error')) {
+if (! function_exists('json_error')) {
     function json_error($errors = null, $code = -1, $status = 400)
     {
         return json_response(null, $code, $status, $errors);
     }
 }
 
-if (!function_exists('json_status')) {
+if (! function_exists('json_status')) {
     function json_status($status, $success = 200, $fail = 400)
     {
         return json_response(null, 0, $status ? $success : $fail);
     }
 }
 
-if (!function_exists('sized_image')) {
+if (! function_exists('sized_image')) {
     function sized_image($path, $size)
     {
         if (($pos = strrpos($path, '/')) !== false) {
@@ -252,7 +252,7 @@ if (!function_exists('sized_image')) {
     }
 }
 
-if (!function_exists('__fallback')) {
+if (! function_exists('__fallback')) {
     function __fallback(string $key, ?string $fallback = null, ?string $locale = null, ?array $replace = [])
     {
         if (\Illuminate\Support\Facades\Lang::has($key, $locale)) {
@@ -263,7 +263,7 @@ if (!function_exists('__fallback')) {
     }
 }
 
-if (!function_exists('get_class_name')) {
+if (! function_exists('get_class_name')) {
     function get_class_name($object)
     {
         return (new \ReflectionClass($object))->getShortName();
