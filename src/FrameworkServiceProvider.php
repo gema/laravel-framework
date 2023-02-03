@@ -31,11 +31,6 @@ class FrameworkServiceProvider extends ServiceProvider
             $this->bootForConsole();
         }
 
-        // Set up Faker default languages
-        $this->app->singleton(\Faker\Generator::class, function () {
-            return \Faker\Factory::create('pt_PT');
-        });
-
         // Blade directives
 
         // SVG
