@@ -152,10 +152,17 @@ if (! function_exists('json_response')) {
         ];
 
         if (debugMode()) {
-            $time = floatval(number_format((microtime(true) - LARAVEL_START), 6)) * 1e6;
-            $timeData = $time > 1e6 ? [$time / 1e6, 'seconds'] : (
-                $time > 1e3 ? [$time / 1e3, 'miliseconds'] : (
-                    [$time, 'microseconds']
+            $time = (int) ((microtime(true) - LARAVEL_START) * 1e6);
+            $timeData = $time > 1e6 ? [$time / 1e6, 's'] : (
+                $time > 1e3 ? [$time / 1e3, 'ms'] : (
+                    [$time, 'μs']
+                )
+            );
+
+            $memory = memory_get_peak_usage();
+            $memoryData = $memory > 1e6 ? [$memory / 1e6, 'mb'] : (
+                $memory > 1e3 ? [$memory / 1e3, 'kb'] : (
+                    [$memory, 'b']
                 )
             );
 
@@ -163,6 +170,10 @@ if (! function_exists('json_response')) {
                 'time' => [
                     'value' => $timeData[0],
                     'unit' => $timeData[1],
+                ],
+                'memory' => [
+                    'value' => $memoryData[0],
+                    'unit' => $memoryData[1],
                 ],
                 'exception' => $exception,
                 'queries' => DB::getQueryLog(),
