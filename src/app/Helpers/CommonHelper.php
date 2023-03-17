@@ -21,13 +21,6 @@ if (! function_exists('api')) {
     }
 }
 
-if (! function_exists('collect_only')) {
-    function collect_only($model, $attributes)
-    {
-        return collect($model->toArray())->only($attributes)->all();
-    }
-}
-
 if (! function_exists('data_get_first')) {
     function data_get_first($target, $key, $attribute, $default = 0)
     {
@@ -149,30 +142,6 @@ if (! function_exists('aurl')) {
     }
 }
 
-if (! function_exists('map_contains')) {
-    function map_contains($needle_map, $haystack, $default = -1)
-    {
-        foreach ($needle_map as $needle => $value) {
-            if (strpos($haystack, $needle) !== false) {
-                return $value;
-            }
-        }
-
-        return $default;
-    }
-}
-
-if (! function_exists('map_transform')) {
-    function map_transform($value, $map)
-    {
-        if (in_array($value, $map)) {
-            $value = $map[$value];
-        }
-
-        return $value;
-    }
-}
-
 if (! function_exists('json_response')) {
     function json_response($data = null, $code = 0, $status = 200, $errors = null, $exception = null)
     {
@@ -267,5 +236,30 @@ if (! function_exists('get_class_name')) {
     function get_class_name($object)
     {
         return (new \ReflectionClass($object))->getShortName();
+    }
+}
+
+if (! function_exists('memoize')) {
+    function memoize($target)
+    {
+        static $memo = new WeakMap;
+
+        return new class($target, $memo)
+        {
+            function __construct(
+                protected $target,
+                protected &$memo,
+            ) {}
+
+            function __call($method, $params)
+            {
+                $this->memo[$this->target]??=[];
+
+                $signature = $method.crc32(json_encode($params));
+
+                return $this->memo[$this->target][$signature]
+                ??=$this->target->$method(...$params);
+            }
+        };
     }
 }

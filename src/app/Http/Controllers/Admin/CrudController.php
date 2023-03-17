@@ -2,11 +2,11 @@
 
 namespace GemaDigital\Framework\app\Http\Controllers\Admin;
 
+use Backpack\CRUD\app\Http\Controllers\CrudController as OriginalCrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 use GemaDigital\Framework\app\Helpers\HandleDropzoneUploadHelper;
 
-class CrudController extends \Backpack\CRUD\app\Http\Controllers\CrudController
-
+class CrudController extends OriginalCrudController
 {
     use HandleDropzoneUploadHelper;
 

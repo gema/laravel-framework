@@ -93,7 +93,7 @@ trait HandleDropzoneUploadHelper
         try {
             $file = request()->file('file');
 
-            if (!$this->compareMimeTypes($file, ['image'])) {
+            if (! $this->compareMimeTypes($file, ['image'])) {
                 return response('Not a valid image type', 412);
             }
 
@@ -107,15 +107,15 @@ trait HandleDropzoneUploadHelper
             rsort($sizes);
 
             // Save original or its max width version
-            if (!$save_original && $image->width() > $sizes[0]) {
-                $image->resize($sizes[0], null, function ($c) {$c->aspectRatio(); });
+            if (! $save_original && $image->width() > $sizes[0]) {
+                $image->resize($sizes[0], null, function ($c) {$c->aspectRatio();});
             }
             Storage::disk($disk)->put("$path/$filename", $quality ? $image->stream($extension, $quality) : $image->stream());
 
             // Sizes
             foreach ($sizes as $size) {
                 if ($image->width() > $size) {
-                    $image->resize($size, null, function ($c) {$c->aspectRatio(); });
+                    $image->resize($size, null, function ($c) {$c->aspectRatio();});
                 }
 
                 Storage::disk($disk)->put("$path/$size/$filename", $quality ? $image->stream($extension, $quality) : $image->stream());
@@ -136,7 +136,7 @@ trait HandleDropzoneUploadHelper
             $file = request()->file('file');
             $final_path = Storage::disk($disk)->getDriver()->getAdapter()->getPathPrefix().$path;
 
-            if (!$this->compareMimeTypes($file, ['video'])) {
+            if (! $this->compareMimeTypes($file, ['video'])) {
                 return response('Not a valid video type', 412);
             }
 
@@ -154,7 +154,7 @@ trait HandleDropzoneUploadHelper
             // Other thumbnails
             foreach ($sizes as $size) {
                 $thumbnail = new VideoThumbnail();
-                if (!file_exists("$final_path/$size")) {
+                if (! file_exists("$final_path/$size")) {
                     mkdir("$final_path/$size");
                 }
 
