@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Redis;
 
 trait RedisHelper
 {
-    public function redisPublish(BaseEvent $event)
+    public function redisPublish(BaseEvent $event): array
     {
         $redis = Redis::connection();
         $status = $redis->publish($event->getChannel(), $event->toJson());

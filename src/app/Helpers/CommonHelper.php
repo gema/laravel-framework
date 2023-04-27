@@ -1,14 +1,21 @@
 <?php
 
+use App\Models\User;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
+
 if (! function_exists('user')) {
-    function user()
+    function user(): ?User
     {
-        return \Auth::user();
+        return Auth::user();
     }
 }
 
 if (! function_exists('debugMode')) {
-    function debugMode()
+    function debugMode(): bool
     {
         return Config::get('app.debug', false);
     }
@@ -31,7 +38,7 @@ if (! function_exists('data_get_first')) {
 }
 
 if (! function_exists('hasRole')) {
-    function hasRole($role)
+    function hasRole(string $role): bool
     {
         $user = backpack_user() ?: user();
 
@@ -40,7 +47,7 @@ if (! function_exists('hasRole')) {
 }
 
 if (! function_exists('hasAnyPermissions')) {
-    function hasAnyPermissions($permissions)
+    function hasAnyPermissions(string | array $permissions): bool
     {
         $user = backpack_user() ?: user();
 
@@ -61,7 +68,7 @@ if (! function_exists('hasAnyPermissions')) {
 }
 
 if (! function_exists('hasAllPermissions')) {
-    function hasAllPermissions($permissions)
+    function hasAllPermissions(string | array $permissions): bool
     {
         $user = backpack_user() ?: user();
 
@@ -83,21 +90,21 @@ if (! function_exists('hasAllPermissions')) {
 }
 
 if (! function_exists('hasPermission')) {
-    function hasPermission($permissions)
+    function hasPermission(string | array $permissions): bool
     {
         return hasAnyPermissions($permissions);
     }
 }
 
 if (! function_exists('admin')) {
-    function admin()
+    function admin(): bool
     {
         return hasRole('admin');
     }
 }
 
 if (! function_exists('restrictTo')) {
-    function restrictTo($roles, $permissions = null)
+    function restrictTo(string | array $roles, string | array $permissions = null): bool
     {
         $session_role = Session::get('role', null);
         $session_permissions = Session::get('permissions', null);
@@ -125,25 +132,27 @@ if (! function_exists('restrictTo')) {
         elseif ($session_role && $session_permissions && $permissions) {
             return in_array($session_role, $roles) || sizeof(array_intersect($session_permissions, array_values($permissions)));
         }
+
+        return false;
     }
 }
 
 if (! function_exists('is')) {
-    function is($roles, $permissions = null)
+    function is(string | array $roles, string | array $permissions = null): bool
     {
         return restrictTo($roles, $permissions);
     }
 }
 
 if (! function_exists('aurl')) {
-    function aurl($disk, $path)
+    function aurl(string $disk, string $path): string
     {
-        return \Str::startsWith($path, 'http') ? $path : Storage::disk($disk)->url($path);
+        return Str::startsWith($path, 'http') ? $path : Storage::disk($disk)->url($path);
     }
 }
 
 if (! function_exists('json_response')) {
-    function json_response($data = null, $code = 0, $status = 200, $errors = null, $exception = null)
+    function json_response(mixed $data = null, int $code = 0, int $status = 200, mixed $errors = null, $exception = null): Response
     {
         $response = [
             'code' => $code,
@@ -190,7 +199,7 @@ if (! function_exists('json_response')) {
 }
 
 if (! function_exists('json_response_raw')) {
-    function json_response_raw($raw = null, $code = 0, $status = 200, $errors = null, $exception = null)
+    function json_response_raw(mixed $raw = null, int $code = 0, int $status = 200, mixed $errors = null)
     {
         $response = [
             'code' => $code,
@@ -208,21 +217,21 @@ if (! function_exists('json_response_raw')) {
 }
 
 if (! function_exists('json_error')) {
-    function json_error($errors = null, $code = -1, $status = 400)
+    function json_error(mixed $errors = null, int $code = -1, int $status = 400): Response
     {
         return json_response(null, $code, $status, $errors);
     }
 }
 
 if (! function_exists('json_status')) {
-    function json_status($status, $success = 200, $fail = 400)
+    function json_status(bool $status, int $success = 200, int $fail = 400): Response
     {
         return json_response(null, 0, $status ? $success : $fail);
     }
 }
 
 if (! function_exists('sized_image')) {
-    function sized_image($path, $size)
+    function sized_image(string $path, int $size): string
     {
         if (($pos = strrpos($path, '/')) !== false) {
             $path = substr_replace($path, "/$size/", $pos, 1);
@@ -233,7 +242,7 @@ if (! function_exists('sized_image')) {
 }
 
 if (! function_exists('__fallback')) {
-    function __fallback(string $key, ?string $fallback = null, ?string $locale = null, ?array $replace = [])
+    function __fallback(string $key, ?string $fallback = null, ?string $locale = null, ?array $replace = []): ?string
     {
         if (\Illuminate\Support\Facades\Lang::has($key, $locale)) {
             return trans($key, $replace, $locale);
@@ -244,14 +253,14 @@ if (! function_exists('__fallback')) {
 }
 
 if (! function_exists('get_class_name')) {
-    function get_class_name($object)
+    function get_class_name(string $object): string
     {
         return (new \ReflectionClass($object))->getShortName();
     }
 }
 
 if (! function_exists('memoize')) {
-    function memoize($target)
+    function memoize(mixed $target): mixed
     {
         static $memo = new WeakMap;
 

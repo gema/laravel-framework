@@ -11,7 +11,7 @@ class ComposerScripts
      *
      * @return void
      */
-    public static function postInstall()
+    public static function postInstall(): void
     {
         switch (DIRECTORY_SEPARATOR) {
             case '/': // unix

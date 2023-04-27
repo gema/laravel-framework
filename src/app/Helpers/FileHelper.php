@@ -8,42 +8,42 @@ use Str;
 class FileHelper
 {
     // Check if file mime type is Application
-    public static function isApplication($file_path)
+    public static function isApplication(string $filePath): bool
     {
-        return self::isType($file_path, 'application');
+        return self::isType($filePath, 'application');
     }
 
     // Check if file mime type is Audio
-    public static function isAudio($file_path)
+    public static function isAudio(string $filePath): bool
     {
-        return self::isType($file_path, 'audio');
+        return self::isType($filePath, 'audio');
     }
 
     // Check if file mime type is Text
-    public static function isText($file_path)
+    public static function isText(string $filePath): bool
     {
-        return self::isType($file_path, 'text');
+        return self::isType($filePath, 'text');
     }
 
     // Check if file mime type is Image
-    public static function isImage($file_path)
+    public static function isImage(string $filePath): bool
     {
-        return self::isType($file_path, 'image');
+        return self::isType($filePath, 'image');
     }
 
     // Check if file mime type is Video
-    public static function isVideo($file_path)
+    public static function isVideo(string $filePath): bool
     {
-        return self::isType($file_path, 'video');
+        return self::isType($filePath, 'video');
     }
 
-    private static function isType($file_path, $type)
+    private static function isType(string $filePath, string $type): bool
     {
-        return File::exists($file_path) && Str::startsWith(File::mimeType($file_path), $type);
+        return File::exists($filePath) && Str::startsWith(File::mimeType($filePath), $type);
     }
 
-    public static function replaceExtension($file_path, $newExtension)
+    public static function replaceExtension(string $filePath, string $newExtension): string
     {
-        return substr($file_path, 0, strrpos($file_path, '.') + 1).$newExtension;
+        return substr($filePath, 0, strrpos($filePath, '.') + 1).$newExtension;
     }
 }
