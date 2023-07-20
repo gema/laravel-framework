@@ -2,6 +2,9 @@
 
 namespace GemaDigital\Framework;
 
+use DB;
+use GemaDigital\Framework\app\Helpers\QueryLogger;
+use Illuminate\Database\Events\QueryExecuted;
 use Illuminate\Support\ServiceProvider;
 
 class FrameworkServiceProvider extends ServiceProvider
@@ -29,6 +32,11 @@ class FrameworkServiceProvider extends ServiceProvider
         // Publishing is only necessary when using the CLI.
         if ($this->app->runningInConsole()) {
             $this->bootForConsole();
+        }
+
+        // Log all queries
+        if (config('app.debug')) {
+            DB::listen(fn(QueryExecuted $log) => QueryLogger::log($log));
         }
 
         // Blade directives

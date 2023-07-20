@@ -1,10 +1,12 @@
 <?php
 
 use App\Models\User;
+use GemaDigital\Framework\app\Helpers\QueryLogger;
 use Illuminate\Http\Response;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 if (! function_exists('user')) {
@@ -175,6 +177,8 @@ if (! function_exists('json_response')) {
                 )
             );
 
+            $queries = QueryLogger::list();
+
             $response = array_merge($response, ['debug' => [
                 'time' => [
                     'value' => $timeData[0],
@@ -185,7 +189,11 @@ if (! function_exists('json_response')) {
                     'unit' => $memoryData[1],
                 ],
                 'exception' => $exception,
-                'queries' => DB::getQueryLog(),
+                'query' => [
+                    'count' => count($queries),
+                    'time' => collect($queries)->pluck('time')->sum(),
+                    'list' => $queries,
+                ],
                 'post' => request()->request->all(),
             ]]);
         }
@@ -227,6 +235,25 @@ if (! function_exists('json_status')) {
     function json_status(bool $status, int $success = 200, int $fail = 400): Response
     {
         return json_response(null, 0, $status ? $success : $fail);
+    }
+}
+
+if (! function_exists('json_response_pagination')) {
+    function json_response_pagination(mixed $data = null, LengthAwarePaginator $pagination, int $code = 0, int $status = 200, mixed $errors = null, $exception = null): Response
+    {
+        $data = [
+            ...$data,
+            'pagination' => Arr::only($pagination->toArray(), [
+                'from',
+                'to',
+                'total',
+                'per_page',
+                'last_page',
+                'current_page',
+            ]),
+        ];
+
+        return json_response($data, $code, $status, $errors, $exception);
     }
 }
 
@@ -277,8 +304,7 @@ if (! function_exists('memoize')) {
 
                 $signature = $method.crc32(json_encode($params));
 
-                return $this->memo[$this->target][$signature]
-                ??=$this->target->$method(...$params);
+                return $this->memo[$this->target][$signature] ??= $this->target->$method(...$params);
             }
         };
     }
