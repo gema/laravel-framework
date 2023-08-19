@@ -17,14 +17,14 @@
     "require": {
         "php": "^8.1|^8.2",
         "illuminate/support": "~10",
-        "backpack/backupmanager": "^4.0",
-        "backpack/crud": "^5.5.0",
-        "backpack/pro": "^1.6.0",
-        "backpack/filemanager": "^2.0",
-        "backpack/langfilemanager": "^4.0",
-        "backpack/logmanager": "^4.0",
+        "backpack/backupmanager": "^4.0|^5.0",
+        "backpack/crud": "^5.5.0|^6.1",
+        "backpack/pro": "^1.6.0|^2.0",
+        "backpack/filemanager": "^2.0|^3.0",
+        "backpack/langfilemanager": "^4.0|^5.0",
+        "backpack/logmanager": "^4.0|^5.0",
         "backpack/pagemanager": "^3.0",
-        "backpack/permissionmanager": "^6.0",
+        "backpack/permissionmanager": "^6.0|^7.0",
         "backpack/settings": "^3.0",
         "barryvdh/laravel-elfinder": "^0.5.1",
         "laravel/framework": "^10.0",
@@ -34,14 +34,15 @@
         "spatie/laravel-translatable": "^6.1"
     },
     "require-dev": {
-        "backpack/generators": "^3.0",
+        "backpack/generators": "^3.0|^4.0",
         "barryvdh/laravel-debugbar": "^3.2",
         "fakerphp/faker": "^1.14",
         "mockery/mockery": "^1.0",
         "nunomaduro/collision": "^7.0",
         "phpunit/phpunit": "^10.0",
         "spatie/laravel-ignition": "^2.0",
-        "zanysoft/laravel-zip": "^2.0"
+        "zanysoft/laravel-zip": "^2.0",
+        "rector/rector": "^0.18.0"
     },
     "repositories": [
         {
