@@ -162,6 +162,8 @@ if (! function_exists('json_response')) {
             'errors' => $errors,
         ];
 
+        $result = json_encode($response);
+
         if (debugMode()) {
             $time = (int) ((microtime(true) - LARAVEL_START) * 1e6);
             $timeData = $time > 1e6 ? [$time / 1e6, 's'] : (
@@ -196,13 +198,13 @@ if (! function_exists('json_response')) {
                 ],
                 'post' => request()->request->all(),
             ]]);
+
+            $result = json_encode($response);
         }
 
-        $response = json_encode($response);
-
-        return response($response, $status)
+        return response($result, $status)
             ->header('Content-Type', 'text/json')
-            ->header('Content-Length', strval(strlen($response)));
+            ->header('Content-Length', strval(strlen($result)));
     }
 }
 
@@ -300,7 +302,7 @@ if (! function_exists('memoize')) {
 
             function __call($method, $params)
             {
-                $this->memo[$this->target]??=[];
+                $this->memo[$this->target] ??= [];
 
                 $signature = $method.crc32(json_encode($params));
 
