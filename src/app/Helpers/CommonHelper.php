@@ -1,7 +1,7 @@
 <?php
 
+use App\Models\User;
 use GemaDigital\Framework\app\Helpers\QueryLogger;
-use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Response;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Arr;
