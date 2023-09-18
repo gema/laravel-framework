@@ -1,49 +1,48 @@
 @php
-$configs = [];
-foreach (['filemanager', 'backups', 'translations', 'pages', 'authentication', 'settings', 'logs'] as $config) {
-	$configs[$config] = \Config::get("gemadigital.sidebar.$config", true);
-}
+$configs = collect(['filemanager', 'backups', 'translations', 'pages', 'authentication', 'settings', 'logs'])
+->mapWithKeys(fn($config) => [$config => \Config::get("gemadigital.sidebar.$config", true)]);
+
+if($configs->values()->every(fn($value) => false)) return;
 @endphp
 
-<li class="header">{{ __("gemadigital::messages.admin") }}</li>
+{{-- Header --}}
+<x-backpack::menu-separator :title="__('gemadigital::messages.extras')" />
 
-@if($configs['filemanager'])
-<li class="nav-item"><a class="nav-link" href="{{ backpack_url('elfinder') }}"><i class="nav-icon la la-files-o"></i> <span>{{ trans('backpack::crud.file_manager') }}</span></a></li>
-@endif
+<x-backpack::menu-dropdown :title="__('gemadigital::messages.admin')" icon="la la-terminal">
+    @includeWhen(class_exists(\Backpack\DevTools\DevToolsServiceProvider::class), 'backpack.devtools::buttons.sidebar_item')
 
-@if($configs['backups'])
-<li class="nav-item"><a class="nav-link" href='{{ backpack_url('backup') }}'><i class="nav-icon la la-hdd-o"></i> {{ __("gemadigital::messages.backups") }}</a></li>
-@endif
+    @if($configs['authentication'])
+    <x-backpack::menu-dropdown nested="true" :title="__('gemadigital::messages.authentication')" icon="la la-group">
+        <x-backpack::menu-dropdown-item :title="__('gemadigital::messages.users')" icon="la la-user" :link="backpack_url('user')" />
+        <x-backpack::menu-dropdown-item :title="__('gemadigital::messages.roles')" icon="la la-group" :link="backpack_url('role')" />
+        <x-backpack::menu-dropdown-item :title="__('gemadigital::messages.permissions')" icon="la la-key" :link="backpack_url('permission')" />
+    </x-backpack::menu-dropdown>
+    @endif
 
-@if($configs['translations'])
-<li class="nav-item nav-dropdown">
-	<a class="nav-link nav-dropdown-toggle" href="#"><i class="nav-icon la la-globe"></i> {{ __("gemadigital::messages.translations") }}</a>
-	<ul class="nav-dropdown-items">
-		<li class="nav-item"><a class="nav-link" href="{{ backpack_url('language') }}"><i class="nav-icon la la-flag-checkered"></i> <span>{{ __("gemadigital::messages.languages") }}</span></a></li>
-		<li class="nav-item"><a class="nav-link" href="{{ backpack_url('language/texts') }}"><i class="nav-icon la la-language"></i> <span>{{ __("gemadigital::messages.site_texts") }}</span></a></li>
-	</ul>
-</li>
-@endif
+    @if($configs['filemanager'])
+    <x-backpack::menu-dropdown-item :title="__('backpack::crud.file_manager')" icon="la la-files-o" :link="backpack_url('elfinder')" />
+    @endif
 
-@if($configs['logs'])
-<li class='nav-item'><a class='nav-link' href='{{ backpack_url('log') }}'><i class='nav-icon la la-terminal'></i> {{ __("gemadigital::messages.logs") }}</a></li>
-@endif
+    @if($configs['pages'])
+    <x-backpack::menu-dropdown-item :title="__('gemadigital::messages.pages')" icon="la la-file-o" :link="backpack_url('page')" />
+    @endif
 
-@if($configs['pages'])
-<li class='nav-item'><a class='nav-link' href='{{ backpack_url('page') }}'><i class='nav-icon la la-file-o'></i> <span>{{ __("gemadigital::messages.pages") }}</span></a></li>
-@endif
+    @if($configs['translations'])
+    <x-backpack::menu-dropdown nested="true" :title="__('gemadigital::messages.translations')" icon="la la-globe">
+        <x-backpack::menu-dropdown-item :title="__('gemadigital::messages.languages')" icon="la la-flag-checkered" :link="backpack_url('language')" />
+        <x-backpack::menu-dropdown-item :title="__('gemadigital::messages.site_texts')" icon="la la-language" :link="backpack_url('language/texts')" />
+    </x-backpack::menu-dropdown>
+    @endif
 
-@if($configs['authentication'])
-<li class="nav-item nav-dropdown">
-	<a class="nav-link nav-dropdown-toggle" href="#"><i class="nav-icon la la-group"></i> {{ __("gemadigital::messages.authentication") }}</a>
-	<ul class="nav-dropdown-items">
-		<li class="nav-item"><a class="nav-link" href="{{ backpack_url('user') }}"><i class="nav-icon la la-user"></i> <span>{{ __("gemadigital::messages.users") }}</span></a></li>
-		<li class="nav-item"><a class="nav-link" href="{{ backpack_url('role') }}"><i class="nav-icon la la-group"></i> <span>{{ __("gemadigital::messages.roles") }}</span></a></li>
-		<li class="nav-item"><a class="nav-link" href="{{ backpack_url('permission') }}"><i class="nav-icon la la-key"></i> <span>{{ __("gemadigital::messages.permissions") }}</span></a></li>
-	</ul>
-</li>
-@endif
+    @if($configs['backups'])
+    <x-backpack::menu-dropdown-item :title="__('gemadigital::messages.backups')" icon="la la-hdd-o" :link="backpack_url('backup')" />
+    @endif
 
-@if($configs['settings'])
-<li class='nav-item'><a class='nav-link' href='{{ backpack_url('setting') }}'><i class='nav-icon la la-cog'></i> <span>{{ __("gemadigital::messages.settings") }}</span></a></li>
-@endif
+    @if($configs['logs'])
+    <x-backpack::menu-dropdown-item :title="__('gemadigital::messages.logs')" icon="la la-terminal" :link="backpack_url('log')" />
+    @endif
+
+    @if($configs['settings'])
+    <x-backpack::menu-dropdown-item :title="__('gemadigital::messages.settings')" icon="la la-cog" :link="backpack_url('setting')" />
+    @endif
+</x-backpack::menu-dropdown>

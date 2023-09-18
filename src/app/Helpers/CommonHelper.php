@@ -1,13 +1,15 @@
 <?php
 
-use App\Models\User;
 use GemaDigital\Framework\app\Helpers\QueryLogger;
+use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Response;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 
 if (! function_exists('user')) {
     function user(): ?User
@@ -24,24 +26,16 @@ if (! function_exists('debugMode')) {
 }
 
 if (! function_exists('api')) {
-    function api()
+    function api(): mixed
     {
         return app('App\Http\Controllers\Admin\APICrudController');
-    }
-}
-
-if (! function_exists('data_get_first')) {
-    function data_get_first($target, $key, $attribute, $default = 0)
-    {
-        $value = data_get($target, $key);
-
-        return count($value) ? $value[0]->{$attribute} : $default;
     }
 }
 
 if (! function_exists('hasRole')) {
     function hasRole(string $role): bool
     {
+        // @phpstan-ignore-next-line
         $user = backpack_user() ?: user();
 
         return $user && $user->hasRole($role);
@@ -51,6 +45,7 @@ if (! function_exists('hasRole')) {
 if (! function_exists('hasAnyPermissions')) {
     function hasAnyPermissions(string | array $permissions): bool
     {
+        // @phpstan-ignore-next-line
         $user = backpack_user() ?: user();
 
         if ($user) {
@@ -59,6 +54,7 @@ if (! function_exists('hasAnyPermissions')) {
             }
 
             foreach ($permissions as $permission) {
+                // @phpstan-ignore-next-line
                 if ($user->checkPermissionTo($permission, backpack_guard_name())) {
                     return true;
                 }
@@ -72,6 +68,7 @@ if (! function_exists('hasAnyPermissions')) {
 if (! function_exists('hasAllPermissions')) {
     function hasAllPermissions(string | array $permissions): bool
     {
+        // @phpstan-ignore-next-line
         $user = backpack_user() ?: user();
 
         if ($user) {
@@ -81,6 +78,7 @@ if (! function_exists('hasAllPermissions')) {
 
             $value = true;
             foreach ($permissions as $permission) {
+                // @phpstan-ignore-next-line
                 $value &= $user->checkPermissionTo($permission, backpack_guard_name());
             }
 
@@ -149,7 +147,7 @@ if (! function_exists('is')) {
 if (! function_exists('aurl')) {
     function aurl(string $disk, string $path): string
     {
-        return Str::startsWith($path, 'http') ? $path : Storage::disk($disk)->url($path);
+        return str_starts_with($path, 'http') ? $path : Storage::disk($disk)->url($path);
     }
 }
 
@@ -209,7 +207,7 @@ if (! function_exists('json_response')) {
 }
 
 if (! function_exists('json_response_raw')) {
-    function json_response_raw(mixed $raw = null, int $code = 0, int $status = 200, mixed $errors = null)
+    function json_response_raw(mixed $raw = null, int $code = 0, int $status = 200, mixed $errors = null): Response
     {
         $response = [
             'code' => $code,
@@ -273,7 +271,7 @@ if (! function_exists('sized_image')) {
 if (! function_exists('__fallback')) {
     function __fallback(string $key, ?string $fallback = null, ?string $locale = null, ?array $replace = []): ?string
     {
-        if (\Illuminate\Support\Facades\Lang::has($key, $locale)) {
+        if (Lang::has($key, $locale)) {
             return trans($key, $replace, $locale);
         }
 
@@ -284,7 +282,7 @@ if (! function_exists('__fallback')) {
 if (! function_exists('get_class_name')) {
     function get_class_name(string $object): string
     {
-        return (new \ReflectionClass($object))->getShortName();
+        return (new ReflectionClass($object))->getShortName();
     }
 }
 
@@ -297,7 +295,7 @@ if (! function_exists('memoize')) {
         {
             function __construct(
                 protected $target,
-                protected &$memo,
+                protected  &$memo,
             ) {}
 
             function __call($method, $params)

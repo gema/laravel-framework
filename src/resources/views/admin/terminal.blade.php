@@ -1,4 +1,4 @@
-@extends('backpack::blank')
+@extends('backpack.theme-tabler::blank')
 
 @section('after_styles')
 <style media="screen">
@@ -93,7 +93,6 @@
 
                     <div class="form-group">
                         <label class="required">{{ trans('gemadigital::messages.command') }}</label>
-                        <hr />
                         <input id="cmd" required class="form-control" type="text" name="cmd" value="">
                     </div>
 

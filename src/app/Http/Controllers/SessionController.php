@@ -2,9 +2,9 @@
 
 namespace GemaDigital\Framework\app\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Session;
+use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Session;
 
 class SessionController extends Controller
 {

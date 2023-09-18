@@ -2,14 +2,14 @@
 
 namespace GemaDigital\Framework\app\Http\Controllers\Admin;
 
-use File;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Str;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 
 class BuildController extends Controller
 {
-    public function build(Request $request)
+    public function build(Request $request): string | false | null
     {
         $data = [];
         $classList = config('gemadigital.build.classes');
@@ -28,12 +28,12 @@ class BuildController extends Controller
         return $this->shellExec();
     }
 
-    public function save($data)
+    public function save(mixed $data): int | bool
     {
         return File::put(config('gemadigital.build.path'), json_encode($data));
     }
 
-    public function shellExec()
+    public function shellExec(): string | false | null
     {
         return shell_exec('npm run build');
     }

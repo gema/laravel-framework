@@ -2,8 +2,8 @@
 
 namespace GemaDigital\Framework\app\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use Session;
+use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Session;
 
 class LangController extends Controller
 {

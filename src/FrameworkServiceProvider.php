@@ -41,21 +41,6 @@ class FrameworkServiceProvider extends ServiceProvider
 
         // Blade directives
 
-        // SVG
-        \Blade::directive('svg', function ($arguments) {
-            list($path, $class, $style) = array_pad(explode(',', trim($arguments.',,', '() ')), 2, '');
-            $path = trim($path, "' ");
-            $class = trim($class, "' ");
-            $style = trim($style, "' ");
-
-            $svg = new \DOMDocument();
-            $svg->load(public_path($path));
-            $svg->documentElement->setAttribute('class', $class);
-            $svg->documentElement->setAttribute('style', $style);
-
-            return $svg->saveXML($svg->documentElement);
-        });
-
         // Is (Role, Permission)
         \Blade::directive('is', function ($roles, $permissions = null) {
             return "<?php if (is($roles, $permissions)) { ?>";
@@ -100,26 +85,11 @@ class FrameworkServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        // Register the service the package provides.
-        $this->app->singleton('framework', function ($app) {
-            return new Framework();
-        });
-
         // register all configs
         $this->loadConfigs();
 
         // register the helper functions
         $this->loadHelpers();
-    }
-
-    /**
-     * Get the services provided by the provider.
-     *
-     * @return array
-     */
-    public function provides()
-    {
-        return ['framework'];
     }
 
     /**
@@ -162,16 +132,6 @@ class FrameworkServiceProvider extends ServiceProvider
      */
     public function loadConfigs()
     {
-        // Framework config
         $this->mergeConfigFrom(__DIR__.'/config/framework.php', 'gemadigital');
-
-        // Services config
-        $this->mergeConfigFrom(__DIR__.'/config/services.php', 'services');
-
-        // Enums config
-        $this->mergeConfigFrom(__DIR__.'/config/enums.php', 'enums');
-
-        // File Systems config
-        $this->mergeConfigFrom(__DIR__.'/config/filesystems.php', 'filesystems');
     }
 }

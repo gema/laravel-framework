@@ -3,7 +3,7 @@
 namespace GemaDigital\Framework\app\Http\Controllers\Admin;
 
 use Illuminate\Routing\Controller;
-use Session;
+use Illuminate\Support\Facades\Session;
 
 class ViewAsController extends Controller
 {
@@ -13,7 +13,7 @@ class ViewAsController extends Controller
             abort(403);
         }
 
-        if ($role != 'admin') {
+        if ($role !== 'admin') {
             Session::put('role', $role);
         } else {
             $this->clearAll();
@@ -29,7 +29,7 @@ class ViewAsController extends Controller
             abort(403);
         }
 
-        if ($permission != 'all') {
+        if ($permission !== 'all') {
             $permissions = Session::get('permissions', []);
 
             if ($state) {

@@ -32,7 +32,10 @@ class UserCrudController extends OriginalUserCrudController
             'name' => 'status',
             'label' => __('Status'),
             'type' => 'select_from_array',
-            'options' => EnumHelper::translate('user.status'),
+            'options' => [
+                0 => ucfirst(__('active')),
+                1 => ucfirst(__('inactive')),
+            ],
             'allows_null' => false,
         ])->afterField('phone');
     }

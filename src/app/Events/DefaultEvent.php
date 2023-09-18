@@ -2,13 +2,13 @@
 
 namespace GemaDigital\Framework\app\Events;
 
-use Auth;
 use Carbon\Carbon;
 use GemaDigital\Framework\app\Events\SerializesEvents;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Auth;
 
 abstract class DefaultEvent
 {

@@ -2,8 +2,8 @@
 
 namespace GemaDigital\Framework\app\Helpers;
 
-use File;
-use Str;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 
 class FileHelper
 {

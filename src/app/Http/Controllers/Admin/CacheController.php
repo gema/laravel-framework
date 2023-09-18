@@ -2,43 +2,44 @@
 
 namespace GemaDigital\Framework\app\Http\Controllers\Admin;
 
-use Artisan;
-use Cache;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Cache;
 
 class CacheController extends CrudController
 {
-    public function flush(Request $request)
+    public function flush(Request $request): Response
     {
         return json_status(Cache::flush());
     }
 
-    public function config(Request $request)
+    public function config(Request $request): Response
     {
         return json_status(! Artisan::call('config:cache'));
     }
 
-    public function configClear(Request $request)
+    public function configClear(Request $request): Response
     {
         return json_status(! Artisan::call('config:clear'));
     }
 
-    public function route(Request $request)
+    public function route(Request $request): Response
     {
         return json_status(! Artisan::call('route:cache'));
     }
 
-    public function routeClear(Request $request)
+    public function routeClear(Request $request): Response
     {
         return json_status(! Artisan::call('route:clear'));
     }
 
-    public function view(Request $request)
+    public function view(Request $request): Response
     {
         return json_status(! Artisan::call('view:cache'));
     }
 
-    public function viewClear(Request $request)
+    public function viewClear(Request $request): Response
     {
         return json_status(! Artisan::call('view:clear'));
     }

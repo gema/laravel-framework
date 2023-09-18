@@ -42,7 +42,8 @@
         "phpunit/phpunit": "^10.0",
         "spatie/laravel-ignition": "^2.0",
         "zanysoft/laravel-zip": "^2.0",
-        "rector/rector": "^0.18.0"
+        "rector/rector": "^0.18.0",
+        "nunomaduro/larastan": "^2.6"
     },
     "repositories": [
         {
@@ -72,6 +73,11 @@
                 "Framework": "GemaDigital\\Framework\\Facades\\Framework"
             }
         }
+    },
+    "scripts": {
+        "analyse": [
+            "vendor/bin/phpstan analyse src/app"
+        ]
     },
     "suggest": {
         "league/flysystem-aws-s3-v3": "Required to connect to AWS S3 or a Digital Ocean Space.",

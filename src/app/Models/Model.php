@@ -7,29 +7,6 @@ use \Illuminate\Database\Eloquent\Model as OriginalModel;
 class Model extends OriginalModel
 {
     /**
-     * Scopes.
-     */
-    public static function findById(string $id)
-    {
-        return static::where('id', $id)->firstOrFail();
-    }
-
-    public function scopePublished($query)
-    {
-        return $query->where('status', 'publish');
-    }
-
-    public function scopeActive($query)
-    {
-        return $query->where('active', true);
-    }
-
-    public function scopeOrdered($query)
-    {
-        return $query->orderBy('lft', 'ASC');
-    }
-
-    /**
      * Events Helper.
      */
     protected static function booted()

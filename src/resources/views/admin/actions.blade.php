@@ -1,4 +1,4 @@
-@extends('backpack::blank')
+@extends('backpack.theme-tabler::blank')
 
 @php
   $breadcrumbs = [

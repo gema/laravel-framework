@@ -4,7 +4,7 @@ namespace GemaDigital\Framework\app\Console\Commands;
 
 use Carbon\Carbon;
 use Illuminate\Console\Command;
-use ZanySoft\Zip\Zip;
+use ZanySoft\Zip\Facades\Zip;
 
 class package extends Command
 {

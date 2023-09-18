@@ -2,6 +2,7 @@
 
 return [
     'admin_actions' => 'Acções Administrativas',
+    'extras' => 'Extras',
     'admin' => 'Admin',
     'backups' => 'Backups',
     'translations' => 'Traduções',

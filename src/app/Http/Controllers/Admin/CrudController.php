@@ -3,13 +3,12 @@
 namespace GemaDigital\Framework\app\Http\Controllers\Admin;
 
 use Backpack\CRUD\app\Http\Controllers\CrudController as OriginalCrudController;
+use Backpack\CRUD\app\Library\CrudPanel\CrudPanel;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
-use GemaDigital\Framework\app\Helpers\HandleDropzoneUploadHelper;
+use Illuminate\Database\Eloquent\Model;
 
 class CrudController extends OriginalCrudController
 {
-    use HandleDropzoneUploadHelper;
-
     public const CREATED = 'create';
     public const CLONED = 'clone';
     public const DESTROYED = 'destroy';
@@ -22,26 +21,25 @@ class CrudController extends OriginalCrudController
         parent::setupConfigurationForCurrentOperation();
 
         // Check authorization for CRUD
-        $this->crud->id = $this->crud->getCurrentEntryId();
+        $id = $this->crud->getCurrentEntryId();
 
-        if ($this->crud->id && ! $this->authorize($this->crud->id)) {
+        if ($id && ! $this->authorize($id)) {
             abort(401);
         }
     }
 
-    public function authorize($id)
+    public function authorize(int $id): bool
     {
         return true;
     }
 
-    public function wantsJSON()
+    public function wantsJSON(): bool
     {
-        return request() && strpos(request()->headers->get('accept'), 'application/json') === 0;
+        return strpos(request()->headers->get('accept'), 'application/json') === 0;
     }
 
     private $i = 0;
-
-    public function separator($title = null)
+    public function separator(?string $title = null): CrudPanel
     {
         return CRUD::addField([
             'name' => 'separator'.$this->i++,
@@ -53,20 +51,20 @@ class CrudController extends OriginalCrudController
         ]);
     }
 
-    public function getEntryID()
+    public function getEntryID(): int
     {
         preg_match('/\w+\/(\d+)/', $_SERVER['REQUEST_URI'], $matches);
 
         return $matches && sizeof($matches) > 1 ? intval($matches[1]) : null;
     }
 
-    public function getEntry()
+    public function getEntry(): Model
     {
         return $this->crud->model::where('id', $this->getEntryID())->first() ?: null;
     }
 
     // Overrides to deal with cache
-    public function sync($operation)
+    public function sync(string $operation)
     {
     }
 }

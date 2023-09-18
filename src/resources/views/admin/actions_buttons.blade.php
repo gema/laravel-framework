@@ -1,5 +1,5 @@
 <div>
-    <button path="{{ url('/admin/cache/flush') }}" success="{{ __("gemadigital::actions.cache.clear.success") }}" class="btn btn-primary ajax">{{ __("gemadigital::actions.cache.clear.message") }}</button>
+    <button path="{{ url('/admin/cache/flush') }}" success="{{ __("gemadigital::actions.cache.clear.success") }}" class="btn btn-default ajax">{{ __("gemadigital::actions.cache.clear.message") }}</button>
     <br />
     <div style="margin-bottom: 5px;"></div>
     <button path="{{ url('/admin/cache/config') }}" success="{{ __("gemadigital::actions.cache.config.success") }}" class="btn btn-default ajax">{{ __("gemadigital::actions.cache.config.message") }}</button>
