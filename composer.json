@@ -31,7 +31,8 @@
         "laravel/socialite": "^5.0",
         "laravel/tinker": "^2.0",
         "spatie/laravel-cookie-consent": "^3.2",
-        "spatie/laravel-translatable": "^6.1"
+        "spatie/laravel-translatable": "^6.1",
+        "backpack/language-switcher": "^1.0"
     },
     "require-dev": {
         "backpack/generators": "^4.0",
