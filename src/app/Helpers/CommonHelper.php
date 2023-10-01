@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\User;
 use GemaDigital\Framework\app\Helpers\QueryLogger;
 use Illuminate\Http\Response;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -12,7 +11,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 
 if (! function_exists('user')) {
-    function user(): ?User
+    function user()
     {
         return Auth::user();
     }
