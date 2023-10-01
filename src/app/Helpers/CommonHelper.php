@@ -191,7 +191,7 @@ if (! function_exists('json_response')) {
                 'exception' => $exception,
                 'query' => [
                     'count' => count($queries),
-                    'time' => collect($queries)->pluck('time')->sum(),
+                    'time' => (float) number_format(collect($queries)->pluck('time')->sum(), 2),
                     'list' => $queries,
                 ],
                 'post' => request()->request->all(),
