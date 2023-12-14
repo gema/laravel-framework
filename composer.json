@@ -44,7 +44,7 @@
         "spatie/laravel-ignition": "^2.0",
         "zanysoft/laravel-zip": "^2.0",
         "rector/rector": "^0.18.0",
-        "nunomaduro/larastan": "^2.6"
+        "larastan/larastan": "^2.7"
     },
     "repositories": [
         {
