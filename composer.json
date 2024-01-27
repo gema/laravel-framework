@@ -22,6 +22,7 @@
         "backpack/pro": "^2.0",
         "backpack/filemanager": "^3.0",
         "backpack/langfilemanager": "^5.0",
+        "backpack/language-switcher": "^2.0",
         "backpack/logmanager": "^5.0",
         "backpack/pagemanager": "^3.0",
         "backpack/permissionmanager": "^7.0",
@@ -31,8 +32,7 @@
         "laravel/socialite": "^5.0",
         "laravel/tinker": "^2.0",
         "spatie/laravel-cookie-consent": "^3.2",
-        "spatie/laravel-translatable": "^6.1",
-        "backpack/language-switcher": "^1.0"
+        "spatie/laravel-translatable": "^6.1"
     },
     "require-dev": {
         "backpack/generators": "^4.0",
@@ -43,7 +43,7 @@
         "phpunit/phpunit": "^10.0",
         "spatie/laravel-ignition": "^2.0",
         "zanysoft/laravel-zip": "^2.0",
-        "rector/rector": "^0.18.0",
+        "rector/rector": "^0.19",
         "larastan/larastan": "^2.7"
     },
     "repositories": [
