@@ -22,7 +22,7 @@ class FrameworkServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         $this->loadTranslationsFrom(__DIR__.'/resources/lang', 'gemadigital');
         $this->loadViewsFrom(__DIR__.'/resources/views', 'gemadigital');
@@ -83,7 +83,7 @@ class FrameworkServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function register()
+    public function register(): void
     {
         // register all configs
         $this->loadConfigs();
@@ -122,7 +122,7 @@ class FrameworkServiceProvider extends ServiceProvider
     /**
      * Load helper methods, for convenience.
      */
-    public function loadHelpers()
+    public function loadHelpers(): void
     {
         require_once __DIR__.'/app/Helpers/CommonHelper.php';
     }
@@ -130,7 +130,7 @@ class FrameworkServiceProvider extends ServiceProvider
     /**
      * Load configs methods, for convenience.
      */
-    public function loadConfigs()
+    public function loadConfigs(): void
     {
         $this->mergeConfigFrom(__DIR__.'/config/framework.php', 'gemadigital');
     }
