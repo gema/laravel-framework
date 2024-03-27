@@ -8,22 +8,16 @@ class run extends Command
 {
     /**
      * The name and signature of the console command.
-     *
-     * @var string
      */
-    protected $signature = 'run';
+    protected string $signature = 'run';
 
     /**
      * The console command description.
-     *
-     * @var string
      */
-    protected $description = 'artisan serve + npm run watch';
+    protected string $description = 'artisan serve + npm run watch';
 
     /**
      * Create a new command instance.
-     *
-     * @return void
      */
     public function __construct()
     {
@@ -32,10 +26,8 @@ class run extends Command
 
     /**
      * Execute the console command.
-     *
-     * @return mixed
      */
-    public function handle()
+    public function handle(): void
     {
         $app_name = env('APP_NAME');
         $url = parse_url(env('APP_URL'));

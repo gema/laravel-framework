@@ -4,7 +4,7 @@ namespace GemaDigital\Framework\app\Helpers;
 
 class UnityHelper
 {
-    public static function stripTags($item)
+    public static function stripTags(mixed $item): mixed
     {
         if (is_array($item)) {
             foreach ($item as $key => $value) {

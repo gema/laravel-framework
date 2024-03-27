@@ -4,23 +4,22 @@ namespace GemaDigital\Framework\app\Http\Controllers\Admin;
 
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 use Backpack\PermissionManager\app\Http\Controllers\UserCrudController as OriginalUserCrudController;
-use GemaDigital\Framework\app\Helpers\EnumHelper;
 
 class UserCrudController extends OriginalUserCrudController
 {
-    public function setup()
+    public function setup(): void
     {
         parent::setup();
 
         CRUD::enableExportButtons();
     }
 
-    public function setupListOperation()
+    public function setupListOperation(): void
     {
         parent::setupListOperation();
     }
 
-    public function setupFields()
+    public function setupFields(): void
     {
         CRUD::addField([
             'label' => __('Phone'),
@@ -40,14 +39,14 @@ class UserCrudController extends OriginalUserCrudController
         ])->afterField('phone');
     }
 
-    public function setupCreateOperation()
+    public function setupCreateOperation(): void
     {
         parent::setupCreateOperation();
 
         $this->setupFields();
     }
 
-    public function setupUpdateOperation()
+    public function setupUpdateOperation(): void
     {
         parent::setupUpdateOperation();
 
@@ -55,7 +54,7 @@ class UserCrudController extends OriginalUserCrudController
     }
 
     // Overrides to deal with cache
-    public function sync($operation)
+    public function sync($operation): void
     {
     }
 }

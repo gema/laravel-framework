@@ -6,7 +6,7 @@ use Illuminate\Database\Events\QueryExecuted;
 
 class QueryLogger
 {
-    private static $queryLogs = [];
+    private static array $queryLogs = [];
 
     /**
      * Logs a query

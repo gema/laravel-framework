@@ -7,7 +7,7 @@ trait EventMethods
     /**
      * Boot the event methods.
      */
-    protected static function bootEventMethods()
+    protected static function bootEventMethods(): void
     {
         /*
          * Retrieve

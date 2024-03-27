@@ -3,14 +3,14 @@
 namespace GemaDigital\Framework\app\Models\Traits;
 
 use Carbon\Carbon;
-use Config;
-use Image;
-use Storage;
-use Str;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+use Intervention\Image\Image;
 
 trait SaveMedia
 {
-    public function saveImage($model, $value, $path, $name, $sizes, $quality = 85, $attribute_name = 'image', $disk = 'uploads', $deleteOld = true)
+    public function saveImage($model, string $value, string $path, string $name, array $sizes, int $quality = 85, string $attribute_name = 'image', string $disk = 'uploads', bool $deleteOld = true)
     {
         // Save old name in case of delete
         $oldFile = $model->{$attribute_name};
@@ -70,7 +70,7 @@ trait SaveMedia
         return $model->attributes[$attribute_name] = $this->cleanPath($model->attributes[$attribute_name], $disk);
     }
 
-    public function deleteImage($disk, $path, $filename, $sizes)
+    public function deleteImage(string $disk, string $path, string $filename, array $sizes): void
     {
         // Get filename only
         $filename = basename($filename);
@@ -86,7 +86,7 @@ trait SaveMedia
         }
     }
 
-    public function cleanPath($path, $disk)
+    public function cleanPath(string $path, string $disk): string
     {
         // Remove URL
         $path = str_replace(Config::get('app.url'), '', $path);
@@ -102,7 +102,7 @@ trait SaveMedia
         return $path;
     }
 
-    public function uploadMultipleFilesToDiskKeepFileName($value, $attribute_name, $disk, $destination_path)
+    public function uploadMultipleFilesToDiskKeepFileName(string $attribute_name, string $disk, string $destination_path): void
     {
         $request = request();
         $attribute_value = (array) $this->{$attribute_name};
@@ -115,7 +115,7 @@ trait SaveMedia
             foreach ($files_to_clear as $key => $filename) {
                 Storage::disk($disk)->delete($filename);
                 $attribute_value = array_where($attribute_value, function ($value, $key) use ($filename) {
-                    return $value != $filename;
+                    return $value !== $filename;
                 });
             }
         }

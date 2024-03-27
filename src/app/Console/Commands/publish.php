@@ -8,17 +8,13 @@ class publish extends Command
 {
     /**
      * The name and signature of the console command.
-     *
-     * @var string
      */
-    protected $signature = 'boilerplate:publish';
+    protected string $signature = 'boilerplate:publish';
 
     /**
      * The console command description.
-     *
-     * @var string
      */
-    protected $description = 'Publishes the framework assets';
+    protected string $description = 'Publishes the framework assets';
 
     /**
      * Create a new command instance.
@@ -32,10 +28,8 @@ class publish extends Command
 
     /**
      * Execute the console command.
-     *
-     * @return mixed
      */
-    public function handle()
+    public function handle(): void
     {
         if ($this->confirm('Do you wish to publish framework assets?')) {
             $force = $this->confirm('Do you want to force the replace of older assets?');

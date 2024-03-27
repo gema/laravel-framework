@@ -4,7 +4,7 @@ namespace GemaDigital\Framework\app\Events;
 
 trait SerializesEvents
 {
-    public function toArray()
+    public function toArray(): array
     {
         return [
             'data' => (array) $this,
@@ -13,7 +13,7 @@ trait SerializesEvents
         ];
     }
 
-    public function toJson()
+    public function toJson(): string
     {
         return json_encode($this->toArray());
     }

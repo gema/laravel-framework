@@ -1,0 +1,13 @@
+includes:
+    - ./vendor/larastan/larastan/extension.neon
+
+parameters:
+
+    paths:
+        - src/app/
+        - src/config/
+        - src/database/
+        - src/resources/
+        - src/routes/
+
+    level: 5

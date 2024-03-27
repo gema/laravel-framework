@@ -9,22 +9,16 @@ class duplicate extends Command
 {
     /**
      * The name and signature of the console command.
-     *
-     * @var string
      */
-    protected $signature = 'boilerplate:duplicate';
+    protected string $signature = 'boilerplate:duplicate';
 
     /**
      * The console command description.
-     *
-     * @var string
      */
-    protected $description = 'duplicates a new project on a zip';
+    protected string $description = 'duplicates a new project on a zip';
 
     /**
      * Create a new command instance.
-     *
-     * @return void
      */
     public function __construct()
     {
@@ -33,16 +27,13 @@ class duplicate extends Command
 
     /**
      * Execute the console command.
-     *
-     * @return mixed
      */
-    public function handle()
+    public function handle(): void
     {
         $appName = preg_replace('/[^0-9a-zA-Z_-]/', '', preg_replace("/\s/", '-', strtolower(env('APP_NAME'))));
         $appDate = Carbon::now()->format('YmdHis');
 
         $zipName = "$appName-$appDate.zip";
-        $zipPath = base_path($zipName);
 
         $this->info("Packaging $appName to '$zipName'");
 

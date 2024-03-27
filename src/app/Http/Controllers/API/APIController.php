@@ -7,7 +7,7 @@ use Illuminate\Routing\Controller;
 class APIController extends Controller
 {
     // CURL Helper
-    public function curl_request($url, $post = null)
+    public function curl_request(string $url, array $post = null): string | bool
     {
         $curl = curl_init();
 
@@ -37,7 +37,7 @@ class APIController extends Controller
     }
 
     // Safe decode json
-    public function json_decode_safe($data)
+    public function json_decode_safe(mixed $data): mixed
     {
         $json = json_decode($data);
 

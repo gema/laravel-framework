@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use GemaDigital\Framework\app\Events\SerializesEvents;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
+use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Auth;
@@ -17,9 +18,9 @@ abstract class DefaultEvent
     use SerializesModels;
     use SerializesEvents;
 
-    public $channel;
-    public $user;
-    public $timestamp;
+    public string $channel;
+    public ?Authenticatable $user;
+    public Carbon $timestamp;
 
     /**
      * Create a new event instance.
@@ -33,29 +34,29 @@ abstract class DefaultEvent
         $this->timestamp = Carbon::now();
     }
 
-    public function broadcastAs()
+    public function broadcastAs(): string
     {
         return (new \ReflectionClass($this))->getShortName();
     }
 
-    public function broadcastOn()
+    public function broadcastOn(): Channel
     {
         return new Channel($this->channel);
     }
 
-    public function getChannel()
+    public function getChannel(): string
     {
         return $this->channel;
     }
 
-    public function getUserData()
+    public function getUserData(): ?Authenticatable
     {
         $user = Auth::user();
 
         return $user ? (object) $user->only(['id', 'name', 'email']) : null;
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return json_encode([
             get_class_name($this),

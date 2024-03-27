@@ -2,12 +2,14 @@
 
 namespace GemaDigital\Framework\app\Http\Controllers\Admin;
 
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Controller;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Session;
 
 class ViewAsController extends Controller
 {
-    public function viewAsRole($role)
+    public function viewAsRole(string $role): Redirector | RedirectResponse
     {
         if (! admin()) {
             abort(403);
@@ -23,7 +25,7 @@ class ViewAsController extends Controller
         return redirect(url()->previous());
     }
 
-    public function viewAsPermission($permission, $state)
+    public function viewAsPermission(string $permission, $state): Redirector | RedirectResponse
     {
         if (! admin()) {
             abort(403);
@@ -50,7 +52,7 @@ class ViewAsController extends Controller
         return redirect(url()->previous());
     }
 
-    private function clearAll()
+    private function clearAll(): void
     {
         Session::remove('role');
         Session::remove('permissions');

@@ -16,7 +16,7 @@ class CrudController extends OriginalCrudController
     public const UPDATED = 'update';
 
     // Hack to access setup without touching the setup()
-    public function setupConfigurationForCurrentOperation()
+    public function setupConfigurationForCurrentOperation(): void
     {
         parent::setupConfigurationForCurrentOperation();
 
@@ -64,7 +64,7 @@ class CrudController extends OriginalCrudController
     }
 
     // Overrides to deal with cache
-    public function sync(string $operation)
+    public function sync(string $operation): void
     {
     }
 }

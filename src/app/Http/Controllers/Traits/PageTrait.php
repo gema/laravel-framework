@@ -3,18 +3,20 @@
 namespace GemaDigital\Framework\app\Http\Controllers\Traits;
 
 use Cache;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Session;
 
 trait PageTrait
 {
-    public function index($slug = 'home', $sub = null)
+    public function index(string $slug = 'home', string $sub = null): View | Factory
     {
         $locale = Session::get('locale', \Config::get('app.locale'));
 
         $this->data = Cache::rememberForever("page_{$slug}_{$locale}", function () use ($slug) {
             $page = class_exists(\App\Models\Page::class)
-                ? \App\Models\Page::findBySlug($slug)
-                : \Backpack\PageManager\app\Models\Page::findBySlug($slug);
+            ? \App\Models\Page::findBySlug($slug)
+            : \Backpack\PageManager\app\Models\Page::findBySlug($slug);
 
             if (! $page) {
                 abort(404);
@@ -42,7 +44,7 @@ trait PageTrait
         return view('pages.'.$this->data['page']->template, $this->data);
     }
 
-    public function common()
+    public function common(): array
     {
         return [];
     }

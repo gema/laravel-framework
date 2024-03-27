@@ -8,22 +8,16 @@ class install extends Command
 {
     /**
      * The name and signature of the console command.
-     *
-     * @var string
      */
-    protected $signature = 'boilerplate:install';
+    protected string $signature = 'boilerplate:install';
 
     /**
      * The console command description.
-     *
-     * @var string
      */
-    protected $description = 'Set up Laravel project';
+    protected string $description = 'Set up Laravel project';
 
     /**
      * Create a new command instance.
-     *
-     * @return void
      */
     public function __construct()
     {
@@ -32,10 +26,8 @@ class install extends Command
 
     /**
      * Execute the console command.
-     *
-     * @return mixed
      */
-    public function handle()
+    public function handle(): void
     {
         $app = env('APP_NAME');
         $host = env('DB_HOST');
