@@ -6,7 +6,6 @@ use Carbon\Carbon;
 use GemaDigital\Framework\app\Events\SerializesEvents;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
-use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Auth;
@@ -19,7 +18,7 @@ abstract class DefaultEvent
     use SerializesEvents;
 
     public string $channel;
-    public ?Authenticatable $user;
+    public ?object $user;
     public Carbon $timestamp;
 
     /**
@@ -49,7 +48,7 @@ abstract class DefaultEvent
         return $this->channel;
     }
 
-    public function getUserData(): ?Authenticatable
+    public function getUserData(): ?object
     {
         $user = Auth::user();
 
