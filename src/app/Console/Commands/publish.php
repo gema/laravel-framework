@@ -9,12 +9,12 @@ class publish extends Command
     /**
      * The name and signature of the console command.
      */
-    protected string $signature = 'boilerplate:publish';
+    protected $signature = 'boilerplate:publish';
 
     /**
      * The console command description.
      */
-    protected string $description = 'Publishes the framework assets';
+    protected $description = 'Publishes the framework assets';
 
     /**
      * Create a new command instance.

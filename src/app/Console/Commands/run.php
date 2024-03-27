@@ -9,12 +9,12 @@ class run extends Command
     /**
      * The name and signature of the console command.
      */
-    protected string $signature = 'run';
+    protected $signature = 'run';
 
     /**
      * The console command description.
      */
-    protected string $description = 'artisan serve + npm run watch';
+    protected $description = 'artisan serve + npm run watch';
 
     /**
      * Create a new command instance.

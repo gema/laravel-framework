@@ -9,12 +9,12 @@ class install extends Command
     /**
      * The name and signature of the console command.
      */
-    protected string $signature = 'boilerplate:install';
+    protected $signature = 'boilerplate:install';
 
     /**
      * The console command description.
      */
-    protected string $description = 'Set up Laravel project';
+    protected $description = 'Set up Laravel project';
 
     /**
      * Create a new command instance.

@@ -10,12 +10,12 @@ class package extends Command
     /**
      * The name and signature of the console command.
      */
-    protected string $signature = 'package';
+    protected $signature = 'package';
 
     /**
      * The console command description.
      */
-    protected string $description = 'Packages the app on a zip';
+    protected $description = 'Packages the app on a zip';
 
     /**
      * Create a new command instance.

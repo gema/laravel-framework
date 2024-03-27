@@ -10,12 +10,12 @@ class duplicate extends Command
     /**
      * The name and signature of the console command.
      */
-    protected string $signature = 'boilerplate:duplicate';
+    protected $signature = 'boilerplate:duplicate';
 
     /**
      * The console command description.
      */
-    protected string $description = 'duplicates a new project on a zip';
+    protected $description = 'duplicates a new project on a zip';
 
     /**
      * Create a new command instance.
