@@ -28,10 +28,7 @@ if($configs->values()->every(fn($value) => false)) return;
     @endif
 
     @if($configs['translations'])
-    <x-backpack::menu-dropdown nested="true" :title="__('gemadigital::messages.translations')" icon="la la-globe">
-        <x-backpack::menu-dropdown-item :title="__('gemadigital::messages.languages')" icon="la la-flag-checkered" :link="backpack_url('language')" />
-        <x-backpack::menu-dropdown-item :title="__('gemadigital::messages.site_texts')" icon="la la-language" :link="backpack_url('language/texts')" />
-    </x-backpack::menu-dropdown>
+    <x-backpack::menu-dropdown-item :title="__('gemadigital::messages.translations')" icon="la la-language" :link="backpack_url('translation-manager')" />
     @endif
 
     @if($configs['backups'])
