@@ -7,7 +7,9 @@ use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
+use ReflectionClass;
 
 abstract class DefaultEvent
 {
@@ -16,39 +18,47 @@ abstract class DefaultEvent
     use SerializesEvents;
     use SerializesModels;
 
-    public string $channel;
-
+    public array $channels;
     public ?object $user;
-
     public Carbon $timestamp;
 
     /**
      * Create a new event instance.
-     *
-     * @return void
      */
-    public function __construct(string $channel)
+    public function __construct(string|array $channels)
     {
-        $this->channel = $channel;
+        $this->channels = Arr::wrap($channels);
         $this->user = $this->getUserData();
         $this->timestamp = Carbon::now();
     }
 
+    /**
+     * Get the channels the event should broadcast on.
+     */
     public function broadcastAs(): string
     {
-        return (new \ReflectionClass($this))->getShortName();
+        return (new ReflectionClass($this))->getShortName();
     }
 
-    public function broadcastOn(): Channel|array
+    /**
+     * Get the channels the event should broadcast on.
+     */
+    public function broadcastOn(): array
     {
-        return new Channel($this->channel);
+        return array_map(fn (string $channel): Channel => new Channel($channel), $this->channels);
     }
 
-    public function getChannel(): string
+    /**
+     * Get the channels the event should broadcast on.
+     */
+    public function getChannels(): array
     {
-        return $this->channel;
+        return $this->channels;
     }
 
+    /**
+     * Get the user data.
+     */
     public function getUserData(): ?object
     {
         $user = Auth::user();
@@ -56,11 +66,16 @@ abstract class DefaultEvent
         return $user ? (object) $user->only(['id', 'name', 'email']) : null;
     }
 
+    /**
+     * Format the event for broadcast.
+     */
     public function __toString(): string
     {
+        $broadcastOn = $this->broadcastOn();
+
         return json_encode([
             get_class_name($this),
-            $this->broadcastOn()->name,
+            count($broadcastOn) === 1 ? $broadcastOn[0] : $broadcastOn,
             $this,
         ]);
     }
