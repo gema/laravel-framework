@@ -10,7 +10,7 @@ use Illuminate\Support\ServiceProvider;
 
 class FrameworkServiceProvider extends ServiceProvider
 {
-    protected $commands = [
+    protected array $commands = [
         \GemaDigital\Framework\app\Console\Commands\duplicate::class,
         \GemaDigital\Framework\app\Console\Commands\install::class,
         \GemaDigital\Framework\app\Console\Commands\package::class,
@@ -52,29 +52,6 @@ class FrameworkServiceProvider extends ServiceProvider
         Blade::directive('endis', function () {
             return '<?php } ?>';
         });
-
-        // Has (permissions)
-        Blade::directive('hasAll', function ($permissions) {
-            return "<?php if (hasAllPermissions($permissions)) { ?>";
-        });
-
-        Blade::directive('hasAny', function ($permissions) {
-            return "<?php if (hasAnyPermissions($permissions)) { ?>";
-        });
-
-        Blade::directive('has', function ($permission) {
-            return "<?php if (hasPermission($permission)) { ?>";
-        });
-
-        Blade::directive('elsehas', function () {
-            return '<?php } else { ?>';
-        });
-
-        Blade::directive('endhas', function () {
-            return '<?php } ?>';
-        });
-
-        Blade::component('gemadigital::components.responsive-picture', 'responsive-picture');
     }
 
     /**
