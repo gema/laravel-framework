@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 
 class BuildController extends Controller
 {
-    public function build(Request $request): string | false | null
+    public function build(Request $request): string|false|null
     {
         $data = [];
         $classList = config('gemadigital.build.classes');
@@ -28,12 +28,12 @@ class BuildController extends Controller
         return $this->shellExec();
     }
 
-    public function save(mixed $data): int | bool
+    public function save(mixed $data): int|bool
     {
         return File::put(config('gemadigital.build.path'), json_encode($data));
     }
 
-    public function shellExec(): string | false | null
+    public function shellExec(): string|false|null
     {
         return shell_exec('npm run build');
     }

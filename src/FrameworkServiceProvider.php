@@ -2,9 +2,10 @@
 
 namespace GemaDigital\Framework;
 
-use DB;
 use GemaDigital\Framework\app\Helpers\QueryLogger;
 use Illuminate\Database\Events\QueryExecuted;
+use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\ServiceProvider;
 
 class FrameworkServiceProvider extends ServiceProvider
@@ -19,8 +20,6 @@ class FrameworkServiceProvider extends ServiceProvider
 
     /**
      * Perform post-registration booting of services.
-     *
-     * @return void
      */
     public function boot(): void
     {
@@ -42,46 +41,44 @@ class FrameworkServiceProvider extends ServiceProvider
         // Blade directives
 
         // Is (Role, Permission)
-        \Blade::directive('is', function ($roles, $permissions = null) {
+        Blade::directive('is', function ($roles, $permissions = null) {
             return "<?php if (is($roles, $permissions)) { ?>";
         });
 
-        \Blade::directive('elseis', function () {
+        Blade::directive('elseis', function () {
             return '<?php } else { ?>';
         });
 
-        \Blade::directive('endis', function () {
+        Blade::directive('endis', function () {
             return '<?php } ?>';
         });
 
         // Has (permissions)
-        \Blade::directive('hasAll', function ($permissions) {
+        Blade::directive('hasAll', function ($permissions) {
             return "<?php if (hasAllPermissions($permissions)) { ?>";
         });
 
-        \Blade::directive('hasAny', function ($permissions) {
+        Blade::directive('hasAny', function ($permissions) {
             return "<?php if (hasAnyPermissions($permissions)) { ?>";
         });
 
-        \Blade::directive('has', function ($permission) {
+        Blade::directive('has', function ($permission) {
             return "<?php if (hasPermission($permission)) { ?>";
         });
 
-        \Blade::directive('elsehas', function () {
+        Blade::directive('elsehas', function () {
             return '<?php } else { ?>';
         });
 
-        \Blade::directive('endhas', function () {
+        Blade::directive('endhas', function () {
             return '<?php } ?>';
         });
 
-        \Blade::component('gemadigital::components.responsive-picture', 'responsive-picture');
+        Blade::component('gemadigital::components.responsive-picture', 'responsive-picture');
     }
 
     /**
      * Register any package services.
-     *
-     * @return void
      */
     public function register(): void
     {

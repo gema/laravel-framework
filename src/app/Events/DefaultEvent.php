@@ -3,7 +3,6 @@
 namespace GemaDigital\Framework\app\Events;
 
 use Carbon\Carbon;
-use GemaDigital\Framework\app\Events\SerializesEvents;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Foundation\Events\Dispatchable;
@@ -14,11 +13,13 @@ abstract class DefaultEvent
 {
     use Dispatchable;
     use InteractsWithSockets;
-    use SerializesModels;
     use SerializesEvents;
+    use SerializesModels;
 
     public string $channel;
+
     public ?object $user;
+
     public Carbon $timestamp;
 
     /**
@@ -38,7 +39,7 @@ abstract class DefaultEvent
         return (new \ReflectionClass($this))->getShortName();
     }
 
-    public function broadcastOn(): Channel
+    public function broadcastOn(): Channel|array
     {
         return new Channel($this->channel);
     }

@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Session;
 
 class SessionController extends Controller
 {
-    public function flush(Request $request): Redirector | RedirectResponse
+    public function flush(Request $request): Redirector|RedirectResponse
     {
         Session::flush();
 

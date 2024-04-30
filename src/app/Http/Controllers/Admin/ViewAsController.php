@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Session;
 
 class ViewAsController extends Controller
 {
-    public function viewAsRole(string $role): Redirector | RedirectResponse
+    public function viewAsRole(string $role): Redirector|RedirectResponse
     {
         if (! admin()) {
             abort(403);
@@ -25,7 +25,7 @@ class ViewAsController extends Controller
         return redirect(url()->previous());
     }
 
-    public function viewAsPermission(string $permission, $state): Redirector | RedirectResponse
+    public function viewAsPermission(string $permission, $state): Redirector|RedirectResponse
     {
         if (! admin()) {
             abort(403);
@@ -40,7 +40,7 @@ class ViewAsController extends Controller
                 unset($permissions[array_search($permission, $permissions)]);
             }
 
-            if (sizeof($permissions)) {
+            if (count($permissions)) {
                 Session::put('permissions', $permissions);
             } else {
                 Session::remove('permissions');

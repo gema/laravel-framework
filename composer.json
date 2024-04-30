@@ -44,7 +44,9 @@
         "phpunit/phpunit": "^11",
         "spatie/laravel-ignition": "^2.0",
         "rector/rector": "^1",
-        "larastan/larastan": "^2.7"
+        "larastan/larastan": "^2.7",
+        "orchestra/testbench": "^9.0",
+        "laravel/pint": "^1.15"
     },
     "repositories": [
         {

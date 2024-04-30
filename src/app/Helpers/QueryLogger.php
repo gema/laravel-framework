@@ -10,9 +10,6 @@ class QueryLogger
 
     /**
      * Logs a query
-     *
-     * @param QueryExecuted $log
-     * @return void
      */
     public static function log(QueryExecuted $log): void
     {
@@ -24,8 +21,6 @@ class QueryLogger
 
     /**
      * Get query Log
-     *
-     * @return array
      */
     public static function list(): array
     {

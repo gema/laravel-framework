@@ -10,9 +10,13 @@ use Illuminate\Database\Eloquent\Model;
 class CrudController extends OriginalCrudController
 {
     public const CREATED = 'create';
+
     public const CLONED = 'clone';
+
     public const DESTROYED = 'destroy';
+
     public const REORDERED = 'reorder';
+
     public const UPDATED = 'update';
 
     // Hack to access setup without touching the setup()
@@ -39,6 +43,7 @@ class CrudController extends OriginalCrudController
     }
 
     private $i = 0;
+
     public function separator(?string $title = null): CrudPanel
     {
         return CRUD::addField([
@@ -55,7 +60,7 @@ class CrudController extends OriginalCrudController
     {
         preg_match('/\w+\/(\d+)/', $_SERVER['REQUEST_URI'], $matches);
 
-        return $matches && sizeof($matches) > 1 ? intval($matches[1]) : null;
+        return $matches && count($matches) > 1 ? intval($matches[1]) : null;
     }
 
     public function getEntry(): Model

@@ -51,7 +51,9 @@ trait SaveMedia
 
             foreach ($sizes as $size) {
                 if ($image->width() > $size) {
-                    $image->resize($size, null, function ($c) {$c->aspectRatio();});
+                    $image->resize($size, null, function ($c) {
+                        $c->aspectRatio();
+                    });
                 }
 
                 Storage::disk($disk)->put("$path/$size/$filename", $image->stream($format, $quality));

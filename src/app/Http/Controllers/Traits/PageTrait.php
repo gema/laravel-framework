@@ -9,7 +9,7 @@ use Session;
 
 trait PageTrait
 {
-    public function index(string $slug = 'home', string $sub = null): View | Factory
+    public function index(string $slug = 'home', ?string $sub = null): View|Factory
     {
         $locale = Session::get('locale', \Config::get('app.locale'));
 

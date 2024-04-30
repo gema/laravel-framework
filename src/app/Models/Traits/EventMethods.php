@@ -75,7 +75,7 @@ trait EventMethods
     /**
      * Call method if exists.
      */
-    protected static function call($element, string $method, string $extra = null): void
+    protected static function call($element, string $method, ?string $extra = null): void
     {
         if (method_exists($element, $method)) {
             $element->{$method}($element, $extra);

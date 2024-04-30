@@ -7,7 +7,7 @@ use Illuminate\Routing\Controller;
 class APIController extends Controller
 {
     // CURL Helper
-    public function curl_request(string $url, array $post = null): string | bool
+    public function curl_request(string $url, ?array $post = null): string|bool
     {
         $curl = curl_init();
 

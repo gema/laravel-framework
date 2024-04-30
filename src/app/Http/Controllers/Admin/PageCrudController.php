@@ -29,7 +29,7 @@ class PageCrudController extends OriginalPageCrudController
         CRUD::modifyField('slug', ['attributes' => ['readonly' => 'readonly']]);
     }
 
-    public function update(): JsonResponse | RedirectResponse
+    public function update(): JsonResponse|RedirectResponse
     {
         $result = parent::update();
 

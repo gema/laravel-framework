@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Session;
 
 class LangController extends Controller
 {
-    public function setLang(string $locale): Redirector | RedirectResponse
+    public function setLang(string $locale): Redirector|RedirectResponse
     {
         Session::put('locale', $locale);
 

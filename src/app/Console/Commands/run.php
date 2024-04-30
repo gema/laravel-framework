@@ -62,6 +62,6 @@ class run extends Command
             'new-tab --title "'.$app_name.'" -d "'.$dir.'"',
         ];
 
-        pclose(popen(join(' ; ', $commands), 'r'));
+        pclose(popen(implode(' ; ', $commands), 'r'));
     }
 }

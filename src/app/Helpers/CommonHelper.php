@@ -42,7 +42,7 @@ if (! function_exists('hasRole')) {
 }
 
 if (! function_exists('hasAnyPermissions')) {
-    function hasAnyPermissions(string | array $permissions): bool
+    function hasAnyPermissions(string|array $permissions): bool
     {
         // @phpstan-ignore-next-line
         $user = backpack_user() ?: user();
@@ -65,7 +65,7 @@ if (! function_exists('hasAnyPermissions')) {
 }
 
 if (! function_exists('hasAllPermissions')) {
-    function hasAllPermissions(string | array $permissions): bool
+    function hasAllPermissions(string|array $permissions): bool
     {
         // @phpstan-ignore-next-line
         $user = backpack_user() ?: user();
@@ -89,7 +89,7 @@ if (! function_exists('hasAllPermissions')) {
 }
 
 if (! function_exists('hasPermission')) {
-    function hasPermission(string | array $permissions): bool
+    function hasPermission(string|array $permissions): bool
     {
         return hasAnyPermissions($permissions);
     }
@@ -103,7 +103,7 @@ if (! function_exists('admin')) {
 }
 
 if (! function_exists('restrictTo')) {
-    function restrictTo(string | array $roles, string | array $permissions = null): bool
+    function restrictTo(string|array $roles, string|array|null $permissions = null): bool
     {
         $session_role = Session::get('role', null);
         $session_permissions = Session::get('permissions', null);
@@ -129,7 +129,7 @@ if (! function_exists('restrictTo')) {
 
         // View as Role and Permissions
         elseif ($session_role && $session_permissions && $permissions) {
-            return in_array($session_role, $roles) || sizeof(array_intersect($session_permissions, array_values($permissions)));
+            return in_array($session_role, $roles) || count(array_intersect($session_permissions, array_values($permissions)));
         }
 
         return false;
@@ -137,7 +137,7 @@ if (! function_exists('restrictTo')) {
 }
 
 if (! function_exists('is')) {
-    function is(string | array $roles, string | array $permissions = null): bool
+    function is(string|array $roles, string|array|null $permissions = null): bool
     {
         return restrictTo($roles, $permissions);
     }
@@ -292,12 +292,13 @@ if (! function_exists('memoize')) {
 
         return new class($target, $memo)
         {
-            function __construct(
+            public function __construct(
                 protected $target,
-                protected  &$memo,
-            ) {}
+                protected &$memo,
+            ) {
+            }
 
-            function __call($method, $params)
+            public function __call($method, $params)
             {
                 $this->memo[$this->target] ??= [];
 

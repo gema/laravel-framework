@@ -8,8 +8,6 @@ class ComposerScripts
 {
     /**
      * Handle the post-install Composer event.
-     *
-     * @return void
      */
     public static function postInstall(): void
     {
