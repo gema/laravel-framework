@@ -5,13 +5,14 @@ namespace GemaDigital\Framework\app\Http\Controllers\Traits;
 use Cache;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
-use Session;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Session;
 
 trait PageTrait
 {
-    public function index(string $slug = 'home', ?string $sub = null): View|Factory
+    public function index(string $slug = 'home', ?string $sub = null): View | Factory
     {
-        $locale = Session::get('locale', \Config::get('app.locale'));
+        $locale = Session::get('locale', Config::get('app.locale'));
 
         $this->data = Cache::rememberForever("page_{$slug}_{$locale}", function () use ($slug) {
             $page = class_exists(\App\Models\Page::class)
