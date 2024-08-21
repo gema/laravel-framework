@@ -5,24 +5,31 @@ export default [
   {
     files: [
       'src/**/*',
-      'eslint.config.mjs'
+      'eslint.config.mjs',
     ],
     rules: {
+      'comma-dangle': [
+        'error',
+        'always-multiline',
+      ],
       'no-trailing-spaces': 'error',
       'no-undef': 'off',
       'func-names': 'off',
       'arrow-parens': [
         'error',
-        'as-needed'
+        'as-needed',
       ],
       'quotes': [
         'error',
-        'single'
+        'single',
       ],
       'indent': [
         'error',
-        2
-      ]
-    }
-  }
+        2,
+        {
+          'SwitchCase': 1,
+        },
+      ],
+    },
+  },
 ];
