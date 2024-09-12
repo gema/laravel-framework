@@ -2,15 +2,14 @@
 
 namespace App\Macros;
 
-use App\Macros\Filterable\FilterableContract;
 use App\Macros\Filterable\FilterColumn;
-use App\Macros\Filterable\FilterRelation;
-use App\Macros\Searchable\SearchableContract;
 use App\Macros\Searchable\SearchColumn;
+use App\Macros\Filterable\FilterRelation;
 use App\Macros\Searchable\SearchRelation;
-use App\Models\Model;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Facades\DB;
+use GemaDigital\Framework\app\Models\Model;
+use App\Macros\Filterable\FilterableContract;
+use App\Macros\Searchable\SearchableContract;
 
 class BuilderMacros
 {
