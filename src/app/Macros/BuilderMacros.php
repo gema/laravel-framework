@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Macros;
+namespace GemaDigital\Framework\app\Macros;
 
 use App\Macros\Filterable\FilterColumn;
 use App\Macros\Searchable\SearchColumn;

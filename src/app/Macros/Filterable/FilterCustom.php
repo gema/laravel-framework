@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Macros\Filterable;
+namespace GemaDigital\Framework\app\Macros\Filterable;
 
 use Closure;
 use Illuminate\Contracts\Database\Eloquent\Builder;
