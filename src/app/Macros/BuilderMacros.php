@@ -2,12 +2,13 @@
 
 namespace GemaDigital\Framework\app\Macros;
 
+use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Builder;
+use GemaDigital\Framework\app\Models\Model;
 use GemaDigital\Framework\app\Macros\Filterable\FilterColumn;
 use GemaDigital\Framework\app\Macros\Searchable\SearchColumn;
 use GemaDigital\Framework\app\Macros\Filterable\FilterRelation;
 use GemaDigital\Framework\app\Macros\Searchable\SearchRelation;
-use Illuminate\Database\Eloquent\Builder;
-use GemaDigital\Framework\app\Models\Model;
 use GemaDigital\Framework\app\Macros\Filterable\FilterableContract;
 use GemaDigital\Framework\app\Macros\Searchable\SearchableContract;
 
@@ -19,14 +20,26 @@ class BuilderMacros
             /** @var Builder<Model> */
             $builder = $this;
 
-            return $builder->where($column, 'LIKE', "%{$search}%");
+            return DB::rawMatch(
+                sqlite: $builder->where($column, 'LIKE', "%{$search}%"),
+                mysql: $builder->where($column, 'LIKE', "%{$search}%"),
+                pgsql: $builder->where($column, 'ILIKE', "%{$search}%"),
+                sqlsrv: $builder->where($column, 'LIKE', "%{$search}%"),
+                mongodb: $builder->where($column, 'LIKE', "%{$search}%"),
+            );
         });
 
         Builder::macro('orWhereLike', function (string $column, string $search): Builder {
             /** @var Builder<Model> */
             $builder = $this;
 
-            return $builder->orWhere($column, 'LIKE', "%{$search}%");
+            return DB::rawMatch(
+                sqlite: $builder->orWhere($column, 'LIKE', "%{$search}%"),
+                mysql: $builder->orWhere($column, 'LIKE', "%{$search}%"),
+                pgsql: $builder->orWhere($column, 'ILIKE', "%{$search}%"),
+                sqlsrv: $builder->orWhere($column, 'LIKE', "%{$search}%"),
+                mongodb: $builder->orWhere($column, 'LIKE', "%{$search}%"),
+            );
         });
 
         Builder::macro('filterable', function (array $attributes) {
