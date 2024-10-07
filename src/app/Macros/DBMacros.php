@@ -9,13 +9,14 @@ class DBMacros
     public static function register(): void
     {
         DB::macro('rawMatch', function (
-            string $sqlite = '',
-            string $mysql = '',
-            string $pgsql = '',
-            string $sqlsrv = '',
-            string $mongodb = '',
+            ?string $default = null,
+            ?string $sqlite = null,
+            ?string $mysql = null,
+            ?string $pgsql = null,
+            ?string $sqlsrv = null,
+            ?string $mongodb = null,
         ): string {
-            return ${DB::connection()->getName()};
+            return ${DB::connection()->getName()} ?? $default;
         });
     }
 }

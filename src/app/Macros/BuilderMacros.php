@@ -20,26 +20,20 @@ class BuilderMacros
             /** @var Builder<Model> */
             $builder = $this;
 
-            return DB::rawMatch(
-                sqlite: $builder->where($column, 'LIKE', "%{$search}%"),
-                mysql: $builder->where($column, 'LIKE', "%{$search}%"),
-                pgsql: $builder->where($column, 'ILIKE', "%{$search}%"),
-                sqlsrv: $builder->where($column, 'LIKE', "%{$search}%"),
-                mongodb: $builder->where($column, 'LIKE', "%{$search}%"),
-            );
+            return $builder->where($column, DB::rawMatch(
+                pgsql: 'ILIKE',
+                default: 'LIKE',
+            ), "%{$search}%");
         });
 
         Builder::macro('orWhereLike', function (string $column, string $search): Builder {
             /** @var Builder<Model> */
             $builder = $this;
 
-            return DB::rawMatch(
-                sqlite: $builder->orWhere($column, 'LIKE', "%{$search}%"),
-                mysql: $builder->orWhere($column, 'LIKE', "%{$search}%"),
-                pgsql: $builder->orWhere($column, 'ILIKE', "%{$search}%"),
-                sqlsrv: $builder->orWhere($column, 'LIKE', "%{$search}%"),
-                mongodb: $builder->orWhere($column, 'LIKE', "%{$search}%"),
-            );
+            return $builder->orWhere($column, DB::rawMatch(
+                pgsql: 'ILIKE',
+                default: 'LIKE',
+            ), "%{$search}%");
         });
 
         Builder::macro('filterable', function (array $attributes) {
