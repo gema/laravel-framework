@@ -238,11 +238,11 @@ if (! function_exists('json_status')) {
 }
 
 if (! function_exists('json_response_pagination')) {
-    function json_response_pagination(mixed $data = null, LengthAwarePaginator $pagination, int $code = 0, int $status = 200, mixed $errors = null, $exception = null): Response
+    function json_response_pagination(mixed $data = null, LengthAwarePaginator $pagination = null, int $code = 0, int $status = 200, mixed $errors = null, $exception = null): Response
     {
         $data = [
             ...$data,
-            'pagination' => Arr::only($pagination->toArray(), [
+            'pagination' => Arr::only($pagination?->toArray(), [
                 'from',
                 'to',
                 'total',
