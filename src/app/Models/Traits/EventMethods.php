@@ -1,6 +1,6 @@
 <?php
 
-namespace GemaDigital\Framework\app\Models\Traits;
+namespace GemaDigital\Models\Traits;
 
 trait EventMethods
 {
@@ -12,18 +12,18 @@ trait EventMethods
         /*
          * Retrieve
          */
-        method_exists(__CLASS__, 'retrieved') && static::retrieved(function ($element): void {
+        method_exists(self::class, 'retrieved') && static::retrieved(function ($element): void {
             self::call($element, 'afterRetrieve');
         });
 
         /*
          * Create
          */
-        method_exists(__CLASS__, 'creating') && static::creating(function ($element): void {
+        method_exists(self::class, 'creating') && static::creating(function ($element): void {
             self::call($element, 'beforeCreate');
         });
 
-        method_exists(__CLASS__, 'created') && static::created(function ($element): void {
+        method_exists(self::class, 'created') && static::created(function ($element): void {
             self::call($element, 'afterCreate');
             self::call($element, 'sync', 'create');
         });
@@ -31,11 +31,11 @@ trait EventMethods
         /*
          * Update
          */
-        method_exists(__CLASS__, 'updating') && static::updating(function ($element): void {
+        method_exists(self::class, 'updating') && static::updating(function ($element): void {
             self::call($element, 'beforeUpdate');
         });
 
-        method_exists(__CLASS__, 'updated') && static::updated(function ($element): void {
+        method_exists(self::class, 'updated') && static::updated(function ($element): void {
             self::call($element, 'afterUpdate');
             self::call($element, 'sync', 'update');
         });
@@ -43,11 +43,11 @@ trait EventMethods
         /*
          * Save
          */
-        method_exists(__CLASS__, 'saving') && static::saving(function ($element): void {
+        method_exists(self::class, 'saving') && static::saving(function ($element): void {
             self::call($element, 'beforeSave');
         });
 
-        method_exists(__CLASS__, 'saved') && static::saved(function ($element): void {
+        method_exists(self::class, 'saved') && static::saved(function ($element): void {
             self::call($element, 'afterSave');
             self::call($element, 'sync', 'saved');
         });
@@ -55,19 +55,19 @@ trait EventMethods
         /*
          * Delete
          */
-        method_exists(__CLASS__, 'deleting') && static::deleting(function ($element): void {
+        method_exists(self::class, 'deleting') && static::deleting(function ($element): void {
             self::call($element, 'beforeDelete');
             self::call($element, 'sync', 'delete');
         });
 
-        method_exists(__CLASS__, 'deleted') && static::deleted(function ($element): void {
+        method_exists(self::class, 'deleted') && static::deleted(function ($element): void {
             self::call($element, 'afterDelete');
         });
 
         /*
          * Retrieve
          */
-        method_exists(__CLASS__, 'retrieved') && static::retrieved(function ($element): void {
+        method_exists(self::class, 'retrieved') && static::retrieved(function ($element): void {
             self::call($element, 'beforeRetrieved');
         });
     }

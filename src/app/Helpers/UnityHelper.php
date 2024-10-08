@@ -1,6 +1,6 @@
 <?php
 
-namespace GemaDigital\Framework\app\Helpers;
+namespace GemaDigital\Helpers;
 
 class UnityHelper
 {
@@ -15,7 +15,7 @@ class UnityHelper
         }
 
         if (isset($item)) {
-            $item = html_entity_decode($item);
+            $item = html_entity_decode((string) $item);
             $item = str_replace('<br/>', "\n", $item);
             $item = str_replace('<br />', "\n", $item);
             $item = str_replace('</p><p>', "\n\n", $item);

@@ -1,8 +1,8 @@
 <?php
 
-namespace GemaDigital\Framework\app\Http\Controllers\Admin\Operations;
+namespace GemaDigital\Http\Controllers\Admin\Operations;
 
-use GemaDigital\Framework\app\Http\Controllers\Admin\CrudController;
+use GemaDigital\Http\Controllers\Admin\CrudController;
 
 trait InlineCreateOperation
 {

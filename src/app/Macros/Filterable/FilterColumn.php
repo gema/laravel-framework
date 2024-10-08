@@ -1,13 +1,15 @@
 <?php
 
-namespace GemaDigital\Framework\app\Macros\Filterable;
+namespace GemaDigital\Macros\Filterable;
 
 use Illuminate\Contracts\Database\Eloquent\Builder;
 
 class FilterColumn implements FilterableContract
 {
     public const STRING = 'string';
+
     public const INTEGER = 'int';
+
     public const BOOLEAN = 'bool';
 
     public function __construct(

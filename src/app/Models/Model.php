@@ -1,6 +1,6 @@
 <?php
 
-namespace GemaDigital\Framework\app\Models;
+namespace GemaDigital\Models;
 
 use Illuminate\Database\Eloquent\Model as OriginalModel;
 

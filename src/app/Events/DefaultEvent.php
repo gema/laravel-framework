@@ -1,6 +1,6 @@
 <?php
 
-namespace GemaDigital\Framework\app\Events;
+namespace GemaDigital\Events;
 
 use Carbon\Carbon;
 use Illuminate\Broadcasting\Channel;
@@ -19,7 +19,9 @@ abstract class DefaultEvent
     use SerializesModels;
 
     public array $channels;
+
     public ?object $user;
+
     public Carbon $timestamp;
 
     /**
@@ -73,7 +75,7 @@ abstract class DefaultEvent
     {
         $broadcastOn = $this->broadcastOn();
 
-        return json_encode([
+        return (string) json_encode([
             get_class_name($this),
             count($broadcastOn) === 1 ? $broadcastOn[0] : $broadcastOn,
             $this,

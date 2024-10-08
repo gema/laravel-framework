@@ -1,6 +1,6 @@
 <?php
 
-namespace GemaDigital\Framework\app\Http\Controllers\Admin;
+namespace GemaDigital\Http\Controllers\Admin;
 
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 use Backpack\PageManager\app\Http\Controllers\Admin\PageCrudController as OriginalPageCrudController;

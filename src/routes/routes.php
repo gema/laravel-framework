@@ -1,14 +1,14 @@
 <?php
 
-use GemaDigital\Framework\app\Http\Controllers\Admin\AdminActionsController;
-use GemaDigital\Framework\app\Http\Controllers\Admin\BuildController;
-use GemaDigital\Framework\app\Http\Controllers\Admin\CacheController;
-use GemaDigital\Framework\app\Http\Controllers\Admin\MaintenanceController;
-use GemaDigital\Framework\app\Http\Controllers\Admin\ViewAsController;
-use GemaDigital\Framework\app\Http\Controllers\LangController;
-use GemaDigital\Framework\app\Http\Controllers\SessionController;
+use GemaDigital\Http\Controllers\Admin\AdminActionsController;
+use GemaDigital\Http\Controllers\Admin\BuildController;
+use GemaDigital\Http\Controllers\Admin\CacheController;
+use GemaDigital\Http\Controllers\Admin\MaintenanceController;
+use GemaDigital\Http\Controllers\Admin\ViewAsController;
+use GemaDigital\Http\Controllers\LangController;
+use GemaDigital\Http\Controllers\SessionController;
 
-// Framework
+// Gema Digital
 Route::group(['middleware' => 'web'], function () {
     // Admin
     Route::group([

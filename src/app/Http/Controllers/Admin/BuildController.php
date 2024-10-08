@@ -1,6 +1,6 @@
 <?php
 
-namespace GemaDigital\Framework\app\Http\Controllers\Admin;
+namespace GemaDigital\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;

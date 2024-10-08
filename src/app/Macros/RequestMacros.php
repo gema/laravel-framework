@@ -1,9 +1,9 @@
 <?php
 
-namespace GemaDigital\Framework\app\Macros;
+namespace GemaDigital\Macros;
 
-use Laravel\Sanctum\PersonalAccessToken;
 use Illuminate\Http\Request;
+use Laravel\Sanctum\PersonalAccessToken;
 use Laravel\Sanctum\TransientToken;
 
 class RequestMacros

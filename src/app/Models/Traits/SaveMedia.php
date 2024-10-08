@@ -1,6 +1,6 @@
 <?php
 
-namespace GemaDigital\Framework\app\Models\Traits;
+namespace GemaDigital\Models\Traits;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Config;
@@ -99,7 +99,7 @@ trait SaveMedia
         }
 
         // Remove First slash
-        $path = preg_replace("/^\//", '', $path);
+        $path = preg_replace("/^\//", '', (string) $path);
 
         return $path;
     }
@@ -116,9 +116,7 @@ trait SaveMedia
             $attribute_value = (array) $this->{$attribute_name};
             foreach ($files_to_clear as $key => $filename) {
                 Storage::disk($disk)->delete($filename);
-                $attribute_value = array_where($attribute_value, function ($value, $key) use ($filename) {
-                    return $value !== $filename;
-                });
+                $attribute_value = array_where($attribute_value, fn ($value, $key) => $value !== $filename);
             }
         }
 

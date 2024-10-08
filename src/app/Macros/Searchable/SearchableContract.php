@@ -1,6 +1,6 @@
 <?php
 
-namespace GemaDigital\Framework\app\Macros\Searchable;
+namespace GemaDigital\Macros\Searchable;
 
 use Illuminate\Contracts\Database\Eloquent\Builder;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace GemaDigital\Framework\app\Http\Controllers\Traits;
+namespace GemaDigital\Http\Controllers\Traits;
 
 use Cache;
 use Illuminate\Contracts\View\Factory;
@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Session;
 
 trait PageTrait
 {
-    public function index(string $slug = 'home', ?string $sub = null): View | Factory
+    public function index(string $slug = 'home', ?string $sub = null): View|Factory
     {
         $locale = Session::get('locale', Config::get('app.locale'));
 

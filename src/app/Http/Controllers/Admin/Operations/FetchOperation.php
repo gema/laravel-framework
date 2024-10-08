@@ -1,6 +1,6 @@
 <?php
 
-namespace GemaDigital\Framework\app\Http\Controllers\Admin\Operations;
+namespace GemaDigital\Http\Controllers\Admin\Operations;
 
 trait FetchOperation
 {

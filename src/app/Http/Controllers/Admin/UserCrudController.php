@@ -1,6 +1,6 @@
 <?php
 
-namespace GemaDigital\Framework\app\Http\Controllers\Admin;
+namespace GemaDigital\Http\Controllers\Admin;
 
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 use Backpack\PermissionManager\app\Http\Controllers\UserCrudController as OriginalUserCrudController;
@@ -54,7 +54,5 @@ class UserCrudController extends OriginalUserCrudController
     }
 
     // Overrides to deal with cache
-    public function sync($operation): void
-    {
-    }
+    public function sync($operation): void {}
 }
