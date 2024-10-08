@@ -56,7 +56,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "GemaDigital\\": "src/"
+            "GemaDigital\\": "src/app/"
         }
     },
     "autoload-dev": {
