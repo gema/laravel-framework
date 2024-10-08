@@ -5,7 +5,7 @@ namespace GemaDigital\Console\Commands;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 
-class duplicate extends Command
+class DuplicateCommand extends Command
 {
     /**
      * The name and signature of the console command.

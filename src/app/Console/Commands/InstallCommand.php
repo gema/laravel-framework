@@ -4,7 +4,7 @@ namespace GemaDigital\Console\Commands;
 
 use Illuminate\Console\Command;
 
-class install extends Command
+class InstallCommand extends Command
 {
     /**
      * The name and signature of the console command.

@@ -11,11 +11,11 @@ use Illuminate\Support\ServiceProvider;
 class GemaDigitalServiceProvider extends ServiceProvider
 {
     protected array $commands = [
-        \GemaDigital\Console\Commands\duplicate::class,
-        \GemaDigital\Console\Commands\install::class,
-        \GemaDigital\Console\Commands\package::class,
-        \GemaDigital\Console\Commands\publish::class,
-        \GemaDigital\Console\Commands\run::class,
+        \GemaDigital\Console\Commands\DuplicateCommand::class,
+        \GemaDigital\Console\Commands\InstallCommand::class,
+        \GemaDigital\Console\Commands\PackageCommand::class,
+        \GemaDigital\Console\Commands\PublishCommand::class,
+        \GemaDigital\Console\Commands\RunCommand::class,
     ];
 
     /**
@@ -35,17 +35,17 @@ class GemaDigitalServiceProvider extends ServiceProvider
 
         // Log all queries
         if (config('app.debug')) {
-            DB::listen(fn(QueryExecuted $log) => QueryLogger::log($log));
+            DB::listen(fn (QueryExecuted $log) => QueryLogger::log($log));
         }
 
         // Blade directives
 
         // Is (Role, Permission)
-        Blade::directive('is', fn($roles, $permissions = null) => "<?php if (is($roles, $permissions)) { ?>");
+        Blade::directive('is', fn ($roles, $permissions = null) => "<?php if (is($roles, $permissions)) { ?>");
 
-        Blade::directive('elseis', fn() => '<?php } else { ?>');
+        Blade::directive('elseis', fn () => '<?php } else { ?>');
 
-        Blade::directive('endis', fn() => '<?php } ?>');
+        Blade::directive('endis', fn () => '<?php } ?>');
     }
 
     /**
@@ -69,18 +69,18 @@ class GemaDigitalServiceProvider extends ServiceProvider
     {
         // Publishing the configuration file.
         $this->publishes([
-            __DIR__.'/config/framework.php' => config_path('gemadigital.php'),
-            __DIR__.'/config/enums.php' => config_path('enums.php'),
+            __DIR__.'/../config/framework.php' => config_path('gemadigital.php'),
+            __DIR__.'/../config/enums.php' => config_path('enums.php'),
         ]);
 
         // Publishing the views.
         $this->publishes([
-            __DIR__.'/resources/views/vendor/backpack/crud' => base_path('resources/views/vendor/backpack/crud'),
+            __DIR__.'/../resources/views/vendor/backpack/crud' => base_path('resources/views/vendor/backpack/crud'),
         ], 'framework.views');
 
         // Publishing the translation files.
         $this->publishes([
-            __DIR__.'/resources/lang' => resource_path('lang/vendor/gemadigital'),
+            __DIR__.'/../resources/lang' => resource_path('lang/vendor/gemadigital'),
         ], 'framework.views');
 
         // Registering package commands.
@@ -92,7 +92,7 @@ class GemaDigitalServiceProvider extends ServiceProvider
      */
     public function loadHelpers(): void
     {
-        require_once __DIR__.'/app/Helpers/CommonHelper.php';
+        require_once __DIR__.'/Helpers/CommonHelper.php';
     }
 
     /**

@@ -4,7 +4,7 @@ namespace GemaDigital\Console\Commands;
 
 use Illuminate\Console\Command;
 
-class run extends Command
+class RunCommand extends Command
 {
     /**
      * The name and signature of the console command.
