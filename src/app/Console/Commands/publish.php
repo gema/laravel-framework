@@ -14,7 +14,7 @@ class publish extends Command
     /**
      * The console command description.
      */
-    protected $description = 'Publishes the framework assets';
+    protected $description = 'Publishes the gemadigital assets';
 
     /**
      * Create a new command instance.
@@ -31,10 +31,10 @@ class publish extends Command
      */
     public function handle(): void
     {
-        if ($this->confirm('Do you wish to publish framework assets?')) {
+        if ($this->confirm('Do you wish to publish gemadigital assets?')) {
             $force = $this->confirm('Do you want to force the replace of older assets?');
 
-            exec('php artisan vendor:publish --provider="GemaDigital\Framework\GemaDigitalServiceProvider"'.($force ? ' --force' : ''));
+            exec('php artisan vendor:publish --provider="GemaDigital\GemaDigitalServiceProvider"'.($force ? ' --force' : ''));
         }
     }
 }

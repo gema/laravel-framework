@@ -8,7 +8,7 @@ use GemaDigital\Http\Controllers\Admin\ViewAsController;
 use GemaDigital\Http\Controllers\LangController;
 use GemaDigital\Http\Controllers\SessionController;
 
-// Framework
+// Gema Digital
 Route::group(['middleware' => 'web'], function () {
     // Admin
     Route::group([

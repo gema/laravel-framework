@@ -35,17 +35,17 @@ class GemaDigitalServiceProvider extends ServiceProvider
 
         // Log all queries
         if (config('app.debug')) {
-            DB::listen(fn (QueryExecuted $log) => QueryLogger::log($log));
+            DB::listen(fn(QueryExecuted $log) => QueryLogger::log($log));
         }
 
         // Blade directives
 
         // Is (Role, Permission)
-        Blade::directive('is', fn ($roles, $permissions = null) => "<?php if (is($roles, $permissions)) { ?>");
+        Blade::directive('is', fn($roles, $permissions = null) => "<?php if (is($roles, $permissions)) { ?>");
 
-        Blade::directive('elseis', fn () => '<?php } else { ?>');
+        Blade::directive('elseis', fn() => '<?php } else { ?>');
 
-        Blade::directive('endis', fn () => '<?php } ?>');
+        Blade::directive('endis', fn() => '<?php } ?>');
     }
 
     /**
@@ -100,6 +100,6 @@ class GemaDigitalServiceProvider extends ServiceProvider
      */
     public function loadConfigs(): void
     {
-        $this->mergeConfigFrom(__DIR__.'/config/framework.php', 'gemadigital');
+        $this->mergeConfigFrom(__DIR__.'/../config/framework.php', 'gemadigital');
     }
 }
