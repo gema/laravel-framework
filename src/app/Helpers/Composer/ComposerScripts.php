@@ -10,8 +10,8 @@ class ComposerScripts
     public static function postInstall(): void
     {
         match (DIRECTORY_SEPARATOR) {
-            '/' => postInstallUnix(),
-            '\\' => postInstallWindows(),
+            '/' => static::postInstallUnix(),
+            '\\' => static::postInstallWindows(),
         };
     }
 
