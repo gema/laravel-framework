@@ -56,7 +56,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "GemaDigital\\": "src/app/"
+            "GemaDigital\\": "src/"
         }
     },
     "autoload-dev": {
@@ -64,7 +64,7 @@
             "GemaDigital\\Tests\\": "tests"
         },
         "files": [
-            "src\\app\\Helpers\\CommonHelper.php"
+            "src\\Helpers\\CommonHelper.php"
         ]
     },
     "extra": {
@@ -76,7 +76,7 @@
     },
     "scripts": {
         "analyse": [
-            "vendor/bin/phpstan analyse src/app"
+            "vendor/bin/phpstan analyse src"
         ],
         "pint": [
             "vendor/bin/pint"
