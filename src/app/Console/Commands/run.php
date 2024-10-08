@@ -1,6 +1,6 @@
 <?php
 
-namespace GemaDigital\Framework\app\Console\Commands;
+namespace GemaDigital\Console\Commands;
 
 use Illuminate\Console\Command;
 
@@ -30,7 +30,7 @@ class run extends Command
     public function handle(): void
     {
         $app_name = env('APP_NAME');
-        $url = parse_url(env('APP_URL'));
+        $url = parse_url((string) env('APP_URL'));
         $db_connection = env('DB_CONNECTION');
         $db_name = env('DB_DATABASE');
         $db_host = env('DB_HOST');

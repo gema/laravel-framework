@@ -1,16 +1,16 @@
 <?php
 
-namespace GemaDigital\Framework\app\Macros;
+namespace GemaDigital\Macros;
 
-use Illuminate\Support\Facades\DB;
+use GemaDigital\Macros\Filterable\FilterableContract;
+use GemaDigital\Macros\Filterable\FilterColumn;
+use GemaDigital\Macros\Filterable\FilterRelation;
+use GemaDigital\Macros\Searchable\SearchableContract;
+use GemaDigital\Macros\Searchable\SearchColumn;
+use GemaDigital\Macros\Searchable\SearchRelation;
+use GemaDigital\Models\Model;
 use Illuminate\Database\Eloquent\Builder;
-use GemaDigital\Framework\app\Models\Model;
-use GemaDigital\Framework\app\Macros\Filterable\FilterColumn;
-use GemaDigital\Framework\app\Macros\Searchable\SearchColumn;
-use GemaDigital\Framework\app\Macros\Filterable\FilterRelation;
-use GemaDigital\Framework\app\Macros\Searchable\SearchRelation;
-use GemaDigital\Framework\app\Macros\Filterable\FilterableContract;
-use GemaDigital\Framework\app\Macros\Searchable\SearchableContract;
+use Illuminate\Support\Facades\DB;
 
 class BuilderMacros
 {

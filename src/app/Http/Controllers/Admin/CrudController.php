@@ -1,6 +1,6 @@
 <?php
 
-namespace GemaDigital\Framework\app\Http\Controllers\Admin;
+namespace GemaDigital\Http\Controllers\Admin;
 
 use Backpack\CRUD\app\Http\Controllers\CrudController as OriginalCrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanel;
@@ -39,7 +39,7 @@ class CrudController extends OriginalCrudController
 
     public function wantsJSON(): bool
     {
-        return strpos(request()->headers->get('accept'), 'application/json') === 0;
+        return str_starts_with((string) request()->headers->get('accept'), 'application/json');
     }
 
     private $i = 0;
@@ -58,7 +58,7 @@ class CrudController extends OriginalCrudController
 
     public function getEntryID(): int
     {
-        preg_match('/\w+\/(\d+)/', $_SERVER['REQUEST_URI'], $matches);
+        preg_match('/\w+\/(\d+)/', (string) $_SERVER['REQUEST_URI'], $matches);
 
         return $matches && count($matches) > 1 ? intval($matches[1]) : null;
     }
@@ -69,7 +69,5 @@ class CrudController extends OriginalCrudController
     }
 
     // Overrides to deal with cache
-    public function sync(string $operation): void
-    {
-    }
+    public function sync(string $operation): void {}
 }

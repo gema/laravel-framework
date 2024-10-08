@@ -1,6 +1,6 @@
 <?php
 
-namespace GemaDigital\Framework\app\Macros;
+namespace GemaDigital\Macros;
 
 use Illuminate\Support\Facades\DB;
 

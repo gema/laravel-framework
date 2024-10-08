@@ -4,5 +4,5 @@ mkdir %target%\packages
 mkdir %target%\packages\GemaDigital
 
 clear
-mklink /D "%target%\packages\GemaDigital\Framework" %cd%
+mklink /D "%target%\packages\GemaDigital" %cd%
 pause

@@ -1,6 +1,6 @@
 <?php
 
-use GemaDigital\Framework\app\Helpers\QueryLogger;
+use GemaDigital\Helpers\QueryLogger;
 use Illuminate\Http\Response;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Arr;
@@ -238,7 +238,7 @@ if (! function_exists('json_status')) {
 }
 
 if (! function_exists('json_response_pagination')) {
-    function json_response_pagination(mixed $data = null, LengthAwarePaginator $pagination = null, int $code = 0, int $status = 200, mixed $errors = null, $exception = null): Response
+    function json_response_pagination(mixed $data = null, ?LengthAwarePaginator $pagination = null, int $code = 0, int $status = 200, mixed $errors = null, $exception = null): Response
     {
         $data = [
             ...$data,
@@ -268,7 +268,7 @@ if (! function_exists('sized_image')) {
 }
 
 if (! function_exists('__fallback')) {
-    function __fallback(string $key, ?string $fallback = null, ?string $locale = null, ?array $replace = []): ?string
+    function __fallback(string $key, ?string $fallback = null, ?string $locale = null, array $replace = []): ?string
     {
         if (Lang::has($key, $locale)) {
             return trans($key, $replace, $locale);
@@ -295,8 +295,7 @@ if (! function_exists('memoize')) {
             public function __construct(
                 protected $target,
                 protected &$memo,
-            ) {
-            }
+            ) {}
 
             public function __call($method, $params)
             {

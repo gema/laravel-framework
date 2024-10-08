@@ -1,6 +1,6 @@
 <?php
 
-namespace GemaDigital\Framework\app\Http\Controllers\API;
+namespace GemaDigital\Http\Controllers\API;
 
 use Illuminate\Routing\Controller;
 
@@ -39,7 +39,7 @@ class APIController extends Controller
     // Safe decode json
     public function json_decode_safe(mixed $data): mixed
     {
-        $json = json_decode($data);
+        $json = json_decode((string) $data);
 
         return json_last_error() === 0 ? $json : $data;
     }

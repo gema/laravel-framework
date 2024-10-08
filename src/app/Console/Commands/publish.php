@@ -1,6 +1,6 @@
 <?php
 
-namespace GemaDigital\Framework\app\Console\Commands;
+namespace GemaDigital\Console\Commands;
 
 use Illuminate\Console\Command;
 
@@ -34,7 +34,7 @@ class publish extends Command
         if ($this->confirm('Do you wish to publish framework assets?')) {
             $force = $this->confirm('Do you want to force the replace of older assets?');
 
-            exec('php artisan vendor:publish --provider="GemaDigital\Framework\FrameworkServiceProvider"'.($force ? ' --force' : ''));
+            exec('php artisan vendor:publish --provider="GemaDigital\Framework\GemaDigitalServiceProvider"'.($force ? ' --force' : ''));
         }
     }
 }

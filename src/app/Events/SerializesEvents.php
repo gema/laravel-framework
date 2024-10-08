@@ -1,6 +1,6 @@
 <?php
 
-namespace GemaDigital\Framework\app\Events;
+namespace GemaDigital\Events;
 
 trait SerializesEvents
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace GemaDigital\Framework\app\Helpers;
+namespace GemaDigital\Helpers;
 
 class Globals
 {

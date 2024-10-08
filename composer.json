@@ -56,12 +56,12 @@
     ],
     "autoload": {
         "psr-4": {
-            "GemaDigital\\Framework\\": "src/"
+            "GemaDigital\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "GemaDigital\\Framework\\Tests\\": "tests"
+            "GemaDigital\\Tests\\": "tests"
         },
         "files": [
             "src\\app\\Helpers\\CommonHelper.php"
@@ -70,16 +70,19 @@
     "extra": {
         "laravel": {
             "providers": [
-                "GemaDigital\\Framework\\FrameworkServiceProvider"
-            ],
-            "aliases": {
-                "Framework": "GemaDigital\\Framework\\Facades\\Framework"
-            }
+                "GemaDigital\\GemaDigitalServiceProvider"
+            ]
         }
     },
     "scripts": {
         "analyse": [
             "vendor/bin/phpstan analyse src/app"
+        ],
+        "pint": [
+            "vendor/bin/pint"
+        ],
+        "rector": [
+            "vendor/bin/rector"
         ]
     },
     "suggest": {

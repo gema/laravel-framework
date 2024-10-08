@@ -1,21 +1,21 @@
 <?php
 
-namespace GemaDigital\Framework;
+namespace GemaDigital;
 
-use GemaDigital\Framework\app\Helpers\QueryLogger;
+use GemaDigital\Helpers\QueryLogger;
 use Illuminate\Database\Events\QueryExecuted;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\ServiceProvider;
 
-class FrameworkServiceProvider extends ServiceProvider
+class GemaDigitalServiceProvider extends ServiceProvider
 {
     protected array $commands = [
-        \GemaDigital\Framework\app\Console\Commands\duplicate::class,
-        \GemaDigital\Framework\app\Console\Commands\install::class,
-        \GemaDigital\Framework\app\Console\Commands\package::class,
-        \GemaDigital\Framework\app\Console\Commands\publish::class,
-        \GemaDigital\Framework\app\Console\Commands\run::class,
+        \GemaDigital\Console\Commands\duplicate::class,
+        \GemaDigital\Console\Commands\install::class,
+        \GemaDigital\Console\Commands\package::class,
+        \GemaDigital\Console\Commands\publish::class,
+        \GemaDigital\Console\Commands\run::class,
     ];
 
     /**
@@ -35,23 +35,17 @@ class FrameworkServiceProvider extends ServiceProvider
 
         // Log all queries
         if (config('app.debug')) {
-            DB::listen(fn(QueryExecuted $log) => QueryLogger::log($log));
+            DB::listen(fn (QueryExecuted $log) => QueryLogger::log($log));
         }
 
         // Blade directives
 
         // Is (Role, Permission)
-        Blade::directive('is', function ($roles, $permissions = null) {
-            return "<?php if (is($roles, $permissions)) { ?>";
-        });
+        Blade::directive('is', fn ($roles, $permissions = null) => "<?php if (is($roles, $permissions)) { ?>");
 
-        Blade::directive('elseis', function () {
-            return '<?php } else { ?>';
-        });
+        Blade::directive('elseis', fn () => '<?php } else { ?>');
 
-        Blade::directive('endis', function () {
-            return '<?php } ?>';
-        });
+        Blade::directive('endis', fn () => '<?php } ?>');
     }
 
     /**

@@ -1,6 +1,6 @@
 <?php
 
-namespace GemaDigital\Framework\app\Console\Commands;
+namespace GemaDigital\Console\Commands;
 
 use Carbon\Carbon;
 use Illuminate\Console\Command;
@@ -30,7 +30,7 @@ class duplicate extends Command
      */
     public function handle(): void
     {
-        $appName = preg_replace('/[^0-9a-zA-Z_-]/', '', preg_replace("/\s/", '-', strtolower(env('APP_NAME'))));
+        $appName = preg_replace('/[^0-9a-zA-Z_-]/', '', (string) preg_replace("/\s/", '-', strtolower((string) env('APP_NAME'))));
         $appDate = Carbon::now()->format('YmdHis');
 
         $zipName = "$appName-$appDate.zip";

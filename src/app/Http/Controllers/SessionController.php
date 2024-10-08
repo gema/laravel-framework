@@ -1,6 +1,6 @@
 <?php
 
-namespace GemaDigital\Framework\app\Http\Controllers;
+namespace GemaDigital\Http\Controllers;
 
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
