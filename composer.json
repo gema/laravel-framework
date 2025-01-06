@@ -24,7 +24,6 @@
         "backpack/logmanager": "^5.0",
         "backpack/permissionmanager": "^7.0",
         "backpack/translation-manager": "^1.0",
-        "barryvdh/laravel-elfinder": "^0.5.1",
         "laravel/framework": "^11.0",
         "laravel/socialite": "^5.0",
         "laravel/tinker": "^2.0",
