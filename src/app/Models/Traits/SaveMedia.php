@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Intervention\Image\Image;
 
+/** @phpstan-ignore trait.unused */
 trait SaveMedia
 {
     public function saveImage($model, string $value, string $path, string $name, array $sizes, int $quality = 85, string $attribute_name = 'image', string $disk = 'uploads', bool $deleteOld = true)

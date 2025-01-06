@@ -10,11 +10,13 @@ class AdminActionsController extends Controller
 {
     public function actions(): View
     {
+        // @phpstan-ignore argument.type
         return view('gemadigital::admin.actions', []);
     }
 
     public function terminal(): View
     {
+        // @phpstan-ignore argument.type
         return view('gemadigital::admin.terminal', []);
     }
 

@@ -5,6 +5,7 @@ namespace GemaDigital\Helpers;
 use GemaDigital\Events\DefaultEvent;
 use Illuminate\Support\Facades\Redis;
 
+/** @phpstan-ignore trait.unused */
 trait RedisHelper
 {
     public function redisPublish(DefaultEvent $event): array

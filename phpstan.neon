@@ -10,4 +10,13 @@ parameters:
         - src/resources/
         - src/routes/
 
+    excludePaths:
+        - *.blade.php
+        - src/app/Http/Controllers/Admin/PageCrudController.php
+
+    ignoreErrors:
+        - '#outside of the config#'
+        - '#Laravel\\Sanctum#'
+        - '#DB::rawMatch#'
+
     level: 5

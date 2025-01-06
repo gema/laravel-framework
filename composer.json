@@ -15,18 +15,14 @@
         "framework"
     ],
     "require": {
-        "php": "^8.2|^8.3",
+        "php": "^8.3|^8.4",
         "illuminate/support": "~11",
         "backpack/activity-log": "^2.0",
-        "backpack/backupmanager": "^5.0",
         "backpack/crud": "^6.7",
         "backpack/pro": "^2.0",
-        "backpack/filemanager": "^3.0",
         "backpack/language-switcher": "^2.0",
         "backpack/logmanager": "^5.0",
-        "backpack/pagemanager": "^3.0",
         "backpack/permissionmanager": "^7.0",
-        "backpack/settings": "^3.0",
         "backpack/translation-manager": "^1.0",
         "barryvdh/laravel-elfinder": "^0.5.1",
         "laravel/framework": "^11.0",
@@ -43,8 +39,8 @@
         "nunomaduro/collision": "^8.0",
         "phpunit/phpunit": "^11",
         "spatie/laravel-ignition": "^2.0",
-        "rector/rector": "^1",
-        "larastan/larastan": "^2.7",
+        "rector/rector": "^2.0",
+        "larastan/larastan": "^3.0",
         "orchestra/testbench": "^9.0",
         "laravel/pint": "^1.15"
     },
@@ -64,7 +60,7 @@
             "GemaDigital\\Tests\\": "tests"
         },
         "files": [
-            "src\\Helpers\\CommonHelper.php"
+            "src\\app\\Helpers\\CommonHelper.php"
         ]
     },
     "extra": {

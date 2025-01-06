@@ -34,7 +34,6 @@ if (! function_exists('api')) {
 if (! function_exists('hasRole')) {
     function hasRole(string $role): bool
     {
-        // @phpstan-ignore-next-line
         $user = backpack_user() ?: user();
 
         return $user && $user->hasRole($role);
@@ -44,7 +43,6 @@ if (! function_exists('hasRole')) {
 if (! function_exists('hasAnyPermissions')) {
     function hasAnyPermissions(string|array $permissions): bool
     {
-        // @phpstan-ignore-next-line
         $user = backpack_user() ?: user();
 
         if ($user) {
@@ -53,7 +51,6 @@ if (! function_exists('hasAnyPermissions')) {
             }
 
             foreach ($permissions as $permission) {
-                // @phpstan-ignore-next-line
                 if ($user->checkPermissionTo($permission, backpack_guard_name())) {
                     return true;
                 }
@@ -67,7 +64,6 @@ if (! function_exists('hasAnyPermissions')) {
 if (! function_exists('hasAllPermissions')) {
     function hasAllPermissions(string|array $permissions): bool
     {
-        // @phpstan-ignore-next-line
         $user = backpack_user() ?: user();
 
         if ($user) {
@@ -77,7 +73,6 @@ if (! function_exists('hasAllPermissions')) {
 
             $value = true;
             foreach ($permissions as $permission) {
-                // @phpstan-ignore-next-line
                 $value &= $user->checkPermissionTo($permission, backpack_guard_name());
             }
 
@@ -206,8 +201,12 @@ if (! function_exists('json_response')) {
 }
 
 if (! function_exists('json_response_raw')) {
-    function json_response_raw(mixed $raw = null, int $code = 0, int $status = 200, mixed $errors = null): Response
-    {
+    function json_response_raw(
+        mixed $raw = null,
+        int $code = 0,
+        int $status = 200,
+        mixed $errors = null,
+    ): Response {
         $response = [
             'code' => $code,
             'data' => 'RAW',
@@ -238,8 +237,14 @@ if (! function_exists('json_status')) {
 }
 
 if (! function_exists('json_response_pagination')) {
-    function json_response_pagination(mixed $data = null, ?LengthAwarePaginator $pagination = null, int $code = 0, int $status = 200, mixed $errors = null, $exception = null): Response
-    {
+    function json_response_pagination(
+        mixed $data = null,
+        ?LengthAwarePaginator $pagination = null,
+        int $code = 0,
+        int $status = 200,
+        mixed $errors = null,
+        $exception = null,
+    ): Response {
         $data = [
             ...$data,
             'pagination' => Arr::only($pagination?->toArray(), [
@@ -268,8 +273,12 @@ if (! function_exists('sized_image')) {
 }
 
 if (! function_exists('__fallback')) {
-    function __fallback(string $key, ?string $fallback = null, ?string $locale = null, array $replace = []): ?string
-    {
+    function __fallback(
+        string $key,
+        ?string $fallback = null,
+        ?string $locale = null,
+        array $replace = [],
+    ): ?string {
         if (Lang::has($key, $locale)) {
             return trans($key, $replace, $locale);
         }

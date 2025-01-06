@@ -5,6 +5,7 @@ namespace GemaDigital\Helpers;
 use Config;
 use Laravel\Passport\HasApiTokens as OriginalHasApiTokens;
 
+/** @phpstan-ignore trait.unused */
 trait HasApiTokens
 {
     use OriginalHasApiTokens {

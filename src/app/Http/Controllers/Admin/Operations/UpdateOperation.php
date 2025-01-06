@@ -4,6 +4,7 @@ namespace GemaDigital\Http\Controllers\Admin\Operations;
 
 use GemaDigital\Http\Controllers\Admin\CrudController;
 
+/** @phpstan-ignore trait.unused */
 trait UpdateOperation
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation {

@@ -8,6 +8,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Session;
 
+/** @phpstan-ignore trait.unused */
 trait PageTrait
 {
     public function index(string $slug = 'home', ?string $sub = null): View|Factory
