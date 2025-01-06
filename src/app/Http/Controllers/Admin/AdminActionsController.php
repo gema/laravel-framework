@@ -2,6 +2,7 @@
 
 namespace GemaDigital\Http\Controllers\Admin;
 
+use Exception;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -22,8 +23,6 @@ class AdminActionsController extends Controller
 
     public function terminalRun(Request $request): void
     {
-        if (admin()) {
-            echo shell_exec($request->input('cmd'));
-        }
+        throw new Exception('Deprecated');
     }
 }
