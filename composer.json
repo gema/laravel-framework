@@ -81,6 +81,11 @@
         ]
     },
     "suggest": {
+        "backpack/backupmanager": "Useful to backup the database.",
+        "backpack/filemanager": "Useful to manage files on the server.",
+        "backpack/pagemanager": "Useful to manage pages on the server.",
+        "backpack/settings": "Useful to manage settings on the server.",
+        "barryvdh/laravel-elfinder": "Goes along with backpack/filemanager to manage files on the server.",
         "league/flysystem-aws-s3-v3": "Required to connect to AWS S3 or a Digital Ocean Space.",
         "eduardokum/laravel-mail-auto-embed": "Useful to embed images on emails."
     },
