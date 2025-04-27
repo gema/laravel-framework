@@ -13,6 +13,7 @@ parameters:
     excludePaths:
         - *.blade.php
         - src/app/Http/Controllers/Admin/PageCrudController.php
+        - src/app/Models/Page.php
 
     ignoreErrors:
         - '#outside of the config#'

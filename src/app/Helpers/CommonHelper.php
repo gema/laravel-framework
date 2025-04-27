@@ -1,9 +1,7 @@
 <?php
 
-use GemaDigital\Helpers\QueryLogger;
 use Illuminate\Http\Response;
 use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Lang;
@@ -18,6 +16,10 @@ if (! function_exists('user')) {
 }
 
 if (! function_exists('debugMode')) {
+    /**
+     * @deprecated
+     * use config('app.debug', false) instead
+     */
     function debugMode(): bool
     {
         return Config::get('app.debug', false);
@@ -32,15 +34,23 @@ if (! function_exists('api')) {
 }
 
 if (! function_exists('hasRole')) {
+    /**
+     * @deprecated
+     * use impersonate instead
+     */
     function hasRole(string $role): bool
     {
         $user = backpack_user() ?: user();
 
-        return $user && $user->hasRole($role);
+        return $user?->hasRole($role);
     }
 }
 
 if (! function_exists('hasAnyPermissions')) {
+    /**
+     * @deprecated
+     * use impersonate instead
+     */
     function hasAnyPermissions(string|array $permissions): bool
     {
         $user = backpack_user() ?: user();
@@ -62,6 +72,10 @@ if (! function_exists('hasAnyPermissions')) {
 }
 
 if (! function_exists('hasAllPermissions')) {
+    /**
+     * @deprecated
+     * use impersonate instead
+     */
     function hasAllPermissions(string|array $permissions): bool
     {
         $user = backpack_user() ?: user();
@@ -84,6 +98,10 @@ if (! function_exists('hasAllPermissions')) {
 }
 
 if (! function_exists('hasPermission')) {
+    /**
+     * @deprecated
+     * use impersonate instead
+     */
     function hasPermission(string|array $permissions): bool
     {
         return hasAnyPermissions($permissions);
@@ -93,11 +111,15 @@ if (! function_exists('hasPermission')) {
 if (! function_exists('admin')) {
     function admin(): bool
     {
-        return hasRole('admin');
+        return user()?->hasRole('admin');
     }
 }
 
 if (! function_exists('restrictTo')) {
+    /**
+     * @deprecated
+     * use impersonate instead
+     */
     function restrictTo(string|array $roles, string|array|null $permissions = null): bool
     {
         $session_role = Session::get('role', null);
@@ -134,7 +156,7 @@ if (! function_exists('restrictTo')) {
 if (! function_exists('is')) {
     function is(string|array $roles, string|array|null $permissions = null): bool
     {
-        return restrictTo($roles, $permissions);
+        return user()?->hasRole($roles) || user()?->hasAnyPermission($permissions);
     }
 }
 
@@ -146,118 +168,57 @@ if (! function_exists('aurl')) {
 }
 
 if (! function_exists('json_response')) {
+    /**
+     * @deprecated
+     * use response()->api(...) instead
+     */
     function json_response(mixed $data = null, int $code = 0, int $status = 200, mixed $errors = null, $exception = null): Response
     {
-        $response = [
-            'code' => $code,
-            'data' => $data,
-            'errors' => $errors,
-        ];
-
-        $result = json_encode($response);
-
-        if (debugMode()) {
-            $time = (int) ((microtime(true) - LARAVEL_START) * 1e6);
-            $timeData = $time > 1e6 ? [$time / 1e6, 's'] : (
-                $time > 1e3 ? [$time / 1e3, 'ms'] : (
-                    [$time, 'μs']
-                )
-            );
-
-            $memory = memory_get_peak_usage();
-            $memoryData = $memory > 1e6 ? [$memory / 1e6, 'mb'] : (
-                $memory > 1e3 ? [$memory / 1e3, 'kb'] : (
-                    [$memory, 'b']
-                )
-            );
-
-            $queries = QueryLogger::list();
-
-            $response = array_merge($response, ['debug' => [
-                'time' => [
-                    'value' => $timeData[0],
-                    'unit' => $timeData[1],
-                ],
-                'memory' => [
-                    'value' => $memoryData[0],
-                    'unit' => $memoryData[1],
-                ],
-                'exception' => $exception,
-                'query' => [
-                    'count' => count($queries),
-                    'time' => (float) number_format(collect($queries)->pluck('time')->sum(), 2),
-                    'list' => $queries,
-                ],
-                'post' => request()->request->all(),
-            ]]);
-
-            $result = json_encode($response);
-        }
-
-        return response($result, $status)
-            ->header('Content-Type', 'text/json')
-            ->header('Content-Length', strval(strlen($result)));
+        return response()->api($data, $code, $status, $errors, $exception);
     }
 }
 
 if (! function_exists('json_response_raw')) {
-    function json_response_raw(
-        mixed $raw = null,
-        int $code = 0,
-        int $status = 200,
-        mixed $errors = null,
-    ): Response {
-        $response = [
-            'code' => $code,
-            'data' => 'RAW',
-            'errors' => $errors,
-        ];
-
-        $response = json_encode($response);
-        $response = str_replace('"RAW"', $raw, $response);
-
-        return response($response, $status)
-            ->header('Content-Type', 'text/json')
-            ->header('Content-Length', strval(strlen($response)));
+    /**
+     * @deprecated
+     * use response()->apiRaw(...) instead
+     */
+    function json_response_raw(mixed $raw = null, int $code = 0, int $status = 200, mixed $errors = null): Response
+    {
+        return response()->apiRaw($raw, $code, $status, $errors);
     }
 }
 
 if (! function_exists('json_error')) {
+    /**
+     * @deprecated
+     * use response()->api(...) instead
+     */
     function json_error(mixed $errors = null, int $code = -1, int $status = 400): Response
     {
-        return json_response(null, $code, $status, $errors);
+        return response()->api(null, $code, $status, $errors);
     }
 }
 
 if (! function_exists('json_status')) {
+    /**
+     * @deprecated
+     * use response()->api(...) instead
+     */
     function json_status(bool $status, int $success = 200, int $fail = 400): Response
     {
-        return json_response(null, 0, $status ? $success : $fail);
+        return response()->api(null, 0, $status ? $success : $fail);
     }
 }
 
 if (! function_exists('json_response_pagination')) {
-    function json_response_pagination(
-        mixed $data = null,
-        ?LengthAwarePaginator $pagination = null,
-        int $code = 0,
-        int $status = 200,
-        mixed $errors = null,
-        $exception = null,
-    ): Response {
-        $data = [
-            ...$data,
-            'pagination' => Arr::only($pagination?->toArray(), [
-                'from',
-                'to',
-                'total',
-                'per_page',
-                'last_page',
-                'current_page',
-            ]),
-        ];
-
-        return json_response($data, $code, $status, $errors, $exception);
+    /**
+     * @deprecated
+     * use response()->apiPaginated(...) instead
+     */
+    function json_response_pagination(mixed $data = null, ?LengthAwarePaginator $pagination = null, int $code = 0, int $status = 200, mixed $errors = null, $exception = null): Response
+    {
+        return response()->apiPaginated($data, $pagination, $code, $status, $errors, $exception);
     }
 }
 

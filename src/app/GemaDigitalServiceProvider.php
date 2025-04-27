@@ -69,7 +69,6 @@ class GemaDigitalServiceProvider extends ServiceProvider
         // Publishing the configuration file.
         $this->publishes([
             __DIR__.'/../config/framework.php' => config_path('gemadigital.php'),
-            __DIR__.'/../config/enums.php' => config_path('enums.php'),
         ]);
 
         // Publishing the views.

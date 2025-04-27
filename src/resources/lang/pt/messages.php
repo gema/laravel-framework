@@ -32,4 +32,6 @@ return [
     'deactivate_all' => 'Desactivar todos',
     'location' => 'Localização',
     'build' => 'Build',
+    'impersonate' => 'impersonar',
+    'leave_impersonation' => 'sair da impersonação',
 ];
