@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Middleware;
+namespace GemaDigital\Http\Middleware;
 
 use Backpack\CRUD\app\Http\Middleware\CheckIfAdmin as BaseCheckIfAdmin;
 use Closure;
