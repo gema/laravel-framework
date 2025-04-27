@@ -1,11 +1,11 @@
 <?php
 
-namespace GemaDigital\Http\Middleware;
+namespace App\Http\Middleware;
 
 use Backpack\CRUD\app\Http\Middleware\CheckIfAdmin as BaseCheckIfAdmin;
 use Closure;
 
-class CheckIfAdmin extends BaseCheckIfAdmin
+class AdminPanelAccess extends BaseCheckIfAdmin
 {
     /**
      * Handle an incoming request.
@@ -14,7 +14,7 @@ class CheckIfAdmin extends BaseCheckIfAdmin
      */
     public function handle($request, Closure $next)
     {
-        if (! is('admin')) {
+        if (! self::hasAccess()) {
             if ($request->ajax() || $request->wantsJson()) {
                 return response(trans('backpack::base.unauthorized'), 401);
             } else {
@@ -23,5 +23,15 @@ class CheckIfAdmin extends BaseCheckIfAdmin
         }
 
         return $next($request);
+    }
+
+    /**
+     * Check if the user is an admin.
+     *
+     * @return bool
+     */
+    public static function hasAccess(): bool
+    {
+        return request()->user()->hasRole('admin');
     }
 }
