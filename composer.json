@@ -50,7 +50,8 @@
             "GemaDigital\\Tests\\": "tests"
         },
         "files": [
-            "src\\app\\Helpers\\CommonHelper.php"
+            "src\\app\\Helpers\\CommonHelper.php",
+            "src\\app\\Helpers\\RouteHelper.php"
         ]
     },
     "extra": {
