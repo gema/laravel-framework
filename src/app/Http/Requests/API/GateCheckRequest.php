@@ -5,7 +5,7 @@ namespace GemaDigital\Http\Requests\API;
 use GemaDigital\Http\Requests\API\Traits\GateCheckTrait;
 use Illuminate\Foundation\Http\FormRequest;
 
-class Request extends FormRequest
+class GateCheckRequest extends FormRequest
 {
     use GateCheckTrait;
 
