@@ -32,6 +32,6 @@ class AdminPanelAccess extends BaseCheckIfAdmin
      */
     public static function hasAccess(): bool
     {
-        return request()->user()?->hasRole('admin');
+        return request()->user()->hasRole('admin') ?? false;
     }
 }
