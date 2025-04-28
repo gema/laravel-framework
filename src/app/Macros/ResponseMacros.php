@@ -7,7 +7,6 @@ use Illuminate\Http\Response;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Routing\ResponseFactory;
 use Illuminate\Support\Arr;
-use Throwable;
 
 class ResponseMacros
 {
@@ -21,7 +20,7 @@ class ResponseMacros
             int $code = 0,
             int $status = 200,
             mixed $errors = null,
-            ?Throwable $exception = null
+            mixed $exception = null
         ): Response {
             $response = [
                 'code' => $code,
@@ -128,7 +127,7 @@ class ResponseMacros
             int $code = 0,
             int $status = 200,
             mixed $errors = null,
-            ?Throwable $exception = null,
+            mixed $exception = null,
         ): Response {
             $data = [
                 ...$data,
