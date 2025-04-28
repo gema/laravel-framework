@@ -31,7 +31,7 @@ class ExceptionHandler
                 default => array_key_exists($exception->getCode(), Response::$statusTexts) ? $exception->getCode() : 400,
             };
 
-            return json_response(null, -1, $code, $errors, [
+            return response()->api(null, -1, $code, $errors, [
                 $name => [
                     'message' => $message,
                     'file' => $file,
