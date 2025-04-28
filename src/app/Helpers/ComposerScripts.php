@@ -1,6 +1,6 @@
 <?php
 
-namespace GemaDigital\Helpers\Composer;
+namespace GemaDigital\Helpers;
 
 class ComposerScripts
 {
