@@ -90,7 +90,7 @@ class GemaDigitalServiceProvider extends ServiceProvider
      */
     public function loadHelpers(): void
     {
-        require_once __DIR__.'/Helpers/GlobalHelper.php';
+        require_once __DIR__.'/Helpers/GlobalHelpers.php';
     }
 
     /**
