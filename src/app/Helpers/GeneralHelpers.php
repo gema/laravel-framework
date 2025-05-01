@@ -3,21 +3,22 @@
 namespace GemaDigital;
 
 use GemaDigital\Events\DefaultEvent;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Redis;
 use GemaDigital\Http\Middleware\AdminPanelAccess;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Redis;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 /**
  * Default welcome logic route.
  */
-function welcomeRoute(): View|RedirectResponse {
-    if(! Auth::check() || AdminPanelAccess::hasAccess()) {
+function welcomeRoute(): View|RedirectResponse
+{
+    if (! Auth::check() || AdminPanelAccess::hasAccess()) {
         return Redirect::to(route('backpack.dashboard'));
     }
 
@@ -41,7 +42,7 @@ function redisPublish(DefaultEvent $event): array
 /**
  * Generates a URL for the given path if it is not already a URL.
  */
-function aurl(string $path, string $disk = null): string
+function aurl(string $path, ?string $disk = null): string
 {
     return str_starts_with($path, 'http') ? $path : ($disk ? Storage::disk($disk)->url($path) : Storage::url($path));
 }

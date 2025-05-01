@@ -27,8 +27,6 @@ class AdminPanelAccess extends BaseCheckIfAdmin
 
     /**
      * Check if the user is an admin.
-     *
-     * @return bool
      */
     public static function hasAccess(): bool
     {

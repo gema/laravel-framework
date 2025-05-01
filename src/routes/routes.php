@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\User;
 use GemaDigital\Http\Controllers\Admin\AdminActionsController;
 use GemaDigital\Http\Controllers\Admin\BuildController;
 use GemaDigital\Http\Controllers\Admin\CacheController;
@@ -7,8 +8,6 @@ use GemaDigital\Http\Controllers\Admin\ImpersonateController;
 use GemaDigital\Http\Controllers\Admin\MaintenanceController;
 use GemaDigital\Http\Controllers\LangController;
 use GemaDigital\Http\Controllers\SessionController;
-
-use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
@@ -62,13 +61,13 @@ Route::group(['middleware' => 'web'], function () {
 // Socialite login
 Route::get('/auth/redirect/{driver}', fn (string $driver): RedirectResponse => Socialite::driver($driver)->redirect())
     ->name('socialite.login');
- 
+
 Route::get('/auth/callback/{driver}', function (string $driver): RedirectResponse {
     $socialUser = Socialite::driver($driver)->user();
 
     $user = User::query()
         ->where('email', $socialUser->getEmail())
-        ->firstOr(fn() => User::create([
+        ->firstOr(fn () => User::create([
             'name' => $socialUser->getName(),
             'email' => $socialUser->getEmail(),
             'avatar' => $socialUser->getAvatar(),
@@ -78,7 +77,7 @@ Route::get('/auth/callback/{driver}', function (string $driver): RedirectRespons
     $user->name = $socialUser->getName();
     $user->avatar = $socialUser->getAvatar();
     $user->socialite = [
-        ... (array) $user->socialite,
+        ...(array) $user->socialite,
         $driver => [
             'id' => $socialUser->getId(),
             'name' => $socialUser->getName(),
@@ -94,6 +93,6 @@ Route::get('/auth/callback/{driver}', function (string $driver): RedirectRespons
     }
 
     Auth::login($user);
- 
+
     return redirect(route('backpack.dashboard'));
 });
