@@ -2,22 +2,28 @@
 
 return [
     'colors' => [
-        ['#283240', 'rgb(40, 50, 64)'],
-        ['#702f39', 'rgb(112, 47, 57)'],
+        ['#283240', '40, 50, 64'],
+        ['#702f39', '112, 47, 57'],
+    ],
+
+    'auto_admin_domains' => [
+        'gemadigital.com',
+        'brightnow.app',
+        'immera.io',
     ],
 
     'sidebar' => [
-        'filemanager' => true,
-        'backups' => true,
+        'filemanager' => false,
+        'backups' => false,
         'translations' => true,
-        'pages' => true,
+        'pages' => false,
         'authentication' => true,
-        'settings' => true,
+        'settings' => false,
         'logs' => true,
     ],
 
     'build' => [
-        'enabled' => true,
+        'enabled' => false,
         'path' => base_path('parcel/data.json'),
         'classes' => [
             // \App\Models\Article::class => \App\Http\Resources\Article::class,

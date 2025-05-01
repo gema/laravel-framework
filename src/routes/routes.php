@@ -8,6 +8,12 @@ use GemaDigital\Http\Controllers\Admin\MaintenanceController;
 use GemaDigital\Http\Controllers\LangController;
 use GemaDigital\Http\Controllers\SessionController;
 
+use App\Models\User;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Str;
+use Laravel\Socialite\Facades\Socialite;
+
 // Admin
 Route::group([
     'prefix' => config('backpack.base.route_prefix', 'admin'),
@@ -51,4 +57,43 @@ Route::group(['middleware' => 'web'], function () {
     // Pages
     // Route::get('{page}/{subs?}', [PageController::class, 'index'])
     //     ->where(['page' => '^((?!admin).)|[^/]*$', 'subs' => '.*']);
+});
+
+// Socialite login
+Route::get('/auth/redirect/{driver}', fn (string $driver): RedirectResponse => Socialite::driver($driver)->redirect())
+    ->name('socialite.login');
+ 
+Route::get('/auth/callback/{driver}', function (string $driver): RedirectResponse {
+    $socialUser = Socialite::driver($driver)->user();
+
+    $user = User::query()
+        ->where('email', $socialUser->getEmail())
+        ->firstOr(fn() => User::create([
+            'name' => $socialUser->getName(),
+            'email' => $socialUser->getEmail(),
+            'avatar' => $socialUser->getAvatar(),
+            'password' => bcrypt(Str::random(16)),
+        ]));
+
+    $user->name = $socialUser->getName();
+    $user->avatar = $socialUser->getAvatar();
+    $user->socialite = [
+        ... (array) $user->socialite,
+        $driver => [
+            'id' => $socialUser->getId(),
+            'name' => $socialUser->getName(),
+            'email' => $socialUser->getEmail(),
+            'avatar' => $socialUser->getAvatar(),
+        ],
+    ];
+    $user->save();
+
+    // Check user domain
+    if (in_array(Str::afterLast($user->email, '@'), config('gemadigital.auto_admin_domains', []))) {
+        $user->assignRole('admin');
+    }
+
+    Auth::login($user);
+ 
+    return redirect(route('backpack.dashboard'));
 });
