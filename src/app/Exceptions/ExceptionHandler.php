@@ -2,11 +2,8 @@
 
 namespace GemaDigital\Exceptions;
 
-use Illuminate\Auth\Access\AuthorizationException;
-use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Throwable;
 
 class ExceptionHandler
@@ -23,13 +20,7 @@ class ExceptionHandler
             $file = preg_replace('/\\\/', '/', str_replace(base_path(), '', $exception->getFile()));
             $message = htmlspecialchars($exception->getMessage());
             $errors = method_exists($exception, 'errors') ? $exception->errors() : ['exception' => $message];
-
-            // error code
-            $code = match (true) {
-                $exception instanceof AuthorizationException => 403,
-                $exception instanceof AuthenticationException => 401,
-                default => array_key_exists($exception->getCode(), Response::$statusTexts) ? $exception->getCode() : 400,
-            };
+            $code = method_exists($exception, 'getStatusCode') ? $exception->getStatusCode() : 400;
 
             return response()->api(null, -1, $code, $errors, [
                 $name => [
