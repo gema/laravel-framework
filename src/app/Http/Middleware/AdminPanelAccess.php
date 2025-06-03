@@ -4,6 +4,7 @@ namespace GemaDigital\Http\Middleware;
 
 use Backpack\CRUD\app\Http\Middleware\CheckIfAdmin as BaseCheckIfAdmin;
 use Closure;
+use Illuminate\Http\Request;
 
 class AdminPanelAccess extends BaseCheckIfAdmin
 {
@@ -14,7 +15,10 @@ class AdminPanelAccess extends BaseCheckIfAdmin
      */
     public function handle($request, Closure $next)
     {
-        if (! self::hasAccess()) {
+        // Boot the access check
+        $this->bootAccess($request);
+
+        if (! $this->hasAccess($request)) {
             if ($request->ajax() || $request->wantsJson()) {
                 return response(trans('backpack::base.unauthorized'), 401);
             } else {
@@ -28,8 +32,28 @@ class AdminPanelAccess extends BaseCheckIfAdmin
     /**
      * Check if the user is an admin.
      */
-    public static function hasAccess(): bool
+    public function bootAccess(Request $request): void
     {
-        return request()->user()?->hasRole('admin') ?? false;
+        // This method is intentionally left empty.
+        // It can be used to perform any bootstrapping logic if needed.
+    }
+
+    /**
+     * Check if the user is an admin.
+     * This method is used to determine if the user has access to the admin panel.
+     * It's meant to be overridden in child classes if needed.
+     */
+    public function hasAccess(Request $request): bool
+    {
+        return $request->user()?->hasRole('admin') ?? false;
+    }
+
+    /**
+     * Check if the user is an admin.
+     * This static method can be used to check access without needing an instance of the class.
+     */
+    public static function checkAccess(): bool
+    {
+        return (new self())->hasAccess(request());
     }
 }

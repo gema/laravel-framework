@@ -18,7 +18,7 @@ use Illuminate\Support\Str;
  */
 function welcomeRoute(): View|RedirectResponse
 {
-    if (! Auth::check() || AdminPanelAccess::hasAccess()) {
+    if (! Auth::check() || AdminPanelAccess::checkAccess()) {
         return Redirect::to(route('backpack.dashboard'));
     }
 
