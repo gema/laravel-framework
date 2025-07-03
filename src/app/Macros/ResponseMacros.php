@@ -70,7 +70,7 @@ class ResponseMacros
             }
 
             return response($result, $status)
-                ->header('Content-Type', 'text/json')
+                ->header('Content-Type', 'application/json')
                 ->header('Content-Length', strval(strlen($result)));
         });
 
@@ -93,7 +93,7 @@ class ResponseMacros
             $result = str_replace('"RAW"', $raw, $result);
 
             return response($result, $status)
-                ->header('Content-Type', 'text/json')
+                ->header('Content-Type', 'application/json')
                 ->header('Content-Length', strval(strlen($result)));
         });
 
