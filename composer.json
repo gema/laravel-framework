@@ -16,18 +16,9 @@
     ],
     "require": {
         "php": "^8.3|^8.4",
-        "backpack/activity-log": "^2.0",
-        "backpack/crud": "^6.8",
-        "backpack/pro": "^2.0",
-        "backpack/language-switcher": "^2.0",
-        "backpack/logmanager": "^5.0",
-        "backpack/permissionmanager": "^7.0",
-        "backpack/translation-manager": "^1.0",
         "illuminate/support": "~12",
         "laravel/framework": "^12.0",
-        "laravel/tinker": "^2.0",
-        "spatie/laravel-cookie-consent": "^3.2",
-        "spatie/laravel-translatable": "^6.1"
+        "laravel/tinker": "^2.0"
     },
     "require-dev": {
         "rector/rector": "^2.0",
