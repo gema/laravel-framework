@@ -10,12 +10,12 @@ class MaintenanceController extends CrudController
 {
     public function up(Request $request): Response
     {
-        return json_status(! Artisan::call('up'));
+        return response()->apiStatus(! Artisan::call('up'));
     }
 
     public function down(Request $request): Response
     {
-        return json_status(! Artisan::call('down', [
+        return response()->apiStatus(! Artisan::call('down', [
             '--allow' => $_SERVER['REMOTE_ADDR'],
         ]));
     }
