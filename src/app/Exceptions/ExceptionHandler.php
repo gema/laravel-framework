@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Exceptions;
+namespace GemaDigital\Exceptions;
 
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Exceptions\Handler;
