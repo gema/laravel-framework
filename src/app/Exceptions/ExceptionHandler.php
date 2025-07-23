@@ -1,31 +1,27 @@
 <?php
 
-namespace GemaDigital\Exceptions;
+namespace App\Exceptions;
 
-use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Configuration\Exceptions;
+use Illuminate\Foundation\Exceptions\Handler;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Throwable;
 
-class ExceptionHandler
+class ExceptionHandler extends Handler
 {
+    /**
+     * Handle the incoming exceptions.
+     */
     public static function handle(Exceptions $exceptions): void
     {
-        $exceptions->render(self::render(...));
-    }
-
-    public static function render(Throwable $exception, Request $request)
-    {
-        if ($request->expectsJson()) {
+        $exceptions->respond(function (Response|JsonResponse $response, Throwable $exception, Request $request): Response {
             $name = basename($exception::class);
             $file = preg_replace('/\\\/', '/', str_replace(base_path(), '', $exception->getFile()));
             $message = htmlspecialchars($exception->getMessage());
             $errors = method_exists($exception, 'errors') ? $exception->errors() : ['exception' => $message];
-
-            $code = match ($exception::class) {
-                AuthenticationException::class => 401,
-                default => method_exists($exception, 'getStatusCode') ? $exception->getStatusCode() : 400,
-            };
+            $code = $response->getStatusCode() ?: 400;
 
             return response()->api(null, -1, $code, $errors, [
                 $name => [
@@ -35,6 +31,6 @@ class ExceptionHandler
                     'code' => $exception->getCode(),
                 ],
             ]);
-        }
+        });
     }
 }
