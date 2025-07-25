@@ -17,13 +17,13 @@
     "require": {
         "php": "^8.3|^8.4",
         "illuminate/support": "~12",
-        "laravel/framework": "^12.10",
+        "laravel/framework": "^12.21",
         "laravel/tinker": "^2.0"
     },
     "require-dev": {
-        "rector/rector": "^2.0",
-        "larastan/larastan": "^3.0",
-        "laravel/pint": "^1.15"
+        "rector/rector": "^2.1",
+        "larastan/larastan": "^3.6",
+        "laravel/pint": "^1.24"
     },
     "repositories": [
         {
