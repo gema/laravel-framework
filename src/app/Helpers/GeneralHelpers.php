@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use ReflectionClass;
+use WeakMap;
 
 /**
  * Default welcome logic route.
