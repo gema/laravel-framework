@@ -3,8 +3,10 @@
 namespace GemaDigital\Events;
 
 use Carbon\Carbon;
+use function Gemadigital\get_class_name;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
+use Illuminate\Foundation\Auth\User;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Arr;
@@ -63,6 +65,7 @@ abstract class DefaultEvent
      */
     public function getUserData(): ?object
     {
+        /** @var User */
         $user = Auth::user();
 
         return $user ? (object) $user->only(['id', 'name', 'email']) : null;

@@ -36,7 +36,8 @@
             "GemaDigital\\": "src/app/"
         },
         "files": [
-            "src\\_ide_helper.php"
+            "src\\app\\Helpers\\GlobalHelpers.php",
+            "src\\app\\Helpers\\GeneralHelpers.php"
         ]
     },
     "autoload-dev": {
@@ -44,8 +45,7 @@
             "GemaDigital\\Tests\\": "tests"
         },
         "files": [
-            "src\\app\\Helpers\\GlobalHelpers.php",
-            "src\\app\\Helpers\\GeneralHelpers.php"
+            "src\\_ide_helper.php"
         ]
     },
     "extra": {
