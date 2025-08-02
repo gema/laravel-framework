@@ -34,10 +34,7 @@
     "autoload": {
         "psr-4": {
             "GemaDigital\\": "src/app/"
-        },
-        "files": [
-            "src/_ide_helper.php"
-        ]
+        }
     },
     "autoload-dev": {
         "psr-4": {
@@ -45,7 +42,8 @@
         },
         "files": [
             "src\\app\\Helpers\\GlobalHelpers.php",
-            "src\\app\\Helpers\\GeneralHelpers.php"
+            "src\\app\\Helpers\\GeneralHelpers.php",
+            "src\\_ide_helper.php"
         ]
     },
     "extra": {
