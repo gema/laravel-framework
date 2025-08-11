@@ -9,6 +9,7 @@ use GemaDigital\Http\Controllers\Admin\MaintenanceController;
 use GemaDigital\Http\Controllers\LangController;
 use GemaDigital\Http\Controllers\SessionController;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 use Laravel\Socialite\Facades\Socialite;
@@ -19,8 +20,6 @@ Route::group([
     'middleware' => ['web', config('backpack.base.middleware_key', 'admin')],
 ], function () {
     // Admin Actions
-    Route::get('terminal', [AdminActionsController::class, 'terminal'])->name('terminal');
-    Route::post('terminal/run', [AdminActionsController::class, 'terminalRun'])->name('terminal_run');
     Route::get('actions', [AdminActionsController::class, 'actions'])->name('actions');
 
     // Build
@@ -80,12 +79,13 @@ Route::group(['middleware' => 'web'], function () {
                 'avatar' => $socialUser->getAvatar(),
             ],
         ];
-        $user->save();
 
         // Check user domain
         if (in_array(Str::afterLast($user->email, '@'), config('gemadigital.auto_admin_domains', []))) {
-            $user->assignRole('admin');
+            $user->is_admin = true;
         }
+
+        $user->save();
 
         Auth::login($user);
 

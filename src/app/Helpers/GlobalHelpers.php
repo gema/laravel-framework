@@ -1,27 +1,28 @@
 <?php
 
+use App\Models\User;
+use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Lang;
 
 if (! function_exists('user')) {
-    function user()
+    function user(): ?User
     {
-        return Auth::user() ?? backpack_user();
+        return Auth::user();
     }
 }
 
 if (! function_exists('debugMode')) {
     function debugMode(): bool
     {
-        return Config::get('app.debug', false);
+        return config('app.debug', false);
     }
 }
 
-if (! function_exists('admin')) {
-    function admin(): bool
+if (! function_exists('isAdmin')) {
+    function isAdmin(?Authenticatable $user = null): bool
     {
-        return user()?->hasRole('admin');
+        return ($user ?? user())?->id_admin ?? false;
     }
 }
 

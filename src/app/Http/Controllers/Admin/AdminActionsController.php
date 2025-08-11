@@ -2,9 +2,7 @@
 
 namespace GemaDigital\Http\Controllers\Admin;
 
-use Exception;
 use Illuminate\Contracts\View\View;
-use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
 class AdminActionsController extends Controller
@@ -13,16 +11,5 @@ class AdminActionsController extends Controller
     {
         // @phpstan-ignore argument.type
         return view('gemadigital::admin.actions', []);
-    }
-
-    public function terminal(): View
-    {
-        // @phpstan-ignore argument.type
-        return view('gemadigital::admin.terminal', []);
-    }
-
-    public function terminalRun(Request $request): void
-    {
-        throw new Exception('Deprecated');
     }
 }

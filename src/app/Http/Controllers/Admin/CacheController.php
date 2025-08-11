@@ -4,10 +4,11 @@ namespace GemaDigital\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Cache;
 
-class CacheController extends CrudController
+class CacheController extends Controller
 {
     public function flush(Request $request): Response
     {

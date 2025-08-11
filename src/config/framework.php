@@ -6,11 +6,9 @@ return [
         ['#702f39', '112, 47, 57'],
     ],
 
-    'auto_admin_domains' => [
-        'gemadigital.com',
-        'brightnow.app',
-        'immera.io',
-    ],
+    'auto_admin_domains' => explode(',',
+        env('AUTO_ADMIN_DOMAINS', 'gemadigital.com,immera.io')
+    ),
 
     'sidebar' => [
         'filemanager' => false,

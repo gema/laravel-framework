@@ -45,7 +45,7 @@ class AdminPanelAccess extends BaseCheckIfAdmin
      */
     public function hasAccess(Request $request): bool
     {
-        return $request->user()?->hasRole('admin') ?? false;
+        return isAdmin($request->user());
     }
 
     /**
@@ -54,6 +54,6 @@ class AdminPanelAccess extends BaseCheckIfAdmin
      */
     public static function checkAccess(): bool
     {
-        return (new self())->hasAccess(request());
+        return (new self)->hasAccess(request());
     }
 }

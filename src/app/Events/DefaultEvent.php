@@ -3,7 +3,6 @@
 namespace GemaDigital\Events;
 
 use Carbon\Carbon;
-use function Gemadigital\get_class_name;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Foundation\Auth\User;
@@ -12,6 +11,8 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use ReflectionClass;
+
+use function Gemadigital\get_class_name;
 
 abstract class DefaultEvent
 {

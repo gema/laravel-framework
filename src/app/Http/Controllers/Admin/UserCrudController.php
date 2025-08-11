@@ -37,7 +37,7 @@ class UserCrudController extends OriginalUserCrudController
                 $user = User::find(Session::get('impersonator'));
             }
 
-            return $user->hasRole('admin') && $entry->id !== $user->id && $entry->id !== (int) Session::get('impersonated');
+            return isAdmin($user) && $entry->id !== $user->id && $entry->id !== (int) Session::get('impersonated');
         });
 
         parent::setupListOperation();

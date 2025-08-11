@@ -14,7 +14,7 @@ class PageCrudController extends OriginalPageCrudController
     {
         parent::setup();
 
-        if (! is('admin')) {
+        if (! isAdmin()) {
             CRUD::denyAccess(['list', 'update']);
         }
 

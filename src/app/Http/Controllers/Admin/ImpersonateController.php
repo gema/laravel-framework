@@ -35,6 +35,6 @@ class ImpersonateController extends Controller
 
     public function canImpersonate(): bool
     {
-        return request()->user()->hasRole('admin');
+        return isAdmin();
     }
 }
