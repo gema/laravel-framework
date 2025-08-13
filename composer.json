@@ -59,6 +59,9 @@
         "analyse": [
             "vendor/bin/phpstan analyse"
         ],
+        "analyse-pint": [
+            "vendor/bin/pint --test"
+        ],
         "pint": [
             "vendor/bin/pint"
         ],

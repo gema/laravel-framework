@@ -31,4 +31,4 @@ jobs:
         run: "composer analyse-pint"
 
       - name: "PHP Stan Analyse"
-        run: "composer analyse-stan"
+        run: "composer analyse"
