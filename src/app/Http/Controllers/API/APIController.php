@@ -6,7 +6,11 @@ use Illuminate\Routing\Controller;
 
 class APIController extends Controller
 {
-    // CURL Helper
+    /**
+     * CURL Helper
+     *
+     * @param  array<string, mixed>|null  $post
+     */
     public function curl_request(string $url, ?array $post = null): string|bool
     {
         $curl = curl_init();

@@ -50,6 +50,6 @@ class PackageCommand extends Command
             'server.php',
         ];
 
-        $this->info(exec('"%ProgramFiles%\7-Zip\7z.exe" a '.$zipName.' '.implode(' ', $files)));
+        $this->info(exec('"%ProgramFiles%\7-Zip\7z.exe" a '.$zipName.' '.implode(' ', $files)) ?: 'Error: ZIP file not created');
     }
 }

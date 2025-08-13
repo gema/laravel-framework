@@ -29,11 +29,17 @@ function welcomeRoute(): View|RedirectResponse
 
 /**
  * Publish an event to a Redis channel.
+ *
+ * @return array<string, mixed>
  */
 function redisPublish(DefaultEvent $event): array
 {
     $redis = Redis::connection();
-    $status = $redis->publish($event->getChannel(), $event->toJson());
+
+    $status = true;
+    foreach ($event->getChannels() as $channel) {
+        $status &= $redis->command('publish', [$channel, $event->toJson()]);
+    }
 
     return [
         'status' => (bool) $status,
@@ -46,7 +52,18 @@ function redisPublish(DefaultEvent $event): array
  */
 function aurl(string $path, ?string $disk = null): string
 {
-    return str_starts_with($path, 'http') ? $path : ($disk ? Storage::disk($disk)->url($path) : Storage::url($path));
+    if (str_starts_with($path, 'http')) {
+        return $path;
+    }
+
+    if ($disk) {
+        /** @var \Illuminate\Filesystem\FilesystemAdapter $adapter */
+        $adapter = Storage::disk($disk);
+
+        return $adapter->url($path);
+    }
+
+    return Storage::url($path);
 }
 
 /**
@@ -62,32 +79,41 @@ function sized_image(string $path, int $size): string
 }
 
 /**
- * Returns the class name of the given object.
+ * Returns the short class name for an object or class-string.
+ *
+ * @param  object|class-string  $objectOrClass
  */
-function get_class_name(string $object): string
+function get_class_name(object|string $objectOrClass): string
 {
-    return (new ReflectionClass($object))->getShortName();
+    return (new ReflectionClass($objectOrClass))->getShortName();
 }
 
 /**
  * Memoizes the result of a method call to avoid redundant computations.
  */
-function memoize(mixed $target): mixed
+function memoize(object $target): mixed
 {
+    /** @var WeakMap<object, array<string, mixed>> $memo */
     static $memo = new WeakMap;
 
     return new class($target, $memo)
     {
+        /**
+         * @param  WeakMap<object, array<string, mixed>>  $memo
+         */
         public function __construct(
-            protected $target,
-            protected &$memo,
+            protected object $target,
+            protected WeakMap &$memo,
         ) {}
 
-        public function __call($method, $params)
+        /**
+         * @param  array<int, mixed>  $params
+         */
+        public function __call(string $method, array $params): mixed
         {
             $this->memo[$this->target] ??= [];
 
-            $signature = $method.crc32(json_encode($params));
+            $signature = $method.crc32(json_encode($params) ?: '');
 
             return $this->memo[$this->target][$signature] ??= $this->target->$method(...$params);
         }
@@ -139,7 +165,7 @@ function isFileVideo(string $filePath): bool
  */
 function isFileType(string $filePath, string $type): bool
 {
-    return File::exists($filePath) && Str::startsWith(File::mimeType($filePath), $type);
+    return File::exists($filePath) && Str::startsWith(File::mimeType($filePath) ?: '', $type);
 }
 
 /**

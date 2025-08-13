@@ -2,7 +2,8 @@
 
 namespace GemaDigital\Macros\Searchable;
 
-use Illuminate\Contracts\Database\Eloquent\Builder;
+use Illuminate\Contracts\Database\Eloquent\Builder as BuilderContract;
+use Illuminate\Database\Eloquent\Builder;
 
 class SearchRelation implements SearchableContract
 {
@@ -23,7 +24,7 @@ class SearchRelation implements SearchableContract
     /**
      * Search method
      */
-    public function search(Builder $query, ?string $searchText): void
+    public function search(BuilderContract $query, ?string $searchText): void
     {
         if (! $searchText) {
             return;
@@ -31,6 +32,9 @@ class SearchRelation implements SearchableContract
 
         $method = $this->orCondition ? 'orWhereHas' : 'whereHas';
 
-        $query->{$method}($this->relation, fn (Builder $q): Builder => $q->whereLike($this->column, $searchText));
+        // Use a normal closure so we don't return the (possibly wrongly typed) result of whereLike.
+        $query->{$method}($this->relation, function (Builder $q) use ($searchText): void {
+            $q->whereLike($this->column, $searchText);
+        });
     }
 }

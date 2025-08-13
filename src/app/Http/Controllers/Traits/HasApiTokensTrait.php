@@ -8,6 +8,7 @@ use Laravel\Sanctum\HasApiTokens as OriginalHasApiTokens;
 use Laravel\Sanctum\NewAccessToken;
 use Laravel\Sanctum\PersonalAccessToken;
 
+/** @phpstan-ignore trait.unused */
 trait HasApiTokensTrait
 {
     use OriginalHasApiTokens;

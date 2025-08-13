@@ -1,23 +1,25 @@
-includes:
-    - ./vendor/larastan/larastan/extension.neon
-
 parameters:
 
     paths:
-        - src/app/
-        - src/config/
-        - src/database/
-        - src/resources/
-        - src/routes/
+        - src/
 
     excludePaths:
+        - src/_ide_helper.php
         - *.blade.php
+        - src/app/Http/Controllers/Admin/CrudController.php
         - src/app/Http/Controllers/Admin/PageCrudController.php
+        - src/app/Http/Controllers/Admin/UserCrudController.php
+        - src/app/Http/Middleware/AdminPanelAccess.php
         - src/app/Models/Page.php
 
     ignoreErrors:
-        - '#outside of the config#'
+        - '#App\\Models\\User#'
         - '#Laravel\\Sanctum#'
+        - '#Laravel\\Socialite#'
         - '#DB::rawMatch#'
+        - '#ResponseFactory::api#'
 
-    level: 5
+    level: 8
+
+    bootstrapFiles:
+        - src\\_ide_helper.php

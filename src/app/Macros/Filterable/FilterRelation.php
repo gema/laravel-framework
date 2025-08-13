@@ -28,11 +28,13 @@ class FilterRelation implements FilterableContract
         $model = $query->getModel();
 
         // relation attributes
+        /** @var mixed $relation */
         $relation = $model->{$this->relation}();
         $table = $relation->getModel()->getTable();
         $key = $this->column;
 
-        if (method_exists($relation, 'getLocalKeyName')) {
+        if (is_object($relation) && method_exists($relation, 'getLocalKeyName')) {
+            /** @var string $key */
             $key = $relation->getLocalKeyName();
         }
 

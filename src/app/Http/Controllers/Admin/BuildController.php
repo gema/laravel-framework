@@ -7,6 +7,8 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 
+use function Gemadigital\get_class_name;
+
 class BuildController extends Controller
 {
     public function build(Request $request): string|false|null
@@ -30,7 +32,7 @@ class BuildController extends Controller
 
     public function save(mixed $data): int|bool
     {
-        return File::put(config('gemadigital.build.path'), json_encode($data));
+        return File::put(config('gemadigital.build.path'), json_encode($data) ?: '');
     }
 
     public function shellExec(): string|false|null

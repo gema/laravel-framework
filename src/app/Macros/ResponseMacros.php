@@ -28,9 +28,10 @@ class ResponseMacros
                 'errors' => $errors,
             ];
 
-            $result = json_encode($response);
+            $result = json_encode($response) ?: '';
 
             if (debugMode()) {
+                /** @phpstan-ignore-next-line */
                 $time = (int) ((microtime(true) - LARAVEL_START) * 1e6);
                 $timeData = $time > 1e6 ? [$time / 1e6, 's'] : (
                     $time > 1e3 ? [$time / 1e3, 'ms'] : (
@@ -65,7 +66,7 @@ class ResponseMacros
                     'post' => request()->request->all(),
                 ]]);
 
-                $result = json_encode($response);
+                $result = json_encode($response) ?: '';
             }
 
             return response($result, $status)
@@ -88,7 +89,7 @@ class ResponseMacros
                 'errors' => $errors,
             ];
 
-            $result = json_encode($response);
+            $result = json_encode($response) ?: '';
             $result = str_replace('"RAW"', $raw, $result);
 
             return response($result, $status)
@@ -131,7 +132,7 @@ class ResponseMacros
         ): Response {
             $data = [
                 ...$data,
-                'pagination' => Arr::only($pagination?->toArray(), [
+                'pagination' => Arr::only($pagination?->toArray() ?? [], [
                     'from',
                     'to',
                     'total',

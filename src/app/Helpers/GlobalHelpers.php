@@ -22,11 +22,15 @@ if (! function_exists('debugMode')) {
 if (! function_exists('isAdmin')) {
     function isAdmin(?Authenticatable $user = null): bool
     {
-        return ($user ?? user())?->id_admin ?? false;
+        return ($user ?? user())->id_admin ?? false;
     }
 }
 
 if (! function_exists('is')) {
+    /**
+     * @param  string|array<string>  $roles
+     * @param  string|array<string>|null  $permissions
+     */
     function is(string|array $roles, string|array|null $permissions = null): bool
     {
         return user()?->hasRole($roles) || user()?->hasAnyPermission($permissions);
@@ -34,6 +38,9 @@ if (! function_exists('is')) {
 }
 
 if (! function_exists('__fallback')) {
+    /**
+     * @param  array<string, string>  $replace
+     */
     function __fallback(
         string $key,
         ?string $fallback = null,
@@ -41,7 +48,9 @@ if (! function_exists('__fallback')) {
         array $replace = [],
     ): ?string {
         if (Lang::has($key, $locale)) {
-            return trans($key, $replace, $locale);
+            $trans = trans($key, $replace, $locale);
+
+            return is_array($trans) ? $trans[0] : $trans;
         }
 
         return $fallback;

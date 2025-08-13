@@ -57,7 +57,7 @@
     },
     "scripts": {
         "analyse": [
-            "vendor/bin/phpstan analyse src"
+            "vendor/bin/phpstan analyse"
         ],
         "pint": [
             "vendor/bin/pint"

@@ -41,11 +41,18 @@ class AppLocale
             return Session::get('locale');
         }
 
-        $appLocales = config('app.locales');
-        $requestLocales = preg_split('/,|;/', $request->server('HTTP_ACCEPT_LANGUAGE'));
+        /** @var array<int,string> $appLocales */
+        $appLocales = (array) config('app.locales', []);
+        $rawAccept = $request->server('HTTP_ACCEPT_LANGUAGE');
+        if (is_array($rawAccept)) {
+            $rawAccept = reset($rawAccept) ?: '';
+        }
+        $acceptLanguage = is_string($rawAccept) ? $rawAccept : '';
+        /** @var array<int,string> $requestLocales */
+        $requestLocales = preg_split('/,|;/', $acceptLanguage) ?: [];
 
         foreach ($requestLocales as $locale) {
-            if (in_array($locale, $appLocales)) {
+            if (in_array($locale, $appLocales, true)) {
                 Session::put('locale', $locale);
 
                 return $locale;

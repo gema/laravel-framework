@@ -9,7 +9,6 @@ class AdminActionsController extends Controller
 {
     public function actions(): View
     {
-        // @phpstan-ignore argument.type
         return view('gemadigital::admin.actions', []);
     }
 }

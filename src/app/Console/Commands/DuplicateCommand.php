@@ -51,6 +51,6 @@ class DuplicateCommand extends Command
             '*.zip',
         ];
 
-        $this->info(exec('"%ProgramFiles%\7-Zip\7z.exe" a '.$zipName.' -spf -xr0!'.implode(' -xr0!', $exclude)));
+        $this->info(exec('"%ProgramFiles%\7-Zip\7z.exe" a '.$zipName.' -spf -xr0!'.implode(' -xr0!', $exclude)) ?: 'Error: ZIP file not created');
     }
 }

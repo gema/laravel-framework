@@ -27,10 +27,10 @@ trait GateCheckTrait
             $reflectionFunction = new ReflectionFunction($uses);
 
             $method = $reflectionFunction->getName();
-            $controller = $reflectionFunction->getClosureScopeClass()->getName();
+            $controller = $reflectionFunction->getClosureScopeClass()?->getName();
             $parameters = $reflectionFunction->getParameters();
         }
 
-        return Gate::check($method ?? null, [$controller ?? null, ...array_values($parameters ?? [])]);
+        return Gate::check($method ?? '', [$controller ?? null, ...array_values($parameters ?? [])]);
     }
 }

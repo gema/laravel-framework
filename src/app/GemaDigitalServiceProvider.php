@@ -10,6 +10,11 @@ use Illuminate\Support\ServiceProvider;
 
 class GemaDigitalServiceProvider extends ServiceProvider
 {
+    /**
+     * The console commands to be registered.
+     *
+     * @var array<class-string>
+     */
     protected array $commands = [
         \GemaDigital\Console\Commands\DuplicateCommand::class,
         \GemaDigital\Console\Commands\InstallCommand::class,

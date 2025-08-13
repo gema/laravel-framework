@@ -1,0 +1,34 @@
+name: "PHPStan and Pint"
+
+on: [push]
+
+jobs:
+  phpstan-dev:
+    strategy:
+      matrix:
+        php: ["8.4"]
+
+    name: "PHP ${{ matrix.php }}"
+
+    runs-on: "ubuntu-latest"
+
+    steps:
+      - name: "Checkout code"
+        uses: "actions/checkout@v4"
+
+      - name: "Setup PHP"
+        uses: "shivammathur/setup-php@v2"
+        with:
+          php-version: "${{ matrix.php }}"
+          extensions: "zip"
+          tools: "composer:v2"
+          coverage: "none"
+
+      - name: "Install dependencies from composer.json"
+        run: "composer install --no-interaction --no-progress"
+
+      - name: "PHP Pint Test"
+        run: "composer analyse-pint"
+
+      - name: "PHP Stan Analyse"
+        run: "composer analyse-stan"

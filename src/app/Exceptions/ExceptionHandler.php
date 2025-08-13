@@ -13,6 +13,7 @@ class ExceptionHandler
         $exceptions->render(self::render(...));
     }
 
+    /** @phpstan-ignore-next-line */
     public static function render(Throwable $exception, Request $request)
     {
         if ($request->expectsJson()) {

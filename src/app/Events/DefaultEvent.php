@@ -21,6 +21,9 @@ abstract class DefaultEvent
     use SerializesEvents;
     use SerializesModels;
 
+    /**
+     * @var array<string>
+     */
     public array $channels;
 
     public ?object $user;
@@ -29,6 +32,8 @@ abstract class DefaultEvent
 
     /**
      * Create a new event instance.
+     *
+     * @param  string|array<string>  $channels
      */
     public function __construct(string|array $channels)
     {
@@ -47,6 +52,8 @@ abstract class DefaultEvent
 
     /**
      * Get the channels the event should broadcast on.
+     *
+     * @return array<Channel>
      */
     public function broadcastOn(): array
     {
@@ -55,6 +62,8 @@ abstract class DefaultEvent
 
     /**
      * Get the channels the event should broadcast on.
+     *
+     * @return array<string>
      */
     public function getChannels(): array
     {
@@ -66,7 +75,7 @@ abstract class DefaultEvent
      */
     public function getUserData(): ?object
     {
-        /** @var User */
+        /** @var ?User */
         $user = Auth::user();
 
         return $user ? (object) $user->only(['id', 'name', 'email']) : null;

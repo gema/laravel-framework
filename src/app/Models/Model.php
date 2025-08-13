@@ -7,4 +7,5 @@ use Illuminate\Database\Eloquent\Model as OriginalModel;
 class Model extends OriginalModel
 {
     use Traits\EventMethods;
+    use Traits\RandomModelTrait;
 }

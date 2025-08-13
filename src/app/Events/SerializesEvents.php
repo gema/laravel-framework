@@ -4,6 +4,9 @@ namespace GemaDigital\Events;
 
 trait SerializesEvents
 {
+    /**
+     * @return array<string, mixed>
+     */
     public function toArray(): array
     {
         return [
@@ -15,6 +18,6 @@ trait SerializesEvents
 
     public function toJson(): string
     {
-        return json_encode($this->toArray());
+        return json_encode($this->toArray()) ?: '[]';
     }
 }

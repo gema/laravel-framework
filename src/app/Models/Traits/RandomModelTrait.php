@@ -15,6 +15,7 @@ trait RandomModelTrait
      */
     public static function random(): EloquentModel|null|static
     {
+        /** @phpstan-ignore-next-line */
         return static::inRandomOrder()->first();
     }
 
@@ -25,6 +26,7 @@ trait RandomModelTrait
      */
     public static function randomOrNew(): EloquentModel|Factory|static
     {
+        /** @phpstan-ignore-next-line */
         return static::inRandomOrder()->first() ?? self::factory();
     }
 }
