@@ -17,7 +17,6 @@ class GemaDigitalServiceProvider extends ServiceProvider
      */
     protected array $commands = [
         \GemaDigital\Console\Commands\DuplicateCommand::class,
-        \GemaDigital\Console\Commands\InstallCommand::class,
         \GemaDigital\Console\Commands\PackageCommand::class,
         \GemaDigital\Console\Commands\PublishCommand::class,
     ];
