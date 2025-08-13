@@ -33,7 +33,10 @@
     ],
     "autoload": {
         "psr-4": {
-            "GemaDigital\\": "src/app/"
+            "GemaDigital\\": [
+                "src/app/",
+                "src/database/seeders/"
+            ]
         },
         "files": [
             "src\\app\\Helpers\\GlobalHelpers.php",
