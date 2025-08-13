@@ -20,9 +20,11 @@ if (! function_exists('debugMode')) {
 }
 
 if (! function_exists('isAdmin')) {
-    function isAdmin(?Authenticatable $user = null): bool
+    function isAdmin(?User $user = null): bool
     {
-        return ($user ?? user())->id_admin ?? false;
+        $user ??= user();
+
+        return $user->is_admin ?? false;
     }
 }
 
