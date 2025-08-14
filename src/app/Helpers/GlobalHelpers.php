@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\User;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Lang;
 
@@ -19,7 +20,7 @@ if (! function_exists('debugMode')) {
 }
 
 if (! function_exists('isAdmin')) {
-    function isAdmin(?User $user = null): bool
+    function isAdmin(User|Model|null $user = null): bool
     {
         $user ??= user();
 
