@@ -8,7 +8,7 @@ use Illuminate\Contracts\Database\Eloquent\Builder;
 class FilterCustom implements FilterableContract
 {
     /**
-     * @param  array<string, mixed>  $dependencies
+     * @param  array<int, string>  $dependencies
      */
     public function __construct(
         public string $column,
@@ -28,7 +28,7 @@ class FilterCustom implements FilterableContract
     /**
      * Make Custom Filter with other column dependancy
      *
-     * @param  array<string, mixed>  $dependencies
+     * @param  array<int, string>  $dependencies
      */
     public static function makeWith(string $column, array $dependencies, Closure $closure, bool $callAlways = false): FilterCustom
     {
