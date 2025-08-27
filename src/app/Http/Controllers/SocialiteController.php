@@ -25,6 +25,7 @@ class SocialiteController extends Controller
     public function callback(string $driver): RedirectResponse
     {
         $socialUser = Socialite::driver($driver)->user();
+        $inAllowedDomains = in_array(Str::afterLast($socialUser->getEmail(), '@'), config('gemadigital.auto_admin_domains', []));
 
         // Find user
         $user = User::query()
@@ -32,8 +33,10 @@ class SocialiteController extends Controller
             ->first();
 
         if (! $user) {
-            if (! config('gemadigital.registration_open')) {
-                return redirect()->route('login')->with('error', 'Registration is closed');
+            if (! config('gemadigital.registration_open') && ! $inAllowedDomains) {
+                return redirect()
+                    ->route(route(config('gemadigital.routes.list.login', 'backpack.auth.login')))
+                    ->with('error', 'Registration is closed');
             }
 
             $user = User::create([
@@ -57,7 +60,7 @@ class SocialiteController extends Controller
         ];
 
         // Check user domain
-        if (in_array(Str::afterLast($user->email, '@'), config('gemadigital.auto_admin_domains', []))) {
+        if ($inAllowedDomains) {
             $user->is_admin = true;
         }
 
