@@ -26,14 +26,23 @@ class SocialiteController extends Controller
     {
         $socialUser = Socialite::driver($driver)->user();
 
+        // Find user
         $user = User::query()
             ->where('email', $socialUser->getEmail())
-            ->firstOr(fn () => User::create([
+            ->first();
+
+        if (! $user) {
+            if (! config('gemadigital.registration_open')) {
+                return redirect()->route('login')->with('error', 'Registration is closed');
+            }
+
+            $user = User::create([
                 'name' => $socialUser->getName(),
                 'email' => $socialUser->getEmail(),
                 'avatar' => $socialUser->getAvatar(),
                 'password' => bcrypt(Str::random(16)),
-            ]));
+            ]);
+        }
 
         $user->name = $socialUser->getName();
         $user->avatar = $socialUser->getAvatar();

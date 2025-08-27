@@ -10,6 +10,8 @@ return [
         env('AUTO_ADMIN_DOMAINS', 'gemadigital.com,immera.io')
     ),
 
+    'registration_open' => env('REGISTRATION_OPEN', env('BACKPACK_REGISTRATION_OPEN', env('APP_ENV') === 'local')),
+
     'sidebar' => [
         'filemanager' => false,
         'backups' => false,
