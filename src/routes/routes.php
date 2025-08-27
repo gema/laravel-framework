@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\User;
 use GemaDigital\Http\Controllers\Admin\AdminActionsController;
 use GemaDigital\Http\Controllers\Admin\BuildController;
 use GemaDigital\Http\Controllers\Admin\CacheController;
