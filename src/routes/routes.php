@@ -8,16 +8,13 @@ use GemaDigital\Http\Controllers\Admin\ImpersonateController;
 use GemaDigital\Http\Controllers\Admin\MaintenanceController;
 use GemaDigital\Http\Controllers\LangController;
 use GemaDigital\Http\Controllers\SessionController;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Auth;
+use GemaDigital\Http\Controllers\SocialiteController;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Str;
-use Laravel\Socialite\Facades\Socialite;
 
 // Admin
 Route::group([
-    'prefix' => config('backpack.base.route_prefix', 'admin'),
-    'middleware' => ['web', config('backpack.base.middleware_key', 'admin')],
+    'prefix' => config('gemadigital.routes.prefix', 'admin'),
+    'middleware' => ['web', config('gemadigital.routes.middleware', 'admin')],
 ], function () {
     // Admin Actions
     Route::get('actions', [AdminActionsController::class, 'actions'])->name('actions');
@@ -26,7 +23,7 @@ Route::group([
     Route::post('build', [BuildController::class, 'build'])->name('build');
 
     // Impersonate
-    Route::get('impersonate/leave', [ImpersonateController::class, 'leave'])->name('impersonate.leave')->withoutMiddleware(config('backpack.base.middleware_key', 'admin'));
+    Route::get('impersonate/leave', [ImpersonateController::class, 'leave'])->name('impersonate.leave')->withoutMiddleware(config('gemadigital.routes.middleware', 'admin'));
     Route::get('impersonate/{id}', [ImpersonateController::class, 'impersonate'])->name('impersonate');
 
     // Cache
@@ -52,45 +49,12 @@ Route::group(['middleware' => 'web'], function () {
     Route::any('lang/{locale}', [LangController::class, 'setLang'])
         ->where('locale', '[a-z]{2}(-[A-Z]{2})?')->name('lang');
 
-    // Socialite login
-    Route::get('/auth/redirect/{driver}', fn (string $driver): RedirectResponse => Socialite::driver($driver)->redirect())
+    // Socialite
+    Route::get('/auth/redirect/{driver}', [SocialiteController::class, 'login'])
         ->name('socialite.login');
 
-    Route::get('/auth/callback/{driver}', function (string $driver): RedirectResponse {
-        $socialUser = Socialite::driver($driver)->user();
-
-        $user = User::query()
-            ->where('email', $socialUser->getEmail())
-            ->firstOr(fn () => User::create([
-                'name' => $socialUser->getName(),
-                'email' => $socialUser->getEmail(),
-                'avatar' => $socialUser->getAvatar(),
-                'password' => bcrypt(Str::random(16)),
-            ]));
-
-        $user->name = $socialUser->getName();
-        $user->avatar = $socialUser->getAvatar();
-        $user->socialite = [
-            ...(array) $user->socialite,
-            $driver => [
-                'id' => $socialUser->getId(),
-                'name' => $socialUser->getName(),
-                'email' => $socialUser->getEmail(),
-                'avatar' => $socialUser->getAvatar(),
-            ],
-        ];
-
-        // Check user domain
-        if (in_array(Str::afterLast($user->email, '@'), config('gemadigital.auto_admin_domains', []))) {
-            $user->is_admin = true;
-        }
-
-        $user->save();
-
-        Auth::login($user);
-
-        return redirect(route('backpack.dashboard'));
-    });
+    Route::get('/auth/callback/{driver}', [SocialiteController::class, 'callback'])
+        ->name('socialite.callback');
 
     // Pages
     // Route::get('{page}/{subs?}', [PageController::class, 'index'])

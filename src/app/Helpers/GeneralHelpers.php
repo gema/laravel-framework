@@ -21,7 +21,7 @@ use WeakMap;
 function welcomeRoute(): View|RedirectResponse
 {
     if (! Auth::check() || AdminPanelAccess::checkAccess()) {
-        return Redirect::to(route('backpack.dashboard'));
+        return Redirect::to(route(config('gemadigital.routes.list.dashboard', 'backpack.dashboard')));
     }
 
     return view('welcome');

@@ -21,7 +21,7 @@ class ImpersonateController extends Controller
             Session::put('impersonator', $request->user()->id);
         }
 
-        return redirect(route('backpack.dashboard'));
+        return redirect(route(config('gemadigital.routes.list.dashboard', 'backpack.dashboard')));
     }
 
     public function leave(): RedirectResponse
@@ -30,7 +30,7 @@ class ImpersonateController extends Controller
         Session::forget('impersonator');
         Session::forget('impersonated');
 
-        return redirect(route('backpack.dashboard'));
+        return redirect(route(config('gemadigital.routes.list.dashboard', 'backpack.dashboard')));
     }
 
     public function canImpersonate(): bool

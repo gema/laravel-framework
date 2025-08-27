@@ -20,6 +20,15 @@ return [
         'logs' => true,
     ],
 
+    'routes' => [
+        'prefix' => 'admin',
+        'middleware' => 'admin',
+        'list' => [
+            'dashboard' => 'backpack.dashboard',
+            'login' => 'backpack.auth.login',
+        ],
+    ],
+
     'build' => [
         'enabled' => false,
         'path' => base_path('parcel/data.json'),

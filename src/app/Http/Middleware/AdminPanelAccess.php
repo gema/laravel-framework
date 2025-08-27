@@ -20,9 +20,9 @@ class AdminPanelAccess extends BaseCheckIfAdmin
 
         if (! $this->hasAccess($request)) {
             if ($request->ajax() || $request->wantsJson()) {
-                return response(trans('backpack::base.unauthorized'), 401);
+                return response(trans('Unauthorized'), 401);
             } else {
-                return redirect()->guest(backpack_url('login'));
+                return redirect()->guest(route(config('gemadigital.routes.list.login', 'backpack.auth.login')));
             }
         }
 
