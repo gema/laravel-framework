@@ -20,7 +20,7 @@ class DatabaseTransactionMiddleware
         /** @var Response $response */
         $response = $next($request);
 
-        ! is_null($response->exception)
+        $response->exception ?? false
             ? DB::rollBack()
             : DB::commit();
 
