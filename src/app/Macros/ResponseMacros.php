@@ -30,7 +30,7 @@ class ResponseMacros
 
             $result = json_encode($response) ?: '';
 
-            if (debugMode()) {
+            if (app()->hasDebugModeEnabled()) {
                 /** @phpstan-ignore-next-line */
                 $time = (int) ((microtime(true) - LARAVEL_START) * 1e6);
                 $timeData = $time > 1e6 ? [$time / 1e6, 's'] : (

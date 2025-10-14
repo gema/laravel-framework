@@ -15,7 +15,7 @@ class EnableQueryLog
      */
     public function handle($request, Closure $next)
     {
-        if (debugMode()) {
+        if (app()->hasDebugModeEnabled()) {
             DB::enableQueryLog();
         }
 
