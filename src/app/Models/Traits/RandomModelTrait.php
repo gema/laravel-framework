@@ -2,12 +2,12 @@
 
 namespace GemaDigital\Models\Traits;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model as EloquentModel;
+use Illuminate\Database\Query\Builder;
 
 /**
  * @mixin HasFactory
+ * @mixin Builder
  */
 trait RandomModelTrait
 {
