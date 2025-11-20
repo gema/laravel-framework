@@ -14,7 +14,7 @@ trait RandomModelTrait
     /**
      * Gets a random entry
      */
-    public static function random(): ?self
+    public static function random(): ?static
     {
         /** @phpstan-ignore-next-line */
         return static::inRandomOrder()->first();
@@ -23,9 +23,9 @@ trait RandomModelTrait
     /**
      * Gets a random entry or a new one in case none found
      */
-    public static function randomOrNew(): self
+    public static function randomOrNew(): static
     {
         /** @phpstan-ignore-next-line */
-        return static::inRandomOrder()->first() ?? self::factory();
+        return static::inRandomOrder()->first() ?? static::factory();
     }
 }
