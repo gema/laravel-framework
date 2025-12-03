@@ -20,9 +20,9 @@ class CrudController extends OriginalCrudController
     public const UPDATED = 'update';
 
     // Hack to access setup without touching the setup()
-    public function setupConfigurationForCurrentOperation(): void
+    public function setupConfigurationForCurrentOperation(?string $operation = null): void
     {
-        parent::setupConfigurationForCurrentOperation();
+        parent::setupConfigurationForCurrentOperation($operation);
 
         // Check authorization for CRUD
         $id = $this->crud->getCurrentEntryId();
