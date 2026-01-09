@@ -4,6 +4,7 @@ namespace GemaDigital\Exceptions;
 
 use Exception;
 use Illuminate\Auth\AuthenticationException;
+use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -23,7 +24,8 @@ class ExceptionHandler
     public static function render(Throwable $exception, Request $request): Response|false
     {
         if ($exception->getCode() === '22P02') {
-            $message = str_replace('ERROR:  ', '', explode("\n", $exception->errorInfo[2])[0]);
+            /** @var QueryException $exception */
+            $message = str_replace('ERROR:  ', '', explode("\n", $exception->errorInfo[2] ?? '')[0]);
             throw new NotFoundHttpException($message);
         }
 
