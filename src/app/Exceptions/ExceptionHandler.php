@@ -23,7 +23,7 @@ class ExceptionHandler
     public static function render(Throwable $exception, Request $request): Response|false
     {
         if ($exception->getCode() === '22P02') {
-            $message =  str_replace("ERROR:  ", '', explode("\n", $exception->errorInfo[2])[0]);
+            $message = str_replace('ERROR:  ', '', explode("\n", $exception->errorInfo[2])[0]);
             throw new NotFoundHttpException($message);
         }
 
