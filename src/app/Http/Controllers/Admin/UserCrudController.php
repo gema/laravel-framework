@@ -61,6 +61,12 @@ class UserCrudController extends OriginalUserCrudController
             ],
             'allows_null' => false,
         ])->afterField('phone');
+
+        CRUD::addField([
+            'label' => __('Admin'),
+            'name' => 'is_admin',
+            'type' => 'checkbox',
+        ])->afterField('status');
     }
 
     public function setupCreateOperation(): void
