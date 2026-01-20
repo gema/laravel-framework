@@ -7,7 +7,7 @@ return [
     ],
 
     'auto_admin_domains' => explode(',',
-        env('AUTO_ADMIN_DOMAINS', 'gemadigital.com,immera.io')
+        env('AUTO_ADMIN_DOMAINS', 'gema.pt,immera.io')
     ),
 
     'registration_open' => env('REGISTRATION_OPEN', env('BACKPACK_REGISTRATION_OPEN', env('APP_ENV') === 'local')),
@@ -20,6 +20,11 @@ return [
         'authentication' => true,
         'settings' => false,
         'logs' => true,
+    ],
+
+    'jsonExports' => [
+        'path' => storage_path('app/public/data'),
+        'webhook' => env('JSON_EXPORT_WEBHOOK_URL', false),
     ],
 
     'routes' => [
