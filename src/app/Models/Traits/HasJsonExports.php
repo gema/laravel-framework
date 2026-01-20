@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
 use ReflectionClass;
 
+/** @phpstan-ignore trait.unused */
 trait HasJsonExports
 {
     public static function bootHasJsonExports(): void
