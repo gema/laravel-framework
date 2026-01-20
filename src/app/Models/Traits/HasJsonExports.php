@@ -23,12 +23,12 @@ trait HasJsonExports
 
                 $data = $targetModel->$method();
 
-                $path = config('gemadigital.jsonExports.path', storage_path('data')) . "/{$name}.json";
+                $path = config('gemadigital.jsonExports.path', storage_path('data'))."/{$name}.json";
 
                 if (! file_exists(dirname($path))) {
                     mkdir(dirname($path), 0755, true);
                 }
-                
+
                 if (file_exists($path)) {
                     unlink($path);
                 }

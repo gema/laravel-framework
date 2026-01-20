@@ -8,7 +8,6 @@ use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 
 class ExceptionHandler
@@ -26,7 +25,11 @@ class ExceptionHandler
         if ($exception->getCode() === '22P02') {
             /** @var QueryException $exception */
             $message = str_replace('ERROR:  ', '', explode("\n", $exception->errorInfo[2] ?? '')[0]);
-            throw new NotFoundHttpException($message);
+
+            return response()->apiError(
+                errors: ['query' => $message],
+                status: 404,
+            );
         }
 
         if (app()->hasDebugModeEnabled() && $request->expectsJson()) {
@@ -34,22 +37,26 @@ class ExceptionHandler
             $file = preg_replace('/\\\/', '/', str_replace(base_path(), '', $exception->getFile()));
             $message = htmlspecialchars($exception->getMessage());
             $errors = method_exists($exception, 'errors') ? $exception->errors() : ['exception' => $message];
-            $code = method_exists($exception, 'getStatusCode') ? $exception->getStatusCode() : null;
+            $status = method_exists($exception, 'getStatusCode') ? $exception->getStatusCode() : null;
 
-            $code ??= match ($exception::class) {
+            $status ??= match ($exception::class) {
                 AuthenticationException::class => 401,
                 Exception::class => $exception->getCode(),
                 default => 400,
             };
 
-            return response()->api(null, -1, $code, $errors, [
-                $name => [
-                    'message' => $message,
-                    'file' => $file,
-                    'line' => $exception->getLine(),
-                    'code' => $exception->getCode(),
-                ],
-            ]);
+            return response()->api(
+                status: $status,
+                errors: $errors,
+                exception: [
+                    $name => [
+                        'message' => $message,
+                        'file' => $file,
+                        'line' => $exception->getLine(),
+                        'code' => $exception->getCode(),
+                    ],
+                ]
+            );
         }
 
         return false;
