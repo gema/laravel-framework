@@ -10,18 +10,33 @@ use ReflectionClass;
 /** @phpstan-ignore trait.unused */
 trait HasJsonExports
 {
+    /**
+     * @return array<string, string>
+     */
+    public function getJsonExportMethods(): array
+    {
+        $methods = [];
+
+        foreach (get_class_methods($this) as $method) {
+            if (! str_starts_with($method, 'export') || ! str_ends_with($method, 'Json')) {
+                continue;
+            }
+
+            $name = Str::of($method)
+                ->substr(6, -4)
+                ->snake();
+
+            $methods[(string) $name] = $method;
+        }
+
+        return $methods;
+    }
+
     public static function bootHasJsonExports(): void
     {
         $exportHelper = function (Model $targetModel): void {
-            foreach (get_class_methods($targetModel) as $method) {
-                if (! str_starts_with($method, 'export') || ! str_ends_with($method, 'Json')) {
-                    continue;
-                }
-
-                $name = Str::of($method)
-                    ->substr(6, -4)
-                    ->snake();
-
+            // @phpstan-ignore method.notFound
+            foreach ($targetModel->getJsonExportMethods() as $name => $method) {
                 $data = $targetModel->$method();
 
                 $path = config('gemadigital.jsonExports.path', storage_path('data'))."/{$name}.json";
