@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Console\Commands;
+namespace GemaDigital\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\Model;

@@ -19,6 +19,7 @@ class GemaDigitalServiceProvider extends ServiceProvider
         \GemaDigital\Console\Commands\DuplicateCommand::class,
         \GemaDigital\Console\Commands\PackageCommand::class,
         \GemaDigital\Console\Commands\PublishCommand::class,
+        \GemaDigital\Console\Commands\ExportJsonsCommand::class,
     ];
 
     /**
