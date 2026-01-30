@@ -1,7 +1,7 @@
 {
     "private": true,
     "dependencies": {
-        "cantil": "^1.1.2",
+        "cantil": "^1.1.6",
         "normalize.css": "^8.0.1"
     }
 }
