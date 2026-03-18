@@ -5,6 +5,7 @@ namespace GemaDigital;
 use GemaDigital\Events\DefaultEvent;
 use GemaDigital\Http\Middleware\AdminPanelAccess;
 use Illuminate\Contracts\View\View;
+use Illuminate\Filesystem\FilesystemAdapter;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
@@ -57,7 +58,7 @@ function aurl(string $path, ?string $disk = null): string
     }
 
     if ($disk) {
-        /** @var \Illuminate\Filesystem\FilesystemAdapter $adapter */
+        /** @var FilesystemAdapter $adapter */
         $adapter = Storage::disk($disk);
 
         return $adapter->url($path);

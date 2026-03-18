@@ -23,9 +23,9 @@ class ParentValidation implements ValidationRule
         }
 
         if ($this->isDescendantOf($value)) {
-            $fail(__('validation.parent_recursive', [
-                'model' => class_basename($this->model),
-            ]));
+            $fail('validation.parent_recursive')->translate([
+                'model' => class_basename((string) $this->model),
+            ]);
         }
     }
 
@@ -34,6 +34,10 @@ class ParentValidation implements ValidationRule
      */
     public function isDescendantOf(mixed $value): bool
     {
+        if ($this->model === null) {
+            return false;
+        }
+
         if ($this->model->getKey() == $value) {
             return true;
         }

@@ -4,6 +4,7 @@ namespace GemaDigital\Helpers;
 
 use Illuminate\Support\Facades\Config;
 use Laravel\Passport\HasApiTokens as OriginalHasApiTokens;
+use Laravel\Passport\Token;
 
 /** @phpstan-ignore trait.unused */
 trait HasApiTokens
@@ -15,7 +16,7 @@ trait HasApiTokens
     /**
      * Get the current access token being used by the user.
      *
-     * @return \Laravel\Passport\Token|null
+     * @return ?Token
      */
     public function token()
     {

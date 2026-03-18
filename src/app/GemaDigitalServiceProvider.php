@@ -2,6 +2,10 @@
 
 namespace GemaDigital;
 
+use GemaDigital\Console\Commands\DuplicateCommand;
+use GemaDigital\Console\Commands\ExportJsonsCommand;
+use GemaDigital\Console\Commands\PackageCommand;
+use GemaDigital\Console\Commands\PublishCommand;
 use GemaDigital\Helpers\QueryLogger;
 use Illuminate\Database\Events\QueryExecuted;
 use Illuminate\Support\Facades\Blade;
@@ -16,10 +20,10 @@ class GemaDigitalServiceProvider extends ServiceProvider
      * @var array<class-string>
      */
     protected array $commands = [
-        \GemaDigital\Console\Commands\DuplicateCommand::class,
-        \GemaDigital\Console\Commands\PackageCommand::class,
-        \GemaDigital\Console\Commands\PublishCommand::class,
-        \GemaDigital\Console\Commands\ExportJsonsCommand::class,
+        DuplicateCommand::class,
+        PackageCommand::class,
+        PublishCommand::class,
+        ExportJsonsCommand::class,
     ];
 
     /**

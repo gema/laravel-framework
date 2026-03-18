@@ -2,6 +2,8 @@
 
 namespace GemaDigital\Http\Controllers\Traits;
 
+use App\Models\Page;
+use Backpack\PageManager\app\Models\Page as BackpackPage;
 use Cache;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -16,9 +18,9 @@ trait PageTrait
         $locale = Session::get('locale', Config::get('app.locale'));
 
         $this->data = Cache::rememberForever("page_{$slug}_{$locale}", function () use ($slug) {
-            $page = class_exists(\App\Models\Page::class)
-            ? \App\Models\Page::findBySlug($slug)
-            : \Backpack\PageManager\app\Models\Page::findBySlug($slug);
+            $page = class_exists(Page::class)
+            ? Page::findBySlug($slug)
+            : BackpackPage::findBySlug($slug);
 
             if (! $page) {
                 abort(404);

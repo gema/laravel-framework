@@ -4,6 +4,7 @@ namespace GemaDigital\Rules;
 
 use Closure;
 use Illuminate\Contracts\Validation\ValidationRule;
+use Illuminate\Translation\PotentiallyTranslatedString;
 
 final class ScopedExistsRule implements ValidationRule
 {
@@ -28,7 +29,7 @@ final class ScopedExistsRule implements ValidationRule
     /**
      * Run the validation rule.
      *
-     * @param  \Closure(string): \Illuminate\Translation\PotentiallyTranslatedString  $fail
+     * @param  Closure(string): PotentiallyTranslatedString  $fail
      */
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
@@ -40,13 +41,13 @@ final class ScopedExistsRule implements ValidationRule
         $field = $this->field ?? $model->getKeyName();
 
         if (is_array($value) && $model->whereIn($field, $value)->count() !== count($value)) {
-            $fail(__('validation.exists'));
+            $fail('validation.exists');
 
             return;
         }
 
         if ($model->where($field, $value)->count() === 0) {
-            $fail(__('validation.exists'));
+            $fail('validation.exists');
 
             return;
         }
