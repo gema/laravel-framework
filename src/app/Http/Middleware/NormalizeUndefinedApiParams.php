@@ -13,15 +13,25 @@ class NormalizeUndefinedApiParams
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $input = $request->all();
+        // Normalize query/body input
+        if ($input = $request->all()) {
+            array_walk_recursive($input, static function (&$item): void {
+                if ($item === 'undefined' || $item === 'null') {
+                    $item = null;
+                }
+            });
 
-        array_walk_recursive($input, static function (&$item): void {
-            if ($item === 'undefined' || $item === 'null') {
-                $item = null;
+            $request->merge($input);
+        }
+
+        // Normalize route parameters
+        if ($route = $request->route()) {
+            foreach ($route->parameters() as $key => $value) {
+                if (is_string($value) && ($value === 'undefined' || $value === 'null')) {
+                    $route->setParameter($key, null);
+                }
             }
-        });
-
-        $request->merge($input);
+        }
 
         return $next($request);
     }
