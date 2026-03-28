@@ -25,11 +25,10 @@ class NormalizeUndefinedApiParams
         }
 
         // Normalize route parameters
-        if ($route = $request->route()) {
-            foreach ($route->parameters() as $key => $value) {
-                if (is_string($value) && ($value === 'undefined' || $value === 'null')) {
-                    $route->setParameter($key, null);
-                }
+        $route = $request->route();
+        foreach ($route->parameters() as $key => $value) {
+            if (is_string($value) && ($value === 'undefined' || $value === 'null')) {
+                $route->setParameter($key, null);
             }
         }
 
