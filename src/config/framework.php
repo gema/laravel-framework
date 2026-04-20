@@ -45,4 +45,10 @@ return [
             // \App\Models\Page::class => \App\Http\Resources\Page::class,
         ],
     ],
+
+    'alerts' => [
+        'ignore' => [
+            'SQLSTATE[HY000] [2002] Connection refused',
+        ],
+    ]
 ];

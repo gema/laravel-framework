@@ -14,6 +14,8 @@ class ExceptionHandler
 {
     public static function handle(Exceptions $exceptions): void
     {
+        $exceptions->stopReporting(fn (QueryException $e) => self::shouldIgnore($e));
+
         $exceptions->render(self::render(...));
     }
 
@@ -57,6 +59,19 @@ class ExceptionHandler
                     ],
                 ]
             );
+        }
+
+        return false;
+    }
+
+    private static function shouldIgnore(Throwable $e): bool
+    {
+        $ignores = config('gemadigital.alerts.ignore', []);
+
+        foreach ($ignores as $ignore) {
+            if (str_contains($e->getMessage(), $ignore)) {
+                return true;
+            }
         }
 
         return false;
