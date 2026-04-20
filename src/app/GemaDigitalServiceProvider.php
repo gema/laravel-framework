@@ -76,7 +76,7 @@ class GemaDigitalServiceProvider extends ServiceProvider
     {
         // Publishing the configuration file.
         $this->publishes([
-            __DIR__.'/../config/framework.php' => config_path('gemadigital.php'),
+            __DIR__.'/../config/gemadigital.php' => config_path('gemadigital.php'),
         ]);
 
         // Publishing the views.
@@ -107,6 +107,6 @@ class GemaDigitalServiceProvider extends ServiceProvider
      */
     public function loadConfigs(): void
     {
-        $this->mergeConfigFrom(__DIR__.'/../config/framework.php', 'gemadigital');
+        $this->mergeConfigFrom(__DIR__.'/../config/gemadigital.php', 'gemadigital');
     }
 }

@@ -14,9 +14,9 @@ class ExceptionHandler
 {
     public static function handle(Exceptions $exceptions): void
     {
-        $exceptions->dontReportWhen(self::dontReportWhen(...));
-
-        $exceptions->render(self::render(...));
+        $exceptions
+            ->dontReportWhen(self::dontReportWhen(...))
+            ->render(self::render(...));
     }
 
     /**
@@ -64,6 +64,9 @@ class ExceptionHandler
         return false;
     }
 
+    /**
+     * Determine if the exception should be reported.
+     */
     private static function dontReportWhen(Throwable $e): bool
     {
         $ignores = config('gemadigital.alerts.ignore', []);
