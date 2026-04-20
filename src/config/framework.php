@@ -50,5 +50,5 @@ return [
         'ignore' => [
             'SQLSTATE[HY000] [2002] Connection refused',
         ],
-    ]
+    ],
 ];

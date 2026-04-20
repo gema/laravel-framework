@@ -14,6 +14,7 @@ class ExceptionHandler
 {
     public static function handle(Exceptions $exceptions): void
     {
+        // @phpstan-ignore-next-line
         $exceptions->stopReporting(fn (QueryException $e) => self::shouldIgnore($e));
 
         $exceptions->render(self::render(...));
