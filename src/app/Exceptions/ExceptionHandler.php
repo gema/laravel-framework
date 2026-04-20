@@ -14,8 +14,7 @@ class ExceptionHandler
 {
     public static function handle(Exceptions $exceptions): void
     {
-        // @phpstan-ignore-next-line
-        $exceptions->stopReporting(fn (QueryException $e) => self::shouldIgnore($e));
+        $exceptions->dontReportWhen(self::dontReportWhen(...));
 
         $exceptions->render(self::render(...));
     }
@@ -65,7 +64,7 @@ class ExceptionHandler
         return false;
     }
 
-    private static function shouldIgnore(Throwable $e): bool
+    private static function dontReportWhen(Throwable $e): bool
     {
         $ignores = config('gemadigital.alerts.ignore', []);
 

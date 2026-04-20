@@ -48,7 +48,7 @@ return [
 
     'alerts' => [
         'ignore' => [
-            'SQLSTATE[HY000] [2002] Connection refused',
+            // 'SQLSTATE[HY000] [2002] Connection refused',
         ],
     ],
 ];
