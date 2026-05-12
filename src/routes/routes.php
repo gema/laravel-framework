@@ -50,9 +50,11 @@ Route::group(['middleware' => 'web'], function () {
 
     // Socialite
     Route::get('/auth/redirect/{driver}', [SocialiteController::class, 'login'])
+        ->where('driver', 'google|azure')
         ->name('socialite.login');
 
     Route::get('/auth/callback/{driver}', [SocialiteController::class, 'callback'])
+        ->where('driver', 'google|azure')
         ->name('socialite.callback');
 
     // Pages
