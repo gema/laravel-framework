@@ -24,6 +24,10 @@ class SocialiteController extends Controller
      */
     public function callback(string $driver): RedirectResponse
     {
+        if (! in_array($driver, ['google', 'azure'])) {
+            abort(404);
+        }
+
         $socialUser = Socialite::driver($driver)->user();
         $inAllowedDomains = in_array(Str::afterLast($socialUser->getEmail(), '@'), config('gemadigital.auto_admin_domains', []));
 
