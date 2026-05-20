@@ -4,6 +4,7 @@ namespace GemaDigital\Http\Controllers\Admin\Operations;
 
 use GemaDigital\Http\Controllers\Admin\CrudController;
 
+/** @deprecated Use XDeleteOperation instead. */
 /** @phpstan-ignore trait.unused */
 trait DeleteOperation
 {
