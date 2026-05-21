@@ -8,6 +8,7 @@ use GemaDigital\Http\Controllers\Admin\MaintenanceController;
 use GemaDigital\Http\Controllers\LangController;
 use GemaDigital\Http\Controllers\SessionController;
 use GemaDigital\Http\Controllers\SocialiteController;
+use GemaDigital\Http\Controllers\VitalsController;
 use Illuminate\Support\Facades\Route;
 
 // Admin
@@ -56,6 +57,11 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/auth/callback/{driver}', [SocialiteController::class, 'callback'])
         ->where('driver', 'google|azure')
         ->name('socialite.callback');
+
+    // Vitals
+    Route::get('/vitals', VitalsController::class)
+        ->middleware('throttle:30,1')
+        ->name('vitals');
 
     // Pages
     // Route::get('{page}/{subs?}', [PageController::class, 'index'])
