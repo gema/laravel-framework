@@ -11,10 +11,11 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use ReflectionClass;
+use Stringable;
 
 use function Gemadigital\get_class_name;
 
-abstract class DefaultEvent
+abstract class DefaultEvent implements Stringable
 {
     use Dispatchable;
     use InteractsWithSockets;

@@ -49,9 +49,8 @@ class BuilderMacros
                 if (is_string($attribute)) {
                     if (str_contains($attribute, '.')) {
                         return FilterRelation::make(...explode('.', $attribute));
-                    } else {
-                        return FilterColumn::make($attribute);
                     }
+                    return FilterColumn::make($attribute);
                 }
 
                 return $attribute;
@@ -82,9 +81,8 @@ class BuilderMacros
                 if (is_string($attribute)) {
                     if (str_contains($attribute, '.')) {
                         return SearchRelation::make(...explode('.', $attribute));
-                    } else {
-                        return SearchColumn::make($attribute);
                     }
+                    return SearchColumn::make($attribute);
                 }
 
                 return $attribute;

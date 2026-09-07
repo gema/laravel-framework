@@ -73,7 +73,7 @@ function aurl(string $path, ?string $disk = null): string
 function sized_image(string $path, int $size): string
 {
     if (($pos = strrpos($path, '/')) !== false) {
-        $path = substr_replace($path, "/$size/", $pos, 1);
+        return substr_replace($path, "/$size/", $pos, 1);
     }
 
     return $path;

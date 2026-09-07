@@ -62,7 +62,6 @@ trait HasJsonExports
             if (property_exists($model, 'triggerJsonExport')) {
                 $reflection = new ReflectionClass($model);
                 $property = $reflection->getProperty('triggerJsonExport');
-                $property->setAccessible(true);
                 $classes = $property->getValue($model);
 
                 if (! is_array($classes)) {

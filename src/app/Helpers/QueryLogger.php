@@ -16,10 +16,10 @@ class QueryLogger
      */
     public static function log(QueryExecuted $log): void
     {
-        array_push(self::$queryLogs, [
+        self::$queryLogs[] = [
             'sql' => vsprintf(str_replace(['%', '?'], ['%%', '%s'], $log->sql), $log->bindings),
             'time' => $log->time,
-        ]);
+        ];
     }
 
     /**

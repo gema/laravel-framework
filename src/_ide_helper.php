@@ -47,7 +47,6 @@ namespace Illuminate\Contracts\Routing {
         /**
          * Return a custom API status response.
          *
-         * @param bool $status
          * @param int $success
          * @param int $fail
          * @return \Illuminate\Http\Response
@@ -58,7 +57,6 @@ namespace Illuminate\Contracts\Routing {
          * Return a custom API response with pagination.
          *
          * @param mixed|null $data
-         * @param \Illuminate\Pagination\LengthAwarePaginator|null $pagination
          * @param int $code
          * @param int $status
          * @param mixed|null $errors
@@ -92,8 +90,6 @@ namespace Illuminate\Database\Eloquent {
         /**
          * Add a "where like" clause to the query.
          *
-         * @param string $column
-         * @param string $search
          * @return \Illuminate\Database\Eloquent\Builder<TModel>
          */
         public function whereLike(string $column, string $search) {}
@@ -101,8 +97,6 @@ namespace Illuminate\Database\Eloquent {
         /**
          * Add an "or where like" clause to the query.
          *
-         * @param string $column
-         * @param string $search
          * @return \Illuminate\Database\Eloquent\Builder<TModel>
          */
         public function orWhereLike(string $column, string $search) {}
@@ -110,7 +104,6 @@ namespace Illuminate\Database\Eloquent {
         /**
          * Apply filterable attributes to the query.
          *
-         * @param array $attributes
          * @return \Illuminate\Database\Eloquent\Builder<TModel>
          */
         public function filterable(array $attributes) {}
@@ -118,7 +111,6 @@ namespace Illuminate\Database\Eloquent {
         /**
          * Apply searchable attributes to the query.
          *
-         * @param array $attributes
          * @return \Illuminate\Database\Eloquent\Builder<TModel>
          */
         public function searchable(array $attributes) {}
@@ -126,8 +118,6 @@ namespace Illuminate\Database\Eloquent {
         /**
          * Apply orderable attributes to the query.
          *
-         * @param string|null $orderBy
-         * @param string $orderDir
          * @return \Illuminate\Database\Eloquent\Builder<TModel>
          */
         public function orderable(?string $orderBy = null, string $orderDir = 'desc') {}
@@ -135,7 +125,6 @@ namespace Illuminate\Database\Eloquent {
         /**
          * Apply filterable having clause to the query.
          *
-         * @param string $attribute
          * @return \Illuminate\Database\Eloquent\Builder<TModel>
          */
         public function filterableHaving(string $attribute) {}
@@ -149,12 +138,6 @@ namespace Illuminate\Support\Facades {
         /**
          * Get the appropriate raw SQL based on the database driver.
          *
-         * @param string|null $default
-         * @param string|null $sqlite
-         * @param string|null $mysql
-         * @param string|null $pgsql
-         * @param string|null $sqlsrv
-         * @param string|null $mongodb
          * @return string
          */
         public static function rawMatch(

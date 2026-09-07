@@ -21,9 +21,8 @@ class AdminPanelAccess extends BaseCheckIfAdmin
         if (! $this->hasAccess($request)) {
             if ($request->ajax() || $request->wantsJson()) {
                 return response(trans('Unauthorized'), 401);
-            } else {
-                return redirect()->guest(route(config('gemadigital.routes.list.login', 'backpack.auth.login')));
             }
+            return redirect()->guest(route(config('gemadigital.routes.list.login', 'backpack.auth.login')));
         }
 
         return $next($request);

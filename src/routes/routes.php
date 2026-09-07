@@ -47,7 +47,8 @@ Route::group(['middleware' => 'web'], function () {
 
     // Language
     Route::any('lang/{locale}', [LangController::class, 'setLang'])
-        ->where('locale', '[a-z]{2}(-[A-Z]{2})?')->name('lang');
+        ->where('locale', '[a-z]{2}(-[A-Z]{2})?')
+        ->name('lang');
 
     // Socialite
     Route::get('/auth/redirect/{driver}', [SocialiteController::class, 'login'])
@@ -60,7 +61,7 @@ Route::group(['middleware' => 'web'], function () {
 
     // Vitals
     Route::get('/vitals', VitalsController::class)
-        ->middleware('throttle:30,1')
+        ->middleware('throttle:10,1')
         ->name('vitals');
 
     // Pages

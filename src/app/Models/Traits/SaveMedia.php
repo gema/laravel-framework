@@ -30,7 +30,7 @@ trait SaveMedia
             $format = substr($value, 11, 3);
 
             // jpeg exception
-            if ($format == 'jpe') {
+            if ($format === 'jpe') {
                 $format = 'jpg';
             }
 

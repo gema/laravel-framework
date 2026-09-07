@@ -17,16 +17,6 @@ class PublishCommand extends Command
     protected $description = 'Publishes the gemadigital assets';
 
     /**
-     * Create a new command instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
-    /**
      * Execute the console command.
      */
     public function handle(): void

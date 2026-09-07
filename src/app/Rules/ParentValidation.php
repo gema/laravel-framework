@@ -18,7 +18,7 @@ class ParentValidation implements ValidationRule
      */
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        if ($this->model === null) {
+        if (!$this->model instanceof Model) {
             return;
         }
 
@@ -34,7 +34,7 @@ class ParentValidation implements ValidationRule
      */
     public function isDescendantOf(mixed $value): bool
     {
-        if ($this->model === null) {
+        if (!$this->model instanceof Model) {
             return false;
         }
 
