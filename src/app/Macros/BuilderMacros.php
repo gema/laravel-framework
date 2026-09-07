@@ -50,6 +50,7 @@ class BuilderMacros
                     if (str_contains($attribute, '.')) {
                         return FilterRelation::make(...explode('.', $attribute));
                     }
+
                     return FilterColumn::make($attribute);
                 }
 
@@ -82,6 +83,7 @@ class BuilderMacros
                     if (str_contains($attribute, '.')) {
                         return SearchRelation::make(...explode('.', $attribute));
                     }
+
                     return SearchColumn::make($attribute);
                 }
 
