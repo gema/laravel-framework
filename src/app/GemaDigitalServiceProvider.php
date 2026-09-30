@@ -2,11 +2,13 @@
 
 namespace GemaDigital;
 
+use Backpack\CRUD\app\Http\Middleware\AuthenticateSession as BackpackAuthenticateSession;
 use GemaDigital\Console\Commands\DuplicateCommand;
 use GemaDigital\Console\Commands\ExportJsonsCommand;
 use GemaDigital\Console\Commands\PackageCommand;
 use GemaDigital\Console\Commands\PublishCommand;
 use GemaDigital\Helpers\QueryLogger;
+use GemaDigital\Http\Middleware\AuthenticateSession;
 use Illuminate\Database\Events\QueryExecuted;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\DB;
@@ -65,6 +67,11 @@ class GemaDigitalServiceProvider extends ServiceProvider
 
         // register the helper functions
         $this->loadHelpers();
+
+        // replace Backpack's AuthenticateSession, which logs out every user on Laravel >= 13.33
+        if (class_exists(BackpackAuthenticateSession::class)) {
+            $this->app->bind(BackpackAuthenticateSession::class, AuthenticateSession::class);
+        }
     }
 
     /**
