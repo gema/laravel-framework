@@ -10,7 +10,6 @@ parameters:
         - src/app/Http/Controllers/Admin/PageCrudController.php
         - src/app/Http/Controllers/Admin/UserCrudController.php
         - src/app/Http/Middleware/AdminPanelAccess.php
-        - src/app/Http/Middleware/AuthenticateSession.php
         - src/app/Models/Page.php
 
     ignoreErrors:
