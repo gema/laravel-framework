@@ -342,6 +342,19 @@ o botão nos dashboards. Como a rota depende do config, mudar o `enabled` obriga
 `route:cache`. Se a app precisar de recompilar o frontend com esses dados, o build corre no deploy ou
 na CI, fora do pedido web.
 
+**Na própria v17 (25/10/2026, issue #21)** — o painel deixou de assumir que quem lá entra é admin:
+
+- As rotas `admin/*` da framework passaram a exigir `isAdmin()`, através do middleware `AdminOnly`, mesmo
+  quando o `AdminPanelAccess::hasAccess()` da app deixa entrar outros papéis (como no vine-wine-backend).
+  Quem não é admin recebe 403. O `impersonate/leave` fica de fora, para quem está a ser impersonado
+  poder sair.
+- Quando o controlador tem o seu próprio `authorize(int $id)`, a framework passou a chamá-lo também para
+  cada linha que o bulk delete, o bulk clone e o reorder mandam no pedido (`entries[]`, `tree`). Se uma
+  falhar, o pedido dá 401 e nada muda. As chaves inteiras são convertidas como faz a base de dados; as de
+  texto chegam tal como vieram. Sem `authorize()` próprio, tudo fica como estava. Como o Backpack manda
+  a árvore inteira no reorder, num CRUD com regra só reordena quem tem acesso a todas as linhas. Não
+  corre no create, que ainda não tem linha: para isso usa-se `CRUD::denyAccess('create')` no `setup()`.
+
 ### 8.2 O que a v17 espera da app
 
 `app/Providers/AppServiceProvider.php`:
@@ -385,10 +398,11 @@ Restante lista de verificação:
 
 | Grupo | Rotas |
 |---|---|
-| `admin/*` (middleware `web` + alias `admin`) | `actions`, `impersonate/{id}`, `impersonate/leave`, `cache/*`, `maintenance/up`, `maintenance/down` |
+| `admin/*` (middleware `web` + alias `admin` + `AdminOnly`) | `actions`, `impersonate/{id}`, `impersonate/leave`, `cache/*`, `maintenance/up`, `maintenance/down` |
 | públicas (`web`) | `session/flush`, `lang/{locale}`, `auth/redirect/{driver}`, `auth/callback/{driver}`, `vitals` |
 
-Com `gemadigital.build.enabled` a `true` há também o `admin/build` (§8.1).
+Com `gemadigital.build.enabled` a `true` há também o `admin/build` (§8.1). Todas as de `admin/*` exigem
+um admin, exceto o `impersonate/leave`.
 
 Nenhuma corre shell: `build` só escreve o ficheiro de `gemadigital.build.path`, e `cache/*` e
 `maintenance/*` chamam o Artisan no próprio processo (`Artisan::call`).

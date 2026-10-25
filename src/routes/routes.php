@@ -9,12 +9,13 @@ use GemaDigital\Http\Controllers\LangController;
 use GemaDigital\Http\Controllers\SessionController;
 use GemaDigital\Http\Controllers\SocialiteController;
 use GemaDigital\Http\Controllers\VitalsController;
+use GemaDigital\Http\Middleware\AdminOnly;
 use Illuminate\Support\Facades\Route;
 
-// Admin
+// Admin (AdminOnly: the project's AdminPanelAccess may let other users into the panel)
 Route::group([
     'prefix' => config('gemadigital.routes.prefix', 'admin'),
-    'middleware' => ['web', config('gemadigital.routes.middleware', 'admin')],
+    'middleware' => ['web', config('gemadigital.routes.middleware', 'admin'), AdminOnly::class],
 ], function () {
     // Admin Actions
     Route::get('actions', [AdminActionsController::class, 'actions'])->name('actions');
@@ -25,7 +26,7 @@ Route::group([
     }
 
     // Impersonate
-    Route::get('impersonate/leave', [ImpersonateController::class, 'leave'])->name('impersonate.leave')->withoutMiddleware(config('gemadigital.routes.middleware', 'admin'));
+    Route::get('impersonate/leave', [ImpersonateController::class, 'leave'])->name('impersonate.leave')->withoutMiddleware([config('gemadigital.routes.middleware', 'admin'), AdminOnly::class]);
     Route::get('impersonate/{id}', [ImpersonateController::class, 'impersonate'])->name('impersonate');
 
     // Cache
