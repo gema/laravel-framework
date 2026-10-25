@@ -8,7 +8,7 @@
 > primeira sessão de Claude e que já não existe em disco), tudo o que se aprendeu na conversa
 > seguinte, e as correções feitas depois de cada deploy.
 >
-> Última atualização: 2026-10-12.
+> Última atualização: 2026-10-25.
 
 ## Como ler este manual
 
@@ -333,6 +333,13 @@ em todos os imports (20 a 36 ficheiros por projeto).
   operações próprias não podem ter outros parâmetros (mandá-los no corpo do pedido).
 - Config `framework.php` → `gemadigital.php` (via `mergeConfigFrom`; overrides parciais funcionam).
 
+**Na própria v17 (25/10/2026)** — o `admin/build` deixou de correr `npm run build`: saiu o
+`BuildController::shellExec()`. O pedido só escreve em `gemadigital.build.path` o JSON das classes de
+`gemadigital.build.classes` e responde como as outras ações (`apiStatus`), com erro se não conseguir
+escrever o ficheiro. Antes o comando corria a pedido de qualquer admin, porque a rota não olha para o
+`build.enabled`: o `enabled` só esconde o botão nos dashboards. Se a app precisar de recompilar o
+frontend com esses dados, o build corre no deploy ou na CI, fora do pedido web.
+
 ### 8.2 O que a v17 espera da app
 
 `app/Providers/AppServiceProvider.php`:
@@ -378,6 +385,9 @@ Restante lista de verificação:
 |---|---|
 | `admin/*` (middleware `web` + alias `admin`) | `actions`, `build`, `impersonate/{id}`, `impersonate/leave`, `cache/*`, `maintenance/up`, `maintenance/down` |
 | públicas (`web`) | `session/flush`, `lang/{locale}`, `auth/redirect/{driver}`, `auth/callback/{driver}`, `vitals` |
+
+Nenhuma corre shell: `build` só escreve o ficheiro de `gemadigital.build.path`, e `cache/*` e
+`maintenance/*` chamam o Artisan no próprio processo (`Artisan::call`).
 
 O alias de middleware `admin` vem do Backpack. Projetos sem Backpack têm de o criar (§14).
 
