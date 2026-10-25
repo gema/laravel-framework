@@ -7,7 +7,7 @@ use Illuminate\Database\Events\QueryExecuted;
 class QueryLogger
 {
     /**
-     * @var array<int, array<string, float|string>>
+     * @var array<int, array{sql: string, time: float|null}>
      */
     private static array $queryLogs = [];
 
@@ -25,7 +25,7 @@ class QueryLogger
     /**
      * Get query Log
      *
-     * @return array<int, array<string, float|string>>
+     * @return array<int, array{sql: string, time: float|null}>
      */
     public static function list(): array
     {

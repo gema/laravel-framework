@@ -20,7 +20,9 @@ Route::group([
     Route::get('actions', [AdminActionsController::class, 'actions'])->name('actions');
 
     // Build
-    Route::post('build', [BuildController::class, 'build'])->name('build');
+    if (config('gemadigital.build.enabled')) {
+        Route::post('build', [BuildController::class, 'build'])->name('build');
+    }
 
     // Impersonate
     Route::get('impersonate/leave', [ImpersonateController::class, 'leave'])->name('impersonate.leave')->withoutMiddleware(config('gemadigital.routes.middleware', 'admin'));

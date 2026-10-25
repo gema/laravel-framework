@@ -13,6 +13,11 @@ class UsersSeeder extends Seeder
      */
     public function run(): void
     {
+        // Without a console (e.g. seeding from a test) there is no one to ask
+        if (! $this->command) {
+            return;
+        }
+
         $i = -1;
         while ($this->command->confirm('Add '.($i++ ? 'an' : 'another').' admin user?')) {
             $name = $this->command->ask('Name');

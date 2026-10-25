@@ -336,9 +336,11 @@ em todos os imports (20 a 36 ficheiros por projeto).
 **Na própria v17 (25/10/2026)** — o `admin/build` deixou de correr `npm run build`: saiu o
 `BuildController::shellExec()`. O pedido só escreve em `gemadigital.build.path` o JSON das classes de
 `gemadigital.build.classes` e responde como as outras ações (`apiStatus`), com erro se não conseguir
-escrever o ficheiro. Antes o comando corria a pedido de qualquer admin, porque a rota não olha para o
-`build.enabled`: o `enabled` só esconde o botão nos dashboards. Se a app precisar de recompilar o
-frontend com esses dados, o build corre no deploy ou na CI, fora do pedido web.
+escrever o ficheiro. A rota passou a ser registada só com `build.enabled` a `true`. Antes existia
+sempre, e o comando corria a pedido de qualquer admin, mesmo com o `enabled` a `false`, que só escondia
+o botão nos dashboards. Como a rota depende do config, mudar o `enabled` obriga a refazer o
+`route:cache`. Se a app precisar de recompilar o frontend com esses dados, o build corre no deploy ou
+na CI, fora do pedido web.
 
 ### 8.2 O que a v17 espera da app
 
@@ -383,8 +385,10 @@ Restante lista de verificação:
 
 | Grupo | Rotas |
 |---|---|
-| `admin/*` (middleware `web` + alias `admin`) | `actions`, `build`, `impersonate/{id}`, `impersonate/leave`, `cache/*`, `maintenance/up`, `maintenance/down` |
+| `admin/*` (middleware `web` + alias `admin`) | `actions`, `impersonate/{id}`, `impersonate/leave`, `cache/*`, `maintenance/up`, `maintenance/down` |
 | públicas (`web`) | `session/flush`, `lang/{locale}`, `auth/redirect/{driver}`, `auth/callback/{driver}`, `vitals` |
+
+Com `gemadigital.build.enabled` a `true` há também o `admin/build` (§8.1).
 
 Nenhuma corre shell: `build` só escreve o ficheiro de `gemadigital.build.path`, e `cache/*` e
 `maintenance/*` chamam o Artisan no próprio processo (`Artisan::call`).
@@ -700,6 +704,12 @@ larastan/phpstan mais recentes, que acusam erros novos em código antigo. Padrõ
 8. `env()` fora de configs → mover para `config/services.php`.
 9. `nunomaduro/larastan` → `larastan/larastan ^3` e corrigir o `include` do `phpstan.neon`.
 10. `tests/Unit/ExampleTest` com `assertTrue(true)` → `/* @phpstan-ignore-next-line */`.
+11. No Laravel 13.38 (na 13.34 ainda não) o `Seeder::$command` é `Command|null`: `$this->command->confirm()`
+    dá `method.nonObject`. Sem consola o `$command` é mesmo `null` e o seeder rebenta. No `DatabaseSeeder`,
+    `$this->command?->confirm()` salta os seeders opcionais; num seeder que só faz perguntas, sai-se
+    logo no início (como no `UsersSeeder` da framework).
+12. Na mesma versão, o `QueryExecuted::$time` passou a `float|null`: quem guarda o tempo das queries
+    (o `QueryLogger` da framework, listeners próprios) tem de aceitar `null`.
 
 **pint**: `--test` só nos ficheiros alterados, a menos que seja pedido o projeto inteiro. Em ficheiros
 CRLF, `line_ending`, `unary_operator_spaces` e `not_operator_with_successor_space` são falsos positivos:
