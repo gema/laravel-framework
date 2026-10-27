@@ -7,7 +7,9 @@ use GemaDigital\Console\Commands\ExportJsonsCommand;
 use GemaDigital\Console\Commands\PackageCommand;
 use GemaDigital\Console\Commands\PublishCommand;
 use GemaDigital\Helpers\QueryLogger;
+use GemaDigital\Mail\MicrosoftGraphTransport;
 use Illuminate\Database\Events\QueryExecuted;
+use Illuminate\Mail\MailManager;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\ServiceProvider;
@@ -44,6 +46,11 @@ class GemaDigitalServiceProvider extends ServiceProvider
         if (config('app.debug')) {
             DB::listen(fn (QueryExecuted $log) => QueryLogger::log($log));
         }
+
+        // Mail through Microsoft Graph: MAIL_MAILER=microsoft-graph
+        $this->callAfterResolving('mail.manager', function (MailManager $manager): void {
+            $manager->extend('microsoft-graph', fn (array $config) => MicrosoftGraphTransport::fromConfig($config));
+        });
 
         // Blade directives
 
@@ -108,5 +115,8 @@ class GemaDigitalServiceProvider extends ServiceProvider
     public function loadConfigs(): void
     {
         $this->mergeConfigFrom(__DIR__.'/../config/gemadigital.php', 'gemadigital');
+
+        // Extra mailers (microsoft-graph)
+        $this->replaceConfigRecursivelyFrom(__DIR__.'/../config/mail.php', 'mail');
     }
 }
