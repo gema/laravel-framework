@@ -16,6 +16,8 @@ class SocialiteController extends Controller
      */
     public function login(string $driver): RedirectResponse
     {
+        abort_unless(self::isAvailable($driver), 404);
+
         return Socialite::driver($driver)->redirect();
     }
 
@@ -24,6 +26,8 @@ class SocialiteController extends Controller
      */
     public function callback(string $driver): RedirectResponse
     {
+        abort_unless(self::isAvailable($driver), 404);
+
         $socialUser = Socialite::driver($driver)->user();
         $inAllowedDomains = in_array(Str::afterLast($socialUser->getEmail(), '@'), config('gemadigital.auto_admin_domains', []));
 
@@ -34,9 +38,12 @@ class SocialiteController extends Controller
 
         if (! $user) {
             if (! config('gemadigital.registration_open') && ! $inAllowedDomains) {
+                // The login form only shows errors of its fields
+                $field = function_exists('backpack_authentication_column') ? backpack_authentication_column() : 'email';
+
                 return redirect()
-                    ->route(route(config('gemadigital.routes.list.login', 'backpack.auth.login')))
-                    ->with('error', 'Registration is closed');
+                    ->route(config('gemadigital.routes.list.login', 'backpack.auth.login'))
+                    ->withErrors([$field => 'Registration is closed']);
             }
 
             $user = User::create([
@@ -69,5 +76,17 @@ class SocialiteController extends Controller
         Auth::login($user, true);
 
         return redirect(route(config('gemadigital.routes.list.dashboard', 'backpack.dashboard')));
+    }
+
+    /**
+     * Whether the Socialite driver can be used: Socialite is installed and, for azure,
+     * socialiteproviders/microsoft-azure too (the framework registers its driver).
+     */
+    public static function isAvailable(string $driver): bool
+    {
+        return class_exists(Socialite::class) && match ($driver) {
+            'azure' => class_exists('SocialiteProviders\Azure\Provider'),
+            default => true,
+        };
     }
 }

@@ -1,7 +1,12 @@
-@if (config('services.google.client_id') || config('services.azure.client_id'))
+@php
+    $azure = config('services.azure.client_id') && \GemaDigital\Http\Controllers\SocialiteController::isAvailable('azure');
+    $google = config('services.google.client_id') && \GemaDigital\Http\Controllers\SocialiteController::isAvailable('google');
+@endphp
+
+@if ($azure || $google)
 <hr class="my-4" />
 <div class="d-flex justify-content-between align-items-center">
-    @if (config('services.azure.client_id'))
+    @if ($azure)
     <a href="{{ route('socialite.login', ['driver' => 'azure']) }}" tabindex="7" class="btn me-2 w-100 btn-azure">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="icon icon-tabler icons-tabler-filled icon-tabler-brand-windows">
             <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
@@ -10,7 +15,7 @@
         <span>{{ trans('Microsoft') }}</span>
     </a>
     @endif
-    @if (config('services.google.client_id'))
+    @if ($google)
     <a href="{{ route('socialite.login', ['driver' => 'google']) }}" tabindex="6" class="btn ms-2 w-100 btn-google">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="icon icon-tabler icons-tabler-filled icon-tabler-brand-google">
             <path stroke="none" d="M0 0h24v24H0z" fill="none"/>

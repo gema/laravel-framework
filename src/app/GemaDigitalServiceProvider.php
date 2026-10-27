@@ -12,6 +12,7 @@ use Illuminate\Database\Events\QueryExecuted;
 use Illuminate\Mail\MailManager;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
 
 class GemaDigitalServiceProvider extends ServiceProvider
@@ -51,6 +52,8 @@ class GemaDigitalServiceProvider extends ServiceProvider
         $this->callAfterResolving('mail.manager', function (MailManager $manager): void {
             $manager->extend('microsoft-graph', fn (array $config) => MicrosoftGraphTransport::fromConfig($config));
         });
+
+        $this->registerSocialiteDrivers();
 
         // Blade directives
 
@@ -107,6 +110,18 @@ class GemaDigitalServiceProvider extends ServiceProvider
     {
         require_once __DIR__.'/Helpers/GlobalHelpers.php';
         require_once __DIR__.'/Helpers/GeneralHelpers.php';
+    }
+
+    /**
+     * Socialite drivers from installed socialiteproviders packages, so apps don't need their own listener.
+     * Registering again (e.g. in the app's EventServiceProvider) is harmless.
+     */
+    protected function registerSocialiteDrivers(): void
+    {
+        // Microsoft login (azure): socialiteproviders/microsoft-azure
+        if (class_exists('SocialiteProviders\Azure\AzureExtendSocialite')) {
+            Event::listen('SocialiteProviders\Manager\SocialiteWasCalled', 'SocialiteProviders\Azure\AzureExtendSocialite@handle');
+        }
     }
 
     /**
