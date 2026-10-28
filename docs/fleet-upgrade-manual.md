@@ -401,6 +401,24 @@ Por omissão está desligado e nada muda; o `.env.example` do boilerplate já o 
   primeiros algarismos de um UUID como se fossem um id. `getEntry(): ?Model` procura pela chave do
   modelo (`getKeyName()`) em vez de `id`, e devolve `null` quando não há id.
 
+**Na própria v17 (28/10/2026)** — o `QueryLogger`, que com `APP_DEBUG=true` guarda as queries para o bloco
+`debug` do `response()->api()`:
+
+- Deixou de rebentar quando o SQL tem um `?` que não é placeholder: os operadores `jsonb` do PostgreSQL
+  (`?`, `?|`, `?&`, que o Laravel escreve `??`), o `whereJsonContainsKey()` e o SQL corrido com
+  `DB::unprepared()`, como corpos de funções. Antes dava `ValueError: The arguments array must contain N
+  items` depois de a query correr, e o erro chegava a quem a chamou (o pedido web, a migração no
+  `migrate:fresh`). Agora os valores só entram no SQL quando o número de `?` bate com o de bindings;
+  senão, a query fica tal como foi enviada.
+- Também rebentava com bindings `DateTime` e `DateTimeImmutable`, que não têm `__toString`. As datas
+  passam a aparecer formatadas como chegam à base de dados, e os `false` como `0` (antes ficavam vazios).
+- Deixou de ser registado na consola (`artisan`, workers de fila, testes), onde nada lê a lista e um
+  comando longo guardava todas as queries, com os valores, até ao fim: num teste com 20 000 inserts, eram
+  mais 14 MB de memória. Nos pedidos web fica como estava, com todas as queries do pedido. Nos testes, o
+  `debug` do `response()->api()` deixa de trazer queries (antes juntava as de todos os testes já corridos).
+- No gestaodeobras.immera.io, o `DB::connection()->getPdo()->exec()` no lugar do `DB::unprepared()` e o
+  dispatcher de eventos desligado no `legacy:import` deixam de ser precisos por causa do logger.
+
 ### 8.2 O que a v17 espera da app
 
 `app/Providers/AppServiceProvider.php`:
