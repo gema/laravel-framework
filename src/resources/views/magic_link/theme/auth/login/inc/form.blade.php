@@ -30,7 +30,9 @@
         .magic-link-code input { flex: 1 1 0; min-width: 0; max-width: 3.5rem; height: 3.5rem; font-size: 1.5rem; }
     </style>
 
-    <p class="text-secondary text-center">{{ trans('gemadigital::magic_link.code_sent', ['email' => $email]) }}</p>
+    {{-- With registration open every email gets a code; closed, only those with an account do, so the
+         words are the same for all and don't tell which emails have one --}}
+    <p class="text-secondary text-center">{{ trans(config('gemadigital.registration_open') ? 'gemadigital::magic_link.code_sent' : 'gemadigital::magic_link.code_sent_if_account', ['email' => $email]) }}</p>
     <form method="POST" action="{{ route('magic-link.code') }}" novalidate data-magic-link-code onsubmit="if (this.dataset.sent) return false; this.dataset.sent = 1; this.querySelector('button').disabled = true">
         @csrf
         {{-- The 6 digits in 2 groups, as in the email; also sent as code[] without JavaScript --}}
