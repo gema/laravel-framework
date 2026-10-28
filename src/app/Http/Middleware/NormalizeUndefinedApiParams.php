@@ -4,6 +4,7 @@ namespace GemaDigital\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Route;
 use Symfony\Component\HttpFoundation\Response;
 
 class NormalizeUndefinedApiParams
@@ -24,11 +25,14 @@ class NormalizeUndefinedApiParams
             $request->merge($input);
         }
 
-        // Normalize route parameters
+        // Normalize route parameters (as global middleware, there's no route yet)
+        /** @var Route|null $route */
         $route = $request->route();
-        foreach ($route->parameters() as $key => $value) {
-            if (is_string($value) && ($value === 'undefined' || $value === 'null')) {
-                $route->setParameter($key, null);
+        if ($route) {
+            foreach ($route->parameters() as $key => $value) {
+                if (is_string($value) && ($value === 'undefined' || $value === 'null')) {
+                    $route->setParameter($key, null);
+                }
             }
         }
 

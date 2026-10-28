@@ -53,6 +53,8 @@ The login form asks only for the email and sends it a 6-digit code, typed in 6 b
 
 The first login with a new email asks for the name and creates the account without admin permission, and only while registration is open (`REGISTRATION_OPEN` or `BACKPACK_REGISTRATION_OPEN`). Codes and links are kept, hashed, in the app's cache, with at most 3 codes per email and 20 per IP every 10 minutes. The button's link uses the request's host only when it is `APP_URL`'s domain or a subdomain of it, otherwise `APP_URL`. The framework also translates to Portuguese the greeting, sign-off and footer of Laravel's emails, unless the app's `lang/pt.json` has them.
 
+The login follows the routes in use: after changing `MAGIC_LINK_LOGIN`, rebuild or clear the route cache (`php artisan route:clear`), as until then the old login stays whole.
+
 When mail is down, this prints a link
 ```
 $ php artisan auth:magic-link email@example.com

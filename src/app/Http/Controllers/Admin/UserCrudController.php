@@ -5,6 +5,7 @@ namespace GemaDigital\Http\Controllers\Admin;
 use App\Models\User;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 use Backpack\PermissionManager\app\Http\Controllers\UserCrudController as OriginalUserCrudController;
+use GemaDigital\Auth\MagicLink;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
@@ -71,7 +72,7 @@ class UserCrudController extends OriginalUserCrudController
         ])->afterField('status');
 
         // With the login by email (MAGIC_LINK_LOGIN) nobody uses a password
-        if (config('gemadigital.magic_link_login')) {
+        if (MagicLink::active()) {
             CRUD::removeFields(['password', 'password_confirmation']);
         }
     }
@@ -83,7 +84,7 @@ class UserCrudController extends OriginalUserCrudController
         $this->setupFields();
 
         // Backpack only saves the fields' values: the random password of store() goes too
-        if (config('gemadigital.magic_link_login')) {
+        if (MagicLink::active()) {
             CRUD::setOperationSetting('strippedRequest', fn (Request $request): array => $request->only([...CRUD::getAllFieldNames(), 'password']));
         }
     }
@@ -91,7 +92,7 @@ class UserCrudController extends OriginalUserCrudController
     public function store()
     {
         // With the login by email the new user gets a random password, as on a first login by email
-        if (config('gemadigital.magic_link_login')) {
+        if (MagicLink::active()) {
             $password = Str::random(32);
             $this->crud->getRequest()->merge(['password' => $password, 'password_confirmation' => $password]);
         }

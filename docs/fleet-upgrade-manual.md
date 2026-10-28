@@ -385,8 +385,9 @@ Por omissão está desligado e nada muda; o `.env.example` do boilerplate já o 
   Laravel ("Olá!", "Cumprimentos,"), em todos os emails da app, a não ser que o `lang/pt.json` da app já
   os traduza.
 - Se o envio de email falhar, `php artisan auth:magic-link email@dominio` escreve um link no terminal.
-- As rotas dependem do config: mudar o `MAGIC_LINK_LOGIN` obriga a refazer o `config:cache` e o
-  `route:cache`.
+- As rotas dependem do config: mudar o `MAGIC_LINK_LOGIN` obriga a refazer (ou limpar) o `config:cache` e
+  o `route:cache`. Até lá, o login segue as rotas em cache: com uma cache de antes, continua inteiro o
+  login por password, em vez de aparecer o formulário do código a enviar para a rota da password.
 
 **Na própria v17 (28/10/2026)** — o `CrudController` passou a aceitar chaves UUID (e outras de texto):
 

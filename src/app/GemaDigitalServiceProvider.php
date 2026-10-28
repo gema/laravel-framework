@@ -2,6 +2,7 @@
 
 namespace GemaDigital;
 
+use GemaDigital\Auth\MagicLink;
 use GemaDigital\Console\Commands\DuplicateCommand;
 use GemaDigital\Console\Commands\ExportJsonsCommand;
 use GemaDigital\Console\Commands\MagicLinkCommand;
@@ -11,12 +12,13 @@ use GemaDigital\Helpers\QueryLogger;
 use GemaDigital\Mail\MicrosoftGraphTransport;
 use Illuminate\Database\Events\QueryExecuted;
 use Illuminate\Mail\MailManager;
+use Illuminate\Routing\Events\RouteMatched;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
-use Illuminate\View\Factory;
 
 class GemaDigitalServiceProvider extends ServiceProvider
 {
@@ -61,6 +63,8 @@ class GemaDigitalServiceProvider extends ServiceProvider
 
         $this->registerSocialiteDrivers();
 
+        $this->bootMagicLinkLogin();
+
         // Blade directives
 
         // Is (Role, Permission)
@@ -82,8 +86,9 @@ class GemaDigitalServiceProvider extends ServiceProvider
         // register the helper functions
         $this->loadHelpers();
 
+        // Login by email code (MAGIC_LINK_LOGIN): the framework's routes take the place of Backpack's (routes.php)
         if (config('gemadigital.magic_link_login')) {
-            $this->registerMagicLinkLogin();
+            config(['backpack.base.setup_auth_routes' => false]);
         }
     }
 
@@ -135,21 +140,27 @@ class GemaDigitalServiceProvider extends ServiceProvider
     }
 
     /**
-     * Login by email code instead of password (MAGIC_LINK_LOGIN): Backpack's password login, registration form
-     * and password reset go away, and the theme's login form and My Account page become the framework's.
+     * Login by email code instead of password: when the routes in use are the framework's, cached or not, the
+     * theme's login form and My Account page become the framework's. Checked on the request's route, since
+     * Laravel loads the routes at the very end of booting.
      */
-    protected function registerMagicLinkLogin(): void
+    protected function bootMagicLinkLogin(): void
     {
-        // The framework's routes take their place (routes.php). Backpack's registration_open only shows links to
-        // its register form; registering by email follows gemadigital.registration_open
-        config([
-            'backpack.base.setup_auth_routes' => false,
-            'backpack.base.registration_open' => false,
-        ]);
+        Event::listen(RouteMatched::class, function (): void {
+            static $done = false;
 
-        // Ahead of the app's own copies of those views too
-        $this->callAfterResolving('view', function (Factory $view): void {
-            $view->prependNamespace(Str::before((string) config('backpack.ui.view_namespace'), '::'), __DIR__.'/../resources/views/magic_link/theme');
+            if ($done || ! MagicLink::active()) {
+                return;
+            }
+
+            $done = true;
+
+            // Backpack's registration_open only shows links to its register form, which is gone;
+            // registering by email follows gemadigital.registration_open
+            config(['backpack.base.registration_open' => false]);
+
+            // Ahead of the app's own copies of those views too
+            View::prependNamespace(Str::before((string) config('backpack.ui.view_namespace'), '::'), __DIR__.'/../resources/views/magic_link/theme');
         });
     }
 

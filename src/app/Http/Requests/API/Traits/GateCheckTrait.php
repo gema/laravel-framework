@@ -3,6 +3,7 @@
 namespace GemaDigital\Http\Requests\API\Traits;
 
 use Closure;
+use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Gate;
 use ReflectionFunction;
 
@@ -13,7 +14,14 @@ trait GateCheckTrait
      */
     public function authorize(): bool
     {
+        /** @var Route|null $route */
         $route = $this->route();
+
+        // Without a route there's no API to check
+        if (! $route) {
+            return false;
+        }
+
         $uses = $route->action['uses'];
 
         // String apis

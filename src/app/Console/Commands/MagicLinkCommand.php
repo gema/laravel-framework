@@ -26,8 +26,8 @@ class MagicLinkCommand extends Command
         /** @var string $email */
         $email = $this->argument('email');
 
-        if (! config('gemadigital.magic_link_login')) {
-            $this->error('The login by email is off (MAGIC_LINK_LOGIN).');
+        if (! MagicLink::active()) {
+            $this->error('The login by email is off (MAGIC_LINK_LOGIN), or the route cache is from before it.');
 
             return self::FAILURE;
         }

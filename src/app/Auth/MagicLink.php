@@ -4,6 +4,7 @@ namespace GemaDigital\Auth;
 
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 
 class MagicLink
@@ -17,6 +18,15 @@ class MagicLink
      * Tries a code takes before it stops working.
      */
     public const ATTEMPTS = 5;
+
+    /**
+     * Whether the login by email code is in use. It goes by the routes and not by MAGIC_LINK_LOGIN, so the forms
+     * always match them, also with a route cache from before the variable changed.
+     */
+    public static function active(): bool
+    {
+        return Route::has('magic-link.code');
+    }
 
     /**
      * A new 6-digit code and single-use link for the email, in place of any earlier ones.
