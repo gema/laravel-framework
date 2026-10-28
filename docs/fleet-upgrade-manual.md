@@ -350,10 +350,22 @@ na CI, fora do pedido web.
   poder sair.
 - Quando o controlador tem o seu próprio `authorize(int $id)`, a framework passou a chamá-lo também para
   cada linha que o bulk delete, o bulk clone e o reorder mandam no pedido (`entries[]`, `tree`). Se uma
-  falhar, o pedido dá 401 e nada muda. As chaves inteiras são convertidas como faz a base de dados; as de
+  falhar, o pedido dá 403 (401 até 28/10/2026) e nada muda. As chaves inteiras são convertidas como faz a base de dados; as de
   texto chegam tal como vieram. Sem `authorize()` próprio, tudo fica como estava. Como o Backpack manda
   a árvore inteira no reorder, num CRUD com regra só reordena quem tem acesso a todas as linhas. Não
   corre no create, que ainda não tem linha: para isso usa-se `CRUD::denyAccess('create')` no `setup()`.
+
+**Na própria v17 (28/10/2026)** — o `CrudController` passou a aceitar chaves UUID (e outras de texto):
+
+- `authorize(int|string $id)`: o id chega como `int` nas chaves inteiras e como `string` nas outras,
+  tanto o da rota como os do bulk e do reorder. Antes, com UUID, o PHP dava erro de tipo, ou, quando o
+  UUID começava por algarismos, convertia-o num inteiro e autorizava a linha errada. **Overrides com
+  `authorize(int $id)` dão fatal**: passar a `authorize(int|string $id)`. Os que já têm
+  `string|int` (vine-wine-backend) ficam como estão.
+- A autorização recusada responde **403** em vez de 401. O 401 é para quem não tem sessão.
+- `getEntryID(): int|string|null` reconhece UUID no URL (devolve-o em minúsculas) e já não apanha os
+  primeiros algarismos de um UUID como se fossem um id. `getEntry(): ?Model` procura pela chave do
+  modelo (`getKeyName()`) em vez de `id`, e devolve `null` quando não há id.
 
 ### 8.2 O que a v17 espera da app
 
