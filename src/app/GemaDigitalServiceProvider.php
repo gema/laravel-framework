@@ -51,8 +51,9 @@ class GemaDigitalServiceProvider extends ServiceProvider
             $this->bootForConsole();
         }
 
-        // Log all queries
-        if (config('app.debug')) {
+        // Log the queries for the debug data of response()->api(). Not in the console (commands, queue workers,
+        // tests), where nothing reads them and a long command would keep them all in memory
+        if (config('app.debug') && ! $this->app->runningInConsole()) {
             DB::listen(fn (QueryExecuted $log) => QueryLogger::log($log));
         }
 
