@@ -355,6 +355,39 @@ na CI, fora do pedido web.
   a árvore inteira no reorder, num CRUD com regra só reordena quem tem acesso a todas as linhas. Não
   corre no create, que ainda não tem linha: para isso usa-se `CRUD::denyAccess('create')` no `setup()`.
 
+**Na própria v17 (28/10/2026)** — login por código, sem passwords, com `MAGIC_LINK_LOGIN=true` no `.env`.
+Por omissão está desligado e nada muda; o `.env.example` do boilerplate já o traz ligado.
+
+- O formulário pede só o email e envia-lhe um código de 6 dígitos, que se escreve em 6 caixas no mesmo
+  browser (também dá para colar, e o telemóvel pode preenchê-lo sozinho). O email traz ainda um botão
+  para entrar com um clique: no browser que pediu o código entra logo; noutro, só depois de um clique
+  na página do link, para que os antivírus do email que abrem os links não o gastem.
+- O código e o botão duram 15 minutos e só funcionam uma vez. Usar um invalida o outro, e um pedido novo
+  invalida os dois. O código deixa de funcionar ao fim de 5 tentativas erradas. Os botões Microsoft e
+  Google ficam.
+- Saem o login por password, o formulário de registo e a recuperação de password do Backpack: a
+  framework põe o `setup_auth_routes` e o `registration_open` do Backpack a `false` e regista o login e o
+  logout. O formulário da framework passa à frente do `auth/login/inc/form` do tema e da cópia da app.
+- Na página "A minha conta" saem o "Alterar password" e a "Palavra-passe atual". O nome continua a
+  poder mudar; o email, que é o login, fica só de leitura, porque o Backpack só o muda com a password
+  atual. Quem o muda é um admin, na lista de utilizadores. A view `my_account` da framework também
+  passa à frente da do tema e da cópia da app.
+- No CRUD de utilizadores da framework, criar e editar deixam de ter password. Quem é criado ali fica
+  com uma password aleatória, como no primeiro acesso por email. Uma app com o seu próprio
+  `UserCrudController`, que não estenda o da framework, continua a pedir password.
+- O primeiro acesso de um email novo pede o nome e cria a conta sem permissão de admin, e só com o
+  registo aberto (`REGISTRATION_OPEN`/`BACKPACK_REGISTRATION_OPEN`). Os `auto_admin_domains` continuam
+  a valer só no Microsoft e no Google.
+- Os códigos e os links ficam na cache da app (só o hash), com um limite de 3 códigos por email e 20 por
+  IP a cada 10 minutos. O link do botão usa o host do pedido só quando é o domínio do `APP_URL` ou um
+  subdomínio dele; nos outros casos usa o `APP_URL`, que por isso tem de estar certo.
+- A framework passa também a traduzir para português o cumprimento, a despedida e o rodapé dos emails do
+  Laravel ("Olá!", "Cumprimentos,"), em todos os emails da app, a não ser que o `lang/pt.json` da app já
+  os traduza.
+- Se o envio de email falhar, `php artisan auth:magic-link email@dominio` escreve um link no terminal.
+- As rotas dependem do config: mudar o `MAGIC_LINK_LOGIN` obriga a refazer o `config:cache` e o
+  `route:cache`.
+
 ### 8.2 O que a v17 espera da app
 
 `app/Providers/AppServiceProvider.php`:
@@ -401,8 +434,11 @@ Restante lista de verificação:
 | `admin/*` (middleware `web` + alias `admin` + `AdminOnly`) | `actions`, `impersonate/{id}`, `impersonate/leave`, `cache/*`, `maintenance/up`, `maintenance/down` |
 | públicas (`web`) | `session/flush`, `lang/{locale}`, `auth/redirect/{driver}`, `auth/callback/{driver}`, `vitals` |
 
-Com `gemadigital.build.enabled` a `true` há também o `admin/build` (§8.1). Todas as de `admin/*` exigem
-um admin, exceto o `impersonate/leave`.
+Com `gemadigital.build.enabled` a `true` há também o `admin/build` (§8.1). Com `MAGIC_LINK_LOGIN` a
+`true`, a framework regista ainda `admin/login`, `admin/login/code`, `admin/login/name`,
+`admin/login/restart`, `admin/login/link/{token}` e `admin/logout`, no lugar das rotas de autenticação
+do Backpack (§8.1). Todas as de `admin/*` exigem um admin, exceto o
+`impersonate/leave` e as de login e logout.
 
 Nenhuma corre shell: `build` só escreve o ficheiro de `gemadigital.build.path`, e `cache/*` e
 `maintenance/*` chamam o Artisan no próprio processo (`Artisan::call`).

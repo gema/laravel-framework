@@ -4,6 +4,7 @@ namespace GemaDigital;
 
 use GemaDigital\Console\Commands\DuplicateCommand;
 use GemaDigital\Console\Commands\ExportJsonsCommand;
+use GemaDigital\Console\Commands\MagicLinkCommand;
 use GemaDigital\Console\Commands\PackageCommand;
 use GemaDigital\Console\Commands\PublishCommand;
 use GemaDigital\Helpers\QueryLogger;
@@ -14,6 +15,8 @@ use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Str;
+use Illuminate\View\Factory;
 
 class GemaDigitalServiceProvider extends ServiceProvider
 {
@@ -27,6 +30,7 @@ class GemaDigitalServiceProvider extends ServiceProvider
         PackageCommand::class,
         PublishCommand::class,
         ExportJsonsCommand::class,
+        MagicLinkCommand::class,
     ];
 
     /**
@@ -35,6 +39,8 @@ class GemaDigitalServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'gemadigital');
+        // Laravel's own strings, such as the emails' greeting and footer; the app's translations come first
+        $this->loadJsonTranslationsFrom(__DIR__.'/../resources/lang');
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'gemadigital');
         $this->loadRoutesFrom(__DIR__.'/../routes/routes.php');
 
@@ -75,6 +81,10 @@ class GemaDigitalServiceProvider extends ServiceProvider
 
         // register the helper functions
         $this->loadHelpers();
+
+        if (config('gemadigital.magic_link_login')) {
+            $this->registerMagicLinkLogin();
+        }
     }
 
     /**
@@ -122,6 +132,25 @@ class GemaDigitalServiceProvider extends ServiceProvider
         if (class_exists('SocialiteProviders\Azure\AzureExtendSocialite')) {
             Event::listen('SocialiteProviders\Manager\SocialiteWasCalled', 'SocialiteProviders\Azure\AzureExtendSocialite@handle');
         }
+    }
+
+    /**
+     * Login by email code instead of password (MAGIC_LINK_LOGIN): Backpack's password login, registration form
+     * and password reset go away, and the theme's login form and My Account page become the framework's.
+     */
+    protected function registerMagicLinkLogin(): void
+    {
+        // The framework's routes take their place (routes.php). Backpack's registration_open only shows links to
+        // its register form; registering by email follows gemadigital.registration_open
+        config([
+            'backpack.base.setup_auth_routes' => false,
+            'backpack.base.registration_open' => false,
+        ]);
+
+        // Ahead of the app's own copies of those views too
+        $this->callAfterResolving('view', function (Factory $view): void {
+            $view->prependNamespace(Str::before((string) config('backpack.ui.view_namespace'), '::'), __DIR__.'/../resources/views/magic_link/theme');
+        });
     }
 
     /**

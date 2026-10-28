@@ -12,6 +12,9 @@ return [
 
     'registration_open' => env('REGISTRATION_OPEN', env('BACKPACK_REGISTRATION_OPEN', env('APP_ENV') === 'local')),
 
+    // Login by a code (or link) sent by email instead of password; new emails only register while registration is open
+    'magic_link_login' => env('MAGIC_LINK_LOGIN', false),
+
     'sidebar' => [
         'filemanager' => false,
         'backups' => false,
