@@ -419,6 +419,24 @@ Por omissão está desligado e nada muda; o `.env.example` do boilerplate já o 
 - No gestaodeobras.immera.io, o `DB::connection()->getPdo()->exec()` no lugar do `DB::unprepared()` e o
   dispatcher de eventos desligado no `legacy:import` deixam de ser precisos por causa do logger.
 
+**Na própria v17 (29/10/2026)** — avatar por prioridade, e o login Microsoft passa a trazer a foto:
+
+- O trait `GemaDigital\Models\Traits\HasAvatar` dá ao `User` o atributo `avatar_url`: o avatar carregado
+  (a coluna `avatar`), depois a foto do login Microsoft, depois a do Google, e por fim o Gravatar, com o
+  `gravatar_fallback` do Backpack. Para o menu do Backpack o usar: `use HasAvatar;` no `User` e
+  `'avatar_type' => 'avatar_url'` no `config/backpack/base.php` (o boilerplate já traz os dois).
+- **Os logins Microsoft e Google deixam de escrever na coluna `avatar`**: a foto de cada um fica só em
+  `socialite.{driver}.avatar`. Antes, o login do Google copiava a foto para o `avatar`; o login seguinte
+  apaga essa cópia, mas um `avatar` que não seja a foto de um login fica. Código da app que mostre
+  `$user->avatar` à espera da foto do Google passa a ler `$user->avatar_url`, que não entra no JSON do
+  modelo sem `$appends`.
+- A Microsoft não tem URL público para a foto: o Graph só a dá com token, e o
+  `socialiteproviders/microsoft-azure` devolve sempre `avatar` a `null`. O login Microsoft lê a foto de
+  96x96 com o token do próprio utilizador (o `User.Read` que o login já pede) e guarda-a como data URI,
+  com 4 a 6 KB. Não precisa de mais nenhuma permissão na app do Entra ID e funciona com qualquer tenant,
+  `common` incluído. A foto só muda no login seguinte, como a do Google, e os utilizadores existentes só
+  a recebem no próximo login Microsoft.
+
 ### 8.2 O que a v17 espera da app
 
 `app/Providers/AppServiceProvider.php`:
@@ -464,7 +482,6 @@ Restante lista de verificação:
 |---|---|
 | `admin/*` (middleware `web` + alias `admin` + `AdminOnly`) | `actions`, `impersonate/{id}`, `impersonate/leave`, `cache/*`, `maintenance/up`, `maintenance/down` |
 | públicas (`web`) | `session/flush`, `lang/{locale}`, `auth/redirect/{driver}`, `auth/callback/{driver}`, `vitals` |
-
 Com `gemadigital.build.enabled` a `true` há também o `admin/build` (§8.1). Com `MAGIC_LINK_LOGIN` a
 `true`, a framework regista ainda `admin/login`, `admin/login/code`, `admin/login/name`,
 `admin/login/restart`, `admin/login/link/{token}` e `admin/logout`, no lugar das rotas de autenticação

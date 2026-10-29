@@ -42,6 +42,21 @@ MICROSOFT_GRAPH_SENDER=
 
 When the `MICROSOFT_GRAPH_*` keys are empty, the `AZURE_*` ones of the Azure login are used. A `microsoft-graph` mailer in the app's `config/mail.php` overrides these values. The Entra ID app needs the `Mail.Send` application permission, restricted to the sending mailbox. Each message goes in a single request, so attachments are limited to about 3 MB.
 
+## Avatar
+
+With the `HasAvatar` trait in the `User` model, `$user->avatar_url` is the avatar to show: the uploaded one (the `avatar` column), then the photo of the Microsoft login, then the one of the Google login, then Gravatar. Backpack shows it with `'avatar_type' => 'avatar_url'` in `config/backpack/base.php`, and the Gravatar uses its `gravatar_fallback`.
+``` php
+use GemaDigital\Models\Traits\HasAvatar;
+
+class User extends Authenticatable
+{
+    use HasAvatar;
+```
+
+The Microsoft and Google logins don't touch the `avatar` column: each photo goes in `socialite.{driver}.avatar`. Older logins copied the Google photo into `avatar`; the next login clears that copy, and an avatar that isn't one of the logins' photos stays.
+
+Microsoft has no public URL for the profile photo: Graph only gives it with a token. So the Microsoft login reads the 96x96 photo with the user's own token (`User.Read`, which the login already asks for) and saves it as a data URI, of about 4 to 6 KB. It needs no other permission, and it changes only on the next login, like Google's.
+
 ## Login by email code
 
 Logs in to the admin panel without passwords. Set in `.env`
