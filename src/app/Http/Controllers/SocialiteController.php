@@ -3,6 +3,7 @@
 namespace GemaDigital\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -82,7 +83,11 @@ class SocialiteController extends Controller
 
         $user->save();
 
-        Auth::login($user, true);
+        // Backpack's guard, as in its own login and the magic link: in projects still on 'guard' => 'backpack' the
+        // default guard (web) is another session, and the dashboard would send the user back to the login
+        /** @var StatefulGuard $guard */
+        $guard = Auth::guard(config('backpack.base.guard'));
+        $guard->login($user, true);
 
         return redirect(route(config('gemadigital.routes.list.dashboard', 'backpack.dashboard')));
     }
