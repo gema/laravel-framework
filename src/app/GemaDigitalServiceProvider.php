@@ -6,6 +6,7 @@ use GemaDigital\Auth\MagicLink;
 use GemaDigital\Console\Commands\DuplicateCommand;
 use GemaDigital\Console\Commands\ExportJsonsCommand;
 use GemaDigital\Console\Commands\MagicLinkCommand;
+use GemaDigital\Console\Commands\MailTestCommand;
 use GemaDigital\Console\Commands\PackageCommand;
 use GemaDigital\Console\Commands\PublishCommand;
 use GemaDigital\Helpers\QueryLogger;
@@ -33,6 +34,7 @@ class GemaDigitalServiceProvider extends ServiceProvider
         PublishCommand::class,
         ExportJsonsCommand::class,
         MagicLinkCommand::class,
+        MailTestCommand::class,
     ];
 
     /**

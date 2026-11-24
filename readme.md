@@ -28,6 +28,12 @@ Publishes the framework assets
 $ php artisan publish
 ```
 
+Sends a test mail with the default mailer, or another one with `--mailer`
+``` bash
+$ php artisan mail:test email@example.com
+$ php artisan mail:test email@example.com --mailer=microsoft-graph
+```
+
 ## Mail through Microsoft Graph
 
 Sends mail with the Microsoft Graph API instead of SMTP. The framework adds the `microsoft-graph` mailer to the app's mail config, so `config/mail.php` doesn't change. Set in `.env`
@@ -41,6 +47,8 @@ MICROSOFT_GRAPH_SENDER=
 ```
 
 When the `MICROSOFT_GRAPH_*` keys are empty, the `AZURE_*` ones of the Azure login are used. A `microsoft-graph` mailer in the app's `config/mail.php` overrides these values. The Entra ID app needs the `Mail.Send` application permission, restricted to the sending mailbox. Each message goes in a single request, so attachments are limited to about 3 MB.
+
+`php artisan mail:test email@example.com --mailer=microsoft-graph` tries it before `MAIL_MAILER` changes.
 
 ## Avatar
 
