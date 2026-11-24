@@ -48,6 +48,9 @@ class GemaDigitalServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'gemadigital');
         $this->loadRoutesFrom(__DIR__.'/../routes/routes.php');
 
+        // The commands, outside the console too: the admin actions run mail:test with Artisan::call
+        $this->commands($this->commands);
+
         // Publishing is only necessary when using the CLI.
         if ($this->app->runningInConsole()) {
             $this->bootForConsole();
@@ -116,9 +119,6 @@ class GemaDigitalServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../resources/lang' => resource_path('lang/vendor/gemadigital'),
         ], 'framework.views');
-
-        // Registering package commands.
-        $this->commands($this->commands);
     }
 
     /**

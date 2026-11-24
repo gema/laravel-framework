@@ -34,6 +34,8 @@ $ php artisan mail:test email@example.com
 $ php artisan mail:test email@example.com --mailer=microsoft-graph
 ```
 
+The Admin Actions also have a button for it, with the default mailer, that asks for the address and suggests the admin's own.
+
 ## Mail through Microsoft Graph
 
 Sends mail with the Microsoft Graph API instead of SMTP. The framework adds the `microsoft-graph` mailer to the app's mail config, so `config/mail.php` doesn't change. Set in `.env`

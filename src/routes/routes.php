@@ -4,6 +4,7 @@ use GemaDigital\Http\Controllers\Admin\AdminActionsController;
 use GemaDigital\Http\Controllers\Admin\BuildController;
 use GemaDigital\Http\Controllers\Admin\CacheController;
 use GemaDigital\Http\Controllers\Admin\ImpersonateController;
+use GemaDigital\Http\Controllers\Admin\MailController;
 use GemaDigital\Http\Controllers\Admin\MaintenanceController;
 use GemaDigital\Http\Controllers\LangController;
 use GemaDigital\Http\Controllers\MagicLinkController;
@@ -38,6 +39,9 @@ Route::group([
     Route::post('cache/route/clear', [CacheController::class, 'routeClear']);
     Route::post('cache/view', [CacheController::class, 'view']);
     Route::post('cache/view/clear', [CacheController::class, 'viewClear']);
+
+    // Mail
+    Route::post('mail/test', [MailController::class, 'test']);
 
     // Maintenance
     Route::post('maintenance/up', [MaintenanceController::class, 'up']);

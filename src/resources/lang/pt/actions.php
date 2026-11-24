@@ -32,6 +32,14 @@ return [
         ],
     ],
 
+    'mail' => [
+        'test' => [
+            'message' => 'Enviar email de teste',
+            'prompt' => 'Enviar um email de teste para:',
+            'success' => 'Email de teste enviado para :email, pelo mailer :mailer',
+        ],
+    ],
+
     'maintenance' => [
         'up' => [
             'message' => 'Activar manutenção',
