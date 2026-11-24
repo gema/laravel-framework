@@ -824,8 +824,9 @@ aplicou: é uma mudança de comportamento que fica para decisão.
 Feito no pixel-backend e no pixel-rumos-backend (APIs sem Backpack).
 
 1. Composer: `"gemadigital/framework": "v17.x-dev"` com `"minimum-stability": "dev"` e `"prefer-stable": true`.
-   A v17 exige Laravel `^12.49|^13.1`, por isso obriga a subir o Laravel em conjunto. Não são precisos
-   os repositórios do Backpack.
+   A v17 exige Laravel `^12.71|^13.40` (desde 24/11/2026; abaixo disso há falhas de segurança do Laravel,
+   uma delas crítica), por isso obriga a subir o Laravel em conjunto. Não são precisos os repositórios do
+   Backpack.
 2. `AppServiceProvider::boot()`: registar os quatro macros (§8.2).
 3. As rotas da framework registam-se sempre (§8.3). Sem Backpack não existe o alias de middleware
    `admin`: criar `App\Http\Middleware\AdminAccess`

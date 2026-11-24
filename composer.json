@@ -17,7 +17,7 @@
     "require": {
         "php": "^8.3|^8.4|^8.5",
         "illuminate/support": "~12|~13",
-        "laravel/framework": "^12.49|^13.1"
+        "laravel/framework": "^12.71|^13.40"
     },
     "require-dev": {
         "rector/rector": "^2.2",
