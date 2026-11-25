@@ -437,6 +437,25 @@ Por omissão está desligado e nada muda; o `.env.example` do boilerplate já o 
   `common` incluído. A foto só muda no login seguinte, como a do Google, e os utilizadores existentes só
   a recebem no próximo login Microsoft.
 
+**Na própria v17 (25/11/2026)** — as Acções Administrativas ficam com três botões:
+
+- "Limpar cache" corre o `optimize:clear` e a seguir o `optimize`, que volta a pôr em cache a config, os
+  eventos, as rotas e as views. Com `APP_ENV=local` só limpa, para a config e as rotas em cache não
+  esconderem as alterações feitas entretanto. Se o `optimize` falhar, a cache fica limpa e o aviso diz
+  porquê. Saem os botões e as rotas `cache/flush`, `cache/config`, `cache/config/clear`, `cache/route`,
+  `cache/route/clear`, `cache/view` e `cache/view/clear`; entra `cache/clear`. As traduções
+  `actions.cache.*` antigas também saem, e as da manutenção passam a `actions.maintenance.enable` e
+  `actions.maintenance.disable`.
+- "Enviar email de teste" pergunta o endereço, com o do admin já escrito, e corre o `mail:test`, que também
+  existe na consola: `php artisan mail:test email@dominio`, com `--mailer=…` para outro mailer.
+- Aparece "Ativar manutenção" ou "Desativar manutenção", consoante o estado. A ativação passou a funcionar
+  (dava sempre 400, Parte IV) e pede confirmação: faz o que o anexo D fazia na app, um `down` com um
+  `--secret` aleatório e o cookie de bypass para o admin que clicou, válido 12 horas. A framework põe o
+  `laravel_maintenance` fora do `EncryptCookies`, e os projetos com o contorno do anexo D podem apagá-lo.
+  Nos projetos antigos, confirmar que o `storage/framework/.gitignore` tem o `maintenance.php`.
+- Os botões deixaram de ter a classe `ajax`: com o `build_button` na mesma página, cada clique fazia dois
+  pedidos.
+
 ### 8.2 O que a v17 espera da app
 
 `app/Providers/AppServiceProvider.php`:
@@ -480,7 +499,7 @@ Restante lista de verificação:
 
 | Grupo | Rotas |
 |---|---|
-| `admin/*` (middleware `web` + alias `admin` + `AdminOnly`) | `actions`, `impersonate/{id}`, `impersonate/leave`, `cache/*`, `maintenance/up`, `maintenance/down` |
+| `admin/*` (middleware `web` + alias `admin` + `AdminOnly`) | `actions`, `impersonate/{id}`, `impersonate/leave`, `cache/clear`, `mail/test`, `maintenance/up`, `maintenance/down` |
 | públicas (`web`) | `session/flush`, `lang/{locale}`, `auth/redirect/{driver}`, `auth/callback/{driver}`, `vitals` |
 Com `gemadigital.build.enabled` a `true` há também o `admin/build` (§8.1). Com `MAGIC_LINK_LOGIN` a
 `true`, a framework regista ainda `admin/login`, `admin/login/code`, `admin/login/name`,
@@ -488,8 +507,8 @@ Com `gemadigital.build.enabled` a `true` há também o `admin/build` (§8.1). Co
 do Backpack (§8.1). Todas as de `admin/*` exigem um admin, exceto o
 `impersonate/leave` e as de login e logout.
 
-Nenhuma corre shell: `build` só escreve o ficheiro de `gemadigital.build.path`, e `cache/*` e
-`maintenance/*` chamam o Artisan no próprio processo (`Artisan::call`).
+Nenhuma corre shell: `build` só escreve o ficheiro de `gemadigital.build.path`, e `cache/*`, `mail/test`
+e `maintenance/*` chamam o Artisan no próprio processo (`Artisan::call`).
 
 O alias de middleware `admin` vem do Backpack. Projetos sem Backpack têm de o criar (§14).
 
@@ -1038,7 +1057,7 @@ Confirmados no código da branch `v17` (commit `0c684c5`) a 12/10/2026.
 
 | # | Onde | Problema | Sugestão |
 |---|---|---|---|
-| 1 | `src/app/Http/Controllers/Admin/MaintenanceController.php` | `down()` passa `--allow` ao `artisan down`, opção removida no Laravel 8; o botão dá sempre 400 | `--secret` aleatório e devolver o cookie `MaintenanceModeBypassCookie` ao admin (anexo D). Exige `laravel_maintenance` fora do `EncryptCookies` da app |
+| 1 | `src/app/Http/Controllers/Admin/MaintenanceController.php` | **Resolvido a 25/11/2026** (§8.1). O `down()` passava `--allow` ao `artisan down`, opção removida no Laravel 8, e o botão dava sempre 400 | — |
 | 2 | `src/app/Http/Controllers/Admin/PageCrudController.php` | `update()` lê `request()->locale`; o Backpack 7 envia `_locale`. A cache `page_{slug}_{locale}` não é invalidada | esquecer a cache de todos os locales de `config('backpack.crud.locales')` |
 | 3 | `src/app/Models/Traits/SaveMedia.php` | usa `Intervention\Image\Image::make()` (API v2) e `string $value`, que rejeita `null` | portar para a API v4 (anexo B tem a versão usada no paulomerlini) |
 | 4 | `src/resources/views/components/slides.blade.php` | `aurl('uploads', $img)`: sem namespace e com a ordem de argumentos anterior à v15 | `\GemaDigital\aurl($img, 'uploads')` |
@@ -1456,6 +1475,9 @@ if (Str::startsWith((string) $value, 'data:image')) {
 As entradas de administração ligam-se e desligam-se em `config/gemadigital.php` (`sidebar`).
 
 ## Anexo D — Modo de manutenção a funcionar pelo admin
+
+Desde 25/11/2026 (§8.1) a framework faz isto sozinha. O que se segue só serve a projetos presos a uma v17
+anterior; quem o tiver pode apagá-lo ao atualizar.
 
 `app/Http/Controllers/Admin/MaintenanceController.php`:
 

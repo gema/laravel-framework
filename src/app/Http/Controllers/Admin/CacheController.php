@@ -2,46 +2,46 @@
 
 namespace GemaDigital\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\Cache;
+use Throwable;
 
 class CacheController extends Controller
 {
-    public function flush(Request $request): Response
+    /**
+     * php artisan optimize:clear, then php artisan optimize: the application cache goes, and the config, events,
+     * routes and views are cached again. Locally it only clears, as the cached config and routes would hide the
+     * changes made meanwhile.
+     */
+    public function clear(): JsonResponse
     {
-        return response()->apiStatus(Cache::flush());
-    }
+        // Taken before the commands: on Laravel 12, optimize leaves app() on a fresh copy of the app, which doesn't
+        // have the admin's locale
+        $translator = app('translator');
+        $text = fn (string $key, array $replace = []) => $translator->get("gemadigital::actions.cache.clear.$key", $replace);
 
-    public function config(Request $request): Response
-    {
-        return response()->apiStatus(! Artisan::call('config:cache'));
-    }
+        try {
+            Artisan::call('optimize:clear');
+        } catch (Throwable $e) {
+            report($e);
 
-    public function configClear(Request $request): Response
-    {
-        return response()->apiStatus(! Artisan::call('config:clear'));
-    }
+            return response()->json(['message' => $text('failed', ['error' => $e->getMessage()])], 500);
+        }
 
-    public function route(Request $request): Response
-    {
-        return response()->apiStatus(! Artisan::call('route:cache'));
-    }
+        if (app()->isLocal()) {
+            return response()->json(['message' => $text('cleared')]);
+        }
 
-    public function routeClear(Request $request): Response
-    {
-        return response()->apiStatus(! Artisan::call('route:clear'));
-    }
+        try {
+            Artisan::call('optimize');
+        } catch (Throwable $e) {
+            report($e);
 
-    public function view(Request $request): Response
-    {
-        return response()->apiStatus(! Artisan::call('view:cache'));
-    }
+            // The site works, only without some of the caches
+            return response()->json(['message' => $text('not_optimized', ['error' => $e->getMessage()])], 500);
+        }
 
-    public function viewClear(Request $request): Response
-    {
-        return response()->apiStatus(! Artisan::call('view:clear'));
+        return response()->json(['message' => $text('optimized')]);
     }
 }

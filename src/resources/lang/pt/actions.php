@@ -4,31 +4,11 @@ return [
     'cache' => [
         'clear' => [
             'message' => 'Limpar cache',
-            'success' => 'Cache limpa',
-        ],
-        'config' => [
-            'message' => 'Cache config',
-            'success' => 'Configurações em cache',
-        ],
-        'config_clear' => [
-            'message' => 'Limpar cache config',
-            'success' => 'Cache das configurações limpas',
-        ],
-        'route' => [
-            'message' => 'Cache route',
-            'success' => 'Routes em cache',
-        ],
-        'route_clear' => [
-            'message' => 'Limpar cache route',
-            'success' => 'Cache das routes limpas',
-        ],
-        'view' => [
-            'message' => 'Cache view',
-            'success' => 'Views em cache',
-        ],
-        'view_clear' => [
-            'message' => 'Limpar cache view',
-            'success' => 'Cache das views limpas',
+            // Localmente só limpa
+            'cleared' => 'Cache limpa',
+            'optimized' => 'Cache limpa e otimizada',
+            'not_optimized' => 'Cache limpa, mas a otimização falhou: :error',
+            'failed' => 'A limpeza da cache falhou: :error',
         ],
     ],
 
@@ -41,13 +21,14 @@ return [
     ],
 
     'maintenance' => [
-        'up' => [
-            'message' => 'Activar manutenção',
-            'success' => 'Modo de manuntenção activado',
+        'enable' => [
+            'message' => 'Ativar manutenção',
+            'confirm' => 'Ativar a manutenção? O site fica indisponível para todos, exceto este browser, que mantém o acesso durante 12 horas.',
+            'success' => 'Manutenção ativada',
         ],
-        'down' => [
+        'disable' => [
             'message' => 'Desativar manutenção',
-            'success' => 'Modo de manuntenção desactivado',
+            'success' => 'Manutenção desativada',
         ],
     ],
 

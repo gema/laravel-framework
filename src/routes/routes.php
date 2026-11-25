@@ -32,13 +32,7 @@ Route::group([
     Route::get('impersonate/{id}', [ImpersonateController::class, 'impersonate'])->name('impersonate');
 
     // Cache
-    Route::post('cache/flush', [CacheController::class, 'flush']);
-    Route::post('cache/config', [CacheController::class, 'config']);
-    Route::post('cache/config/clear', [CacheController::class, 'configClear']);
-    Route::post('cache/route', [CacheController::class, 'route']);
-    Route::post('cache/route/clear', [CacheController::class, 'routeClear']);
-    Route::post('cache/view', [CacheController::class, 'view']);
-    Route::post('cache/view/clear', [CacheController::class, 'viewClear']);
+    Route::post('cache/clear', [CacheController::class, 'clear']);
 
     // Mail
     Route::post('mail/test', [MailController::class, 'test']);

@@ -36,6 +36,15 @@ $ php artisan mail:test email@example.com --mailer=microsoft-graph
 
 The Admin Actions also have a button for it, with the default mailer, that asks for the address and suggests the admin's own.
 
+## Admin Actions
+
+Buttons for admins, on the `admin/actions` page (in the user menu) or wherever `@include('gemadigital::admin.actions_buttons')` puts them, such as the dashboard:
+- Clear cache: `php artisan optimize:clear`, then `php artisan optimize`
+- Send test mail: asks for the address and runs `mail:test`
+- Enable or Disable maintenance, by the state
+
+Clearing the cache caches the config, events, routes and views again, except with `APP_ENV=local`, where they would hide the changes made meanwhile. When `optimize` fails, the cache stays cleared and the message says why. Enabling maintenance asks first. The site goes down for everyone but the admin who clicked: their browser gets Laravel's bypass cookie, valid for 12 hours, to keep using the site and turn it off. Without that cookie, only `php artisan up` brings the site back.
+
 ## Mail through Microsoft Graph
 
 Sends mail with the Microsoft Graph API instead of SMTP. The framework adds the `microsoft-graph` mailer to the app's mail config, so `config/mail.php` doesn't change. Set in `.env`

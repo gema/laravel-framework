@@ -11,6 +11,7 @@ use GemaDigital\Console\Commands\PackageCommand;
 use GemaDigital\Console\Commands\PublishCommand;
 use GemaDigital\Helpers\QueryLogger;
 use GemaDigital\Mail\MicrosoftGraphTransport;
+use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Database\Events\QueryExecuted;
 use Illuminate\Mail\MailManager;
 use Illuminate\Routing\Events\RouteMatched;
@@ -50,6 +51,9 @@ class GemaDigitalServiceProvider extends ServiceProvider
 
         // The commands, outside the console too: the admin actions run mail:test with Artisan::call
         $this->commands($this->commands);
+
+        // The maintenance bypass cookie of the admin actions: Laravel checks it before the cookies are decrypted
+        EncryptCookies::except('laravel_maintenance');
 
         // Publishing is only necessary when using the CLI.
         if ($this->app->runningInConsole()) {

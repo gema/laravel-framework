@@ -4,31 +4,11 @@ return [
     'cache' => [
         'clear' => [
             'message' => 'Clear cache',
-            'success' => 'Cache cleared',
-        ],
-        'config' => [
-            'message' => 'Cache config',
-            'success' => 'Configs cached',
-        ],
-        'config_clear' => [
-            'message' => 'Clear cache config',
-            'success' => 'Cache das configurações cleared',
-        ],
-        'route' => [
-            'message' => 'Cache route',
-            'success' => 'Routes cached',
-        ],
-        'route_clear' => [
-            'message' => 'Clear cache route',
-            'success' => 'Cache das routes cleared',
-        ],
-        'view' => [
-            'message' => 'Cache view',
-            'success' => 'Views cached',
-        ],
-        'view_clear' => [
-            'message' => 'Clear cache view',
-            'success' => 'Cache views cleared',
+            // Locally it only clears
+            'cleared' => 'Cache cleared',
+            'optimized' => 'Cache cleared and optimized',
+            'not_optimized' => 'Cache cleared, but optimizing failed: :error',
+            'failed' => 'Clearing the cache failed: :error',
         ],
     ],
 
@@ -41,13 +21,14 @@ return [
     ],
 
     'maintenance' => [
-        'up' => [
-            'message' => 'Enable Maintenance Mode',
-            'success' => 'Maintenance Mode enabled',
+        'enable' => [
+            'message' => 'Enable maintenance',
+            'confirm' => 'Enable maintenance? The site becomes unavailable for everyone except this browser, which keeps access for 12 hours.',
+            'success' => 'Maintenance enabled',
         ],
-        'down' => [
-            'message' => 'Disable Maintenance Mode',
-            'success' => 'Maintenance Mode disabled',
+        'disable' => [
+            'message' => 'Disable maintenance',
+            'success' => 'Maintenance disabled',
         ],
     ],
 
