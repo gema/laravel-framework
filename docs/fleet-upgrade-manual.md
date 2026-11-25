@@ -446,7 +446,7 @@ Por omissão está desligado e nada muda; o `.env.example` do boilerplate já o 
   `cache/route/clear`, `cache/view` e `cache/view/clear`; entra `cache/clear`. As traduções
   `actions.cache.*` antigas também saem, e as da manutenção passam a `actions.maintenance.enable` e
   `actions.maintenance.disable`.
-- "Enviar email de teste" pergunta o endereço, com o do admin já escrito, e corre o `mail:test`, que também
+- "Email de teste" pergunta o endereço, com o do admin já escrito, e corre o `mail:test`, que também
   existe na consola: `php artisan mail:test email@dominio`, com `--mailer=…` para outro mailer.
 - Aparece "Ativar manutenção" ou "Desativar manutenção", consoante o estado. A ativação passou a funcionar
   (dava sempre 400, Parte IV) e pede confirmação: faz o que o anexo D fazia na app, um `down` com um

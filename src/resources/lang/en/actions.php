@@ -14,7 +14,7 @@ return [
 
     'mail' => [
         'test' => [
-            'message' => 'Send test mail',
+            'message' => 'Test mail',
             'prompt' => 'Send a test mail to:',
             'success' => 'Test mail sent to :email, with the :mailer mailer',
         ],
